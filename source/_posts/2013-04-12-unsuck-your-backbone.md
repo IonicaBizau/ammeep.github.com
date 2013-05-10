@@ -3,6 +3,7 @@ title: Unsuck your backbone
 author: ammeep
 layout: post
 permalink: /2013/04/12/unsuck-your-backbone/
+comments: true
 dsq_thread_id:
   - 1204657155
 categories:
