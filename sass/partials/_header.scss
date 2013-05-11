@@ -1,18 +1,29 @@
 body > header {
-  background: $header-bg;
+ 
+  padding-left:0px;
+  margin-top:50px;
+
   h1 {
-    display: inline-block;
-    margin: 0;
-    a, a:visited, a:hover {
-      color: $title_color;
-      text-decoration: none;
+      a, a:visited {
+        color: #6b6b6b;
+        text-decoration: none;
+         &:hover { 
+            color: #006666;
+          }
+      }
+
     }
-  }
-  h2 {
-    margin: .2em 0 0;
-    @extend .sans;
-    font-size: 1em;
-    color: $subtitle-color;
-    font-weight: normal;
+
+  .header-container {
+    margin-left:-35px;
+    margin-right:-70px;
+    background: $header-bg;
+    background-image: image-url('navstroke.jpg');
+    background-size:950px 75px;
+    background-repeat:no-repeat;
+    height:75px;
+    width:950px;
+
+
   }
 }

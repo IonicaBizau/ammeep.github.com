@@ -14,20 +14,6 @@ body {
 	padding-left: 0.5em;
 	padding-right: 0.5em;
 
-	> header {
-		background: $white;
-		text-align: center;
-		padding-left: 0px;
-		padding-right: 0px;	
-
-		h1 {
-			a, a:visited, a:hover {
-				color: #8C8C8C;
-				font-family: $heading-font-family;
-			}
-		}
-	}
-
 	> nav {
 		background: $white;
 		border-bottom: 1px solid #F2F2F2;
@@ -97,7 +83,6 @@ body {
 }
 
 article {
-	padding-top: 2em;
 
 	.entry-content {
 		h3 {
@@ -136,8 +121,6 @@ article {
 
 	.blog-index {
 		article {
-			padding-top: 4em;
-
 			header {
 				padding-left: 0;
   				padding-right: 0;
