@@ -23,12 +23,11 @@ I gave a talk at [Codemania][1] - Unsuck your backbone. It was a lot of fun, I 
 
  [1]: http://codemania.co.nz/ "Codemania"
 
-**Video**
-
-
-
 **Slides**  
+{% speakerdeck cf29dcf084890130af0d12313d053a9e %}
 
+**Video**
+{% youtube 0o2whtCJw8I %}
 
 The purpose of the talk is to introduce some simple architectural patterns that you can use in your large JavaScript applications to help you achieve a scalable code base.
 

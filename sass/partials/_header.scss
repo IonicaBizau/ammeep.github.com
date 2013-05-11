@@ -2,8 +2,12 @@ body > header {
  
   padding-left:0px;
   margin-top:50px;
+  hgroup{
+    margin-bottom:50px;
+  }
 
   h1 {
+      float:left;
       a, a:visited {
         color: #6b6b6b;
         text-decoration: none;
@@ -23,7 +27,5 @@ body > header {
     background-repeat:no-repeat;
     height:75px;
     width:950px;
-
-
   }
 }
