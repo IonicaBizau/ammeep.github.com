@@ -5,6 +5,7 @@ layout: post
 permalink: /2013/02/22/games-masters-workshops-kids-can-code/
 dsq_thread_id:
   - 1098327487
+comments: true
 categories:
   - Code
   - Talks
@@ -27,7 +28,6 @@ You can find it here
 
  [1]: http://ammeep.github.com/CollieInSpace/ "http://ammeep.github.com/CollieInSpace/"
 
-This is a link to the source code. From here you are able to play the game, download the code, and even try and add some more features to the game. Any questions, or just want to know more about what you can do to learn more about programming, just send me a message bellow ![:)][2]  
+This is a link to the source code. From here you are able to play the game, download the code, and even try and add some more features to the game. Any questions, or just want to know more about what you can do to learn more about programming, just send me a message bellow ! 
 
-
- [2]: http://amy.palamounta.in/wp-content/plugins/php-image-cache/image.php?path=/wp-includes/images/smilies/icon_smile.gif
+{% speakerdeck c92f46d05efb01307e0412313b031ac2%}

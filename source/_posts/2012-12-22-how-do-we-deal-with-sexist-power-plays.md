@@ -5,6 +5,7 @@ layout: post
 permalink: /2012/12/22/how-do-we-deal-with-sexist-power-plays/
 dsq_thread_id:
   - 987187008
+comments: true
 categories:
   - Personal
 tags:
@@ -53,6 +54,6 @@ This is where we all need to pitch in. We need to **ALL** start recognising th
 
 ![Photo by Scott Savage - Flickr][2]
 
- [2]: http://amy.palamounta.in/wp-content/plugins/php-image-cache/image.php?path=/wp-content/uploads/2012/12/be-excelent-403x300.jpg
+{% img center /images/posts/be-excelent.jpeg %}
 
 These days most of us agree that treating each other with respect, is the only way to live. Yet sometimes we stand by, and stay quiet when we see others not living by this code. Iris said in her post that so many woman keep quiet. It’s because they don’t realise the support they would have if they spoke up. If we start standing up for sexism in the moment, all of these issues will follow suit. Woman, transgender, or in fact any minority will start to feel supported and listened to, and people will generally learn to be even more excellent to each other!
