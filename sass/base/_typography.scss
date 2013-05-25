@@ -4,7 +4,7 @@ $blockquote: $type-border !default;
 $sans: "museo-sans-condensed","Helvetica Neue", Arial, sans-serif !default;
 $serif: "museo-sans-condensed", Georgia, Times, "Times New Roman", serif !default;
 $mono: Menlo, Monaco, "Andale Mono", "lucida console", "Courier New", monospace !default;
-$heading-font-family: "museo-sans-condensed", "Helvetica Neue", Arial, sans-serif !default;
+$heading-font-family: "ff-enzo-web", sans-serif !default;
 $header-title-font-family: $heading-font-family !default;
 $header-subtitle-font-family: $serif !default;
 
@@ -19,7 +19,7 @@ body > header h1 {
   font-size: 2.0em;
   @extend .heading;
   font-family: $header-title-font-family;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.2em;
   letter-spacing: -2px;
   margin-bottom: 0.1em;

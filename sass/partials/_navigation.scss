@@ -85,6 +85,7 @@ header > hgroup > nav {
   background-color: $nav-border-right;
   border: 0;
   padding: 0;
+  display: inline-block;
   &,&:after { @include mask-image($feed); }
   &:after {
     content: "";
