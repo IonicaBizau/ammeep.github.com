@@ -13,11 +13,12 @@ body {
 	padding-left: 0.5em;
 	padding-right: 0.5em;
 
-	> nav {
+	header > nav {
 		background: $white;
 		border-bottom: 1px solid #F2F2F2;
 		padding-left: 0px;
 		padding-right: 0px;
+		height:35px;
 
 		form .search {
 			border-radius: 0.2em 0.2em 0.2em 0.2em;
