@@ -28,6 +28,6 @@ You can find it here
 
  [1]: http://ammeep.github.com/CollieInSpace/ "http://ammeep.github.com/CollieInSpace/"
 
-This is a link to the source code. From here you are able to play the game, download the code, and even try and add some more features to the game. Any questions, or just want to know more about what you can do to learn more about programming, just send me a message bellow ! 
+This is a link to the source code. From here you are able to play the game, download the code, and even try and add some more features to the game. Any questions, or just want to know more about what you can do to learn more about programming, just send me a message bellow! 
 
 {% speakerdeck c92f46d05efb01307e0412313b031ac2%}

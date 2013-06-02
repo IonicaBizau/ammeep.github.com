@@ -8,9 +8,6 @@ body > header {
         a, a:visited {
           color: #ffffff;
           text-decoration: none;
-           &:hover { 
-              color: #006666;
-            }
         }
 
       }
@@ -31,5 +28,6 @@ body > header {
   .header-image{
     float:right;
     margin-top:-15px;
+    margin-right: 20px;
   }
 }
