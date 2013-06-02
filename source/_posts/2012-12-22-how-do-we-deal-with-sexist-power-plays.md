@@ -52,8 +52,6 @@ When challenging someone on a comment, generally most people will be so embarra
 
 This is where we all need to pitch in. We need to **ALL** start recognising these behaviours, and help those in need, in their time of need. If you see someone shrinking unnecessarily as a result of someones words or actions. **Step up!** Gently make them understand that they currently look like a worse person than they actually are. It takes two seconds, and doesn’t have to cause any confrontation. If the person gets worked up over it? Who cares. Let them stew on it. Eventually your words will sink in.
 
-![Photo by Scott Savage - Flickr][2]
-
 {% img center /images/posts/be-excelent.jpeg %}
 
 These days most of us agree that treating each other with respect, is the only way to live. Yet sometimes we stand by, and stay quiet when we see others not living by this code. Iris said in her post that so many woman keep quiet. It’s because they don’t realise the support they would have if they spoke up. If we start standing up for sexism in the moment, all of these issues will follow suit. Woman, transgender, or in fact any minority will start to feel supported and listened to, and people will generally learn to be even more excellent to each other!
