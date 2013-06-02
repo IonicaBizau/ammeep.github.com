@@ -1,5 +1,6 @@
 $noise-bg: image-url('noise.png') top left !default;
 
+$main-green:#006666;
 // Main Link Colors
 $link-color: #006666 !default;
 $link-color-hover: adjust-color($link-color, $lightness: 10, $saturation: 25) !default;
