@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Genetics | Amy Palamountain]]></title>
+  <link href="http://amy.palamounta.in/blog/categories/genetics/atom.xml" rel="self"/>
+  <link href="http://amy.palamounta.in/"/>
+  <updated>2013-06-02T22:04:20+12:00</updated>
+  <id>http://amy.palamounta.in/</id>
+  <author>
+    <name><![CDATA[Amy Palamountain]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[A Recipe To Make Girls]]></title>
+    <link href="http://amy.palamounta.in/2012/10/22/2012528a-recipe-to-make-boys-and-girls-html/"/>
+    <updated>2012-10-22T00:00:00+13:00</updated>
+    <id>http://amy.palamounta.in/2012/10/22/2012528a-recipe-to-make-boys-and-girls-html</id>
+    <content type="html"><![CDATA[<h1></h1>
+
+<p>If I were to ask you, genetically speaking what is the difference between a boy and a girl? You are likely to say  “A girl carries two X chromosomes, while a boy carries one X and one Y”.</p>
+
+<p>If I where then to ask you how that determines ones sex, you might postulate that the Y chromosome contains some special genes which magically builds a male. While perhaps to build a female you need double the amount of X genes to make a female.</p>
+
+<p>While this seems a reasonable assumption, it only proves to be partially correct. At least in humans it seems that the presence or absence of the Y is particularly important in kicking of development of a boy or a girl. However the number of X chromosomes is not of any particular relevance.</p>
+
+<p>How is this possible? Surly girls have twice as much expression of X linked genes than boys? The answer is the X has its dosage compensated for.  Lets explore what this means.</p>
+
+<h2><strong>Girls only use one of their X Chromosomes.</strong></h2>
+
+<hr />
+
+<p>****As we know a boy has 1  X and 1  Y chromosome, while a girl possesses 2 X chromosomes. The double dose of X chromosomes in girls is only relivant very early in the development of a female embryo.</p>
+
+<p>If it wasn’t for the mechanism known as Dosage Compensation any gene coded on an X chromosome would be expressed at double the required level, which can be lethal. Dosage compensation is a genetic regulatory mechanism which operates to neutralize unequal expression of genes on the X chromosome. What this achieves is a roughly equal level of expression of X linked genes in both boys and girls, preventing potentially lethal double dosing of X linked genes.</p>
+
+<p>Compared to the desolate Y chromosome, the X chromosome is a sprawling metropolis of genetic information.  There are are over 1000 genes on the X chromosome which play critical roles in development. Genes related to intelligence, blood clotting and muscle development are all found here. So you can see that if girls had double the amount of X genes compared to boys, some potentially lethal situations could easily arise.</p>
+
+<p>In humans, females achieve dosage compensation by down regulating the expression of genes on one X chromosome. Essentially this means turning off the expression of the extra X chromosome. Thus bringing expression levels of genes on the X chromosome down to similar levels found in males. </p>
+
+<p>The process of turning off an X chromosome is known as X Inactivation and it results in a large genetically inactive X chromosome, known as a Barr body. Actually not all portions of the second X chromosome become inactive, a very small percentage of genes remain active, though for the purposes of this post I will not be discussing this.</p>
+
+<p>When chromosomes become inactive they appear as dark dense patches in the nucleus of a cell. You can see the Barr Body here – an inactive X chromosome.</p>
+
+<p><img src="http://amy.palamounta.in/wp-content/plugins/php-image-cache/image.php?path=/wp-content/uploads/2012/10/barrbody.gif" alt="" />
+I will refrain from the deep dive into the mechanics of why inactive chromosomes appear as dense dark patches, but it is enough to say that rather than being an open and free stretch of DNA the inactive chromosome condenses down to the point where the gene expression proteins are unable to bind to the DNA to read it, there is physically not enough room for the ‘machinery’ to enter. </p>
+
+<p>If you are interested, here is an awesome animation with narration explaining at a high level how the X chromosome gets inactivated by preventing the gene expression machinery from reading its DNA.</p>
+
+<p>How does the extra X chromosome get ‘turned off’? There are set of genes which are found on the X chromosome. This area is known as Xic or the ‘X Inactivation Center’. Inside Xic there is a counting duo, two genes Xist and Tsix who have the jobs of kicking off the inactivation of one randomly selected X chromosome.</p>
+
+<p><img src="http://amy.palamounta.in/wp-content/plugins/php-image-cache/image.php?path=/wp-content/uploads/2012/05/img.jpg" alt="" />
+Both Xist and Tsix produce non coding RNA transcripts. The Tsix RNA transcript is anti sense to the Xist and therefore can bind to the Xist sequence and thus inhibit its action. Before an X chromosome is inactivated both chromosomes will express Xist in low concentrations. Shortly after this one X chromosome will begin to express Tsix in high levels. Because Txis is an inhibitor of Xist expression what follows is a dramatic reduction the concentration of Xist in the area around this X chromosome. This chromosome will become the active X chromosome.</p>
+
+<p>Meanwhile on the second X chromosome the expression of Xist is increased dramatically. The Xist transcript,then binds all the way along the X Chromosome it is expressed from, acting to recruit proteins involved in deactivating genes. The net result here is a Barr Body – an inactive X chromosome.</p>
+
+<p>So we can see that even though girls carry twice the number of X Chromosomes than boys, the second X is only really required early on in sex differentiation, and is not required for normal cell activities. The X Chromosome encodes a lot of genes critical in both ongoing cellular activities and in early development, but double the expression of X linked genes is not required and in fact would be lethal during day to day cellular activity.</p>
+
+<p>The expression of the sex genes is a fascinating topic.  So i hope this gave some insight into the goings on of the X chromosome – and a little bit about how girls are made. I’ll try get out a follow up too ‘A Recipe To Make Boys’</p>
+
+<hr />
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Chromatin and Histones]]></title>
+    <link href="http://amy.palamounta.in/2010/11/30/20081022chromatin-and-histones-html/"/>
+    <updated>2010-11-30T00:00:00+13:00</updated>
+    <id>http://amy.palamounta.in/2010/11/30/20081022chromatin-and-histones-html</id>
+    <content type="html"><![CDATA[<h1></h1>
+
+<p><a href="http://s3.media.squarespace.com/production/745573/8761168/_dY1gnTSXDmg/SP58jSZWBII/AAAAAAAAAEk/zGWmivldDQg/s320/Dyad.png"><img src="http://s3.media.squarespace.com/production/745573/8761168/_dY1gnTSXDmg/SP58jSZWBII/AAAAAAAAAEk/zGWmivldDQg/s320/Dyad.png" alt="" /></a><br/>
+The basic building block of chromatin is the nucleosome, which contains 147 base pairs (bp) of DNA wrapped in a left-handed superhelix 1.7 times around a core histone octamer (two copies each of histones H2A, H2B, H3, and H4). Each core histone contains two separate functional domains: a signature “histone-fold” motif sufficient for both histone-histone and histone-DNA contacts within the nucleosome, and NH2-terminal and COOH-terminal “tail” domains that contain sites for posttranslational modifications (such as acetylation, methylation, phosphorylation, and ubiquitination). Although these histone tails are mostly unresolved in the crystal structure of the nucleosome, they appear to emanate radially from the nucleosome, conveniently positioned to associate with “linker” DNA residing between nucleosomes or with adjacent nucleosomes.</p>
+
+<p>In addition to the core histones, metazoan chromatin also contains linker histones (such as histone H1), which bind to nucleosomes and protect an additional ~20 bp of DNA from nuclease digestion at the core particle boundary. Linker histones are not related in sequence to the core histones, but they also contain a globular domain flanked by NH2-terminal and COOH-terminal tail domains. Although only the linker histone globular domain is essential for binding to nucleosomes, the tail domains are believed to be important for linker histone roles in chromatin folding.</p>
+
+<p>Histones</p>
+
+<p>Histone proteins are among the most highly conserved proteins of higher eukaryotes. Their status as such is reveling as to the importance of Histones both structurally and functionally to the cell. Mutations within the Histones are simply not tolerated, as the fine structure and balance of charge are critical to their functions. In Eukaryotic cells there are 5 main Histone proteins, a linker Histone H1, and the four core Histones H2A, H2B, H3 and H4. These proteins are extensively posttraslationally modified, particularly on their unstructured N termini tails. Histones are by far the most abundant DNA associated protein. Consistent with this role Histones have a high content of positively charged amino acids, where about 20% of all residues are either a Lysine or an Arginine. The core Histones is also relatively small protein ranging in size from 11 kDa to 15 kDa, while H1 is about 21 kDa. A Conserved region is found in each of the core Histones called the Histone fold domain, which is composed of three alpha helices separated by two unstructured loops. It is this domain that mediates the formation of the Histone core particle. Two heterodimers of H3 and H4 come together for form a tetramer core, which makes contacts with DNA. The core particle is then completed by the addition of two H2A H2B dimers. The core Histones each has an unstructured amino terminal tail. These tails are not required for DNA to contact the Histone octamer, but are instead the sites of extensive posttranslational modifications, which alter the function of the individual nucleosome.<br/>
+Nucleosomes and the 10 nm fiber. DNA is wound around this octamer approximately twice (~147bp) to achieve a packing ratio of about 6. Though this is a considerable increase in packing it is still not enough. Interphase nuclei have a packing ratio of about 1000- 2000, while metaphase chromosomes have a packing ratio ~ 7000.</p>
+
+<p>DNA forms higher order structures. The primary level of organization can be described as appearing as like beads on a string or the basic unit fiber. A nucleoprotein is a complex of associated DNA with its own mass in basic histone proteins, and almost the same mass in less basic non-histone proteins. Histone proteins are highly conserved in many species. The nucleosome (a nucleoprotein) is about 2 turns of DNA wound around a histone core and plays a central role in the packing of DNA into the nucleus and is the primary determinant of DNA accessibility. When DNA is wrapped around the nucleosome DNA that is associated with the nucleosome is less susceptible to DNase digestion.</p>
+
+<p>When DNA is replicated the new strands are quickly wrapped into nucleosomes after the replication fork passes by special nucleosome assembly proteins. They wrap the DNA around the H3 H4 tetramer; insert the H2a and H2b units to complete the octomer so that the nucleosome exhibits dyad symmetry. Statistically there seems to be a preference for the AT rich minor groves to face the histone octamer, each of the heterodimers contacts about 30 bp of DNA. Arginine side chains face into all the minor groves to maintain rigidity. There are roughly 14 turns of the DNA helix around the nucleosome, because some twisting of the helix is induced by the octamer in the middle of the coil around the nucleosome. H1 histone acts a brace for the octomer, clipping it all together. About 15 to 55bp of linker DNA is between each nucleosome. This can be seen visually under a microscope in low salt concentrations as a ‘bead on a string’ like appearance. This is the primary structure of chromatin or the basic unit fiber.</p>
+
+<p>To investigate the structure of the nucleosome further scientists used the property that the DNA wrapped around the histone octamer was less susceptible to nuclease degradation than the exposed linker DNA between the subunits. This allowed researchers to isolate and resolve the fine structure of the histone octamer. When the nucleosome is digested with a micrococcal nuclease that digests the linker DNA and releases a 166bp chromatosome (the nucleosome minus the linker DNA) and then can be further digested to remove the H1 subunit and to release the nucleosome core particle. When the crystal structure of the histone octamer is examined the octamer is confirmed to be a flat disc. Each of the 4 histone proteins share the conserved helix turn helix turn helix motif (α1, L1, α2, L2, α3) called the central histone fold domain. Heterodimers form so that there is a juxtaposition of the L1 and L2 of each of the proteins creating a tapered appearance. Each histone has both C and N terminus unstructured tails that make up about 28% of the mass of the core. These tails are subject to posttranslational modifications that allow a cell to regulate how condensed the chromatin is, and how able it is to form higher order structures.</p>
+
+<p>The DNA path around the histone core is not a completely uniform path and a considerable amount of variation is seen depending on the superhelixal state of the DNA. The nucleosome causes the DNA to become over wound so that there are 10.2bp per turn. This is because it allows the minor groves and major groves to line up forming channels that the histone tails can pass through, and leaving the major groves accessible to DNA binding proteins to allow the DNA to partake in normal cellular process. But for most interaction with DNA then DNA needs to disassociate from the histone octamer. Dissociation occurs in semi cooperative stages where first the H3 terminals where the DNA enters and leaves the nucleosome dissociate which then induces dissociation in the H2A and H2B heterodimers followed by the H3 H4 heterodimers. I would like to hazard a guess as to how DNA binding proteins could cause the nucleosome to disassociate from the DNA. The increased acetylation disrupts the higher order structure of the chromatin allowing DNA binding proteins to move in to these areas. Because 4 of the 14 minor groves have H3 histone tails passing through them, and H3 tails also contact the DNA as it enters and exits the nucleosome, I guess that when a DNA binding protein binds with a strong association to a promoter region that this induces some kind of conformational change into the H3 tail and thus induces the disassociation event. I have found no literature on this and don’t know weather this has been tested, proved or disproved. If I had a lab and all the skills in the world I would test to see if those regions that bind to DNA binding proteins are statistically associated with the H3 tail passing through the opposite grove on the nucleosome. This would be a preliminary test to see if in fact this could be an explanation. A further thought on this is that the H4 tails makes many contacts with the H2A H2B heterodimers of a neighboring nucleosome core, and this could be away of transferring conformational information from one nucleosome to the next. I am aware that there are nucleosome remolding proteins but have had little time to read up about these things. This was just a thought exercise.</p>
+
+<p>Increased acetylating of the histone tails has been associated with transcription activity and the reverse for repression. One view is that the net charge reduction caused by acetylation causes the conformational change in the nucleosome. Histone tails interact with neighboring nucleosomes and linker DNA and control the amount of condensation of the chromatin. Tails can undergo reversible acetylation on specific amino acids on the tails; this decreases the net charge and thus decreases the interaction with the negatively charged DNA. Increased methylation of tails is associated with prevention of acetylation thus the nucleosomes are more likely to form the 2ndary level of structure.</p>
+
+<p>H1 and the 30 nm Fiber<br/>
+Chromatin forms a 30 nm fiber under the microscope. There are two models for the structure of this fiber, the solenoid model and the Zigzag model.<br/>
+Under the Solenoid model each coil has about 6 nucleosomes per turn (and therefore contains about ~6*~200bp) to form a 30nm fiber. H1 histone slots in on the inside of the solenoid and is bound to the DNA locking the nucleosome in place. Electron microscopy suggests that the 30 nm fiber is not quite a perfect solenoid it may be a loose helical structure.<br/>
+The crystal structure of the tetranulcosome has been resolved to show that the linker DNA may zigzag backwards and forwards between the nucleosomes.<br/>
+Histone H1 is less conserved than the other core histones, and has 5 different variants in mammalian genomes, each of whom have different roles gene regulation. H1 facilitates the higher order packing of chromatin, by binding to the linker DNA and maintaining the correct spacing between the nucleosomes. High levels of H1 proteins are associated with the formation of the 30nm fiber and also with a decrease in gene activity. The converse is also true, low levels of the H1 are associated with gene activity. The secondary structure is a dynamic structure and must be able to partially unfold and refold to this solenoid form</p>
+
+<p>Histone Tails are required for the 30nm Fiber<br/>
+Core histones that lack the amino terminal tail are incapable to forming 30nm fibers. The most likely role of the tails is to stabilize the 30nm fiber by interacting with adjacent nucleosomes. This model is supported by three dimensional crystal structure of the nucleosome, which shows that each of the N terminal tails of H2A H3 and H4 interacts with the adjacent nucleosome. Recent studies indicate that the interaction between the positively charged N termini of H4 and negative charged region of the histone fold domain of H2A is extremely important for the formation of 30nm fibers.</p>
+
+<p>Chromonema Fibers <br/>
+What is the structure of the chromatin fiber in vivo? Do 10-nm, bead-on-a-string chromatin fibers exist, or are they only present in vitro in low-ionic-strength environments? In vitro, the concentration of divalent ions required to induce 30-nm fiber formation is really quite modest (1 to 2 mM). In fact, the estimated Interphase nuclear concentrations of Ca2 and Mg2 ions [4 to 6 mM and 2 to 4 mM, respectively] are not only expected to condense chromatin fibers but also should drive substantial fiber-fiber interactions. For this reason, when considering how chromatin could affect gene expression, one must consider that chromatin primarily exists in a highly ordered state in vivo. Reinforcing this point are elegant light and electron microscopy studies of mitotic and Interphase chromosomes. Fiber sizes ranging from 100 to 300 nm in diameter were observed throughout mitotic chromosomes, and electron micrographs of Interphase chromosomes also displayed a substantial amount of 100-nm-wide fibers. These very large fibers are unstable when nuclei are prepared in the absence of divalent cations or polyamines, mimicking the Mg2 dependence of folding and self-association seen for nucleosomal arrays in vitro.</p>
+
+<p>What is the dynamic structural organization beyond the 30-nm fiber. But how do these structures influence gene function? Is transcription actually occurring on chromonema fibers, or are transcriptionally active regions less condensed? To answer these questions, Tumbar et al. used a mammalian cell line that contained a long, integrated array of LacI-binding sites. When imaged in living cells by decoration with a LacI-green fluorescent protein (GFP) fusion protein, this 90-Mbp tract appears as a single dot. In contrast, the foci decondensed when cells were transfected with an expression vector that produced a fusion of LacI-GFP to the VP16 transcriptional activation domain. The decondensed LacI tract appeared as an extended ribbon estimated to be 80 to 100 nm in diameter that coiled throughout a considerable volume of the nucleus. The 100-nm fiber colocalized with regions of bromodeoxyuridine-uradine 5′-phosphate incorporation, suggesting active transcription within the site, and recruitment of multiple HATs and increased histone acetylation were also observed. Thus, these data suggest that a 100-nm fiber may be the basic unit of higher order structure that is competent for gene expression. Because RNA polymerase II inhibitors did not block formation of the 100-nm fibers, the structural changes observed are not caused by transcriptional activity but more likely precede transcriptional activation at these sites. Fig. 2. Transcriptional activators induce large-scale changes in chromatin folding. (Left) DNA constructs containing LacI-binding sequences (orange boxes) upstream of a dihydrofolate reductase (DHFR) gene (navy blue) were integrated into chromosomes as tandem ~90-Mbp arrays by Tumbar and co-workers. This locus can be visualized in vivo by expressing a LacI-GFP fusion protein (yellow-green protein), which images as a single green focus within the nucleus (top). In contrast, expression of a LacI-GFP-VP16 activator protein (yellow-green-red protein) produced a ribbon like chromonema fiber within a subset of cells (bottom). On the basis of comparison of ribbon length with the known base pair length of the DNA tract, fiber width was estimated at ~100 nm, which is considerably larger and more compact than even a fully condensed 30-nm nucleosomal array.</p>
+
+<p>One concern with these studies is that these tandem LacI arrays are artificial and, thus, their behavior might be aberrant. To look in a more natural context, Mueller et al. examined the behavior of a tandem array of mouse mammary tumor virus (MMTV) promoters driving expression of a ras gene. Array structure and transcription were examined using a glucocorticoid receptor-GFP (GR-GFP) fusion protein to decorate the array in live cells and fluorescence in situ hybridization of fixed nuclei to verify transcription. The behavior of this MMTV array was dynamic. The addition of a GR agonist led to rapid (1 to 3 hours) decondensation of the arrays, with a rate that paralleled accumulation of ras mRNA. Even the decondensed, transcriptionally active arrays retained at least 50-fold more condensation than naked DNA, suggesting maintenance of at least a fully condensed 30-nm chromatin fiber. Therefore, both the LacI-GFP-VP16 activator and GR-GFP can drive local decondensation of a chromatin fiber. Because VP16 and GR are known to recruit either HATs or ATP-dependent chromatin-remodeling complexes, it is tempting to speculate that these activities play key roles in these decondensation events. In fact, the recruitment of transcriptional coactivators, including HATs and human SWI/SNF, was seen during MMTV array induction, and extensive histone acetylation accompanied VP16-dependent decondensation of the arrays examined by Tumbar et al..</p>
+
+<p>﻿</p>
+
+<p> </p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Fun in the lab]]></title>
+    <link href="http://amy.palamounta.in/2008/12/07/2008127fun-in-the-lab-html/"/>
+    <updated>2008-12-07T00:00:00+13:00</updated>
+    <id>http://amy.palamounta.in/2008/12/07/2008127fun-in-the-lab-html</id>
+    <content type="html"><![CDATA[<h1></h1>
+
+<p>At the moment I have a technicians job, working in a lab. I have two weeks left, and must Finnish the tasks that I have been charged.</p>
+
+<ul>
+<li>Create a wild type clone of a region of exonic human sequence.</li>
+<li>Induce SNP into three wild type clone via the quick change protocol.</li>
+<li>Write a workflow that produced a list of ranked candidate genes, for a human disease using tools such as blast , open reading frame finder tools, and motif searchers.</li>
+</ul>
+
+
+<p>Currently I am having trouble carrying out my ligation reaction into a PGemT easy vector system and then transforming it. Transformation and cells are fine as demonstrated by controls. Ligation is the issue. Diagnostic restriction digests are currently not working, I think this is due to not having enough DNA to digest and then visualise on the gel.</p>
+
+<p>Quick change has been performed on 2 of the three wt clones, and clones have been isolated. The gene now just needs to be sent for sequenceing.</p>
+
+<p>Workflow is on hold.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Insulators Part 1]]></title>
+    <link href="http://amy.palamounta.in/2008/10/23/insulators-part/"/>
+    <updated>2008-10-23T00:00:00+13:00</updated>
+    <id>http://amy.palamounta.in/2008/10/23/insulators-part</id>
+    <content type="html"><![CDATA[<h1></h1>
+
+<p>Today I thought I could kill two birds with one stone, and study up about insulator elements, which i don’t really understand at all to be honest. So bear with me my avid readers (cough).</p>
+
+<p>Right, what do I always do first in a situation like this is hit http://www.ncbi.nlm.nih.gov/<br/>
+best place to start. So a quick book search and i see that apparently ‘insulators define functional domains’ and ‘maintain the independence of functional domains’. So i ask, “What does this mean?” and so our/mostly mine (as Im the only reader of this shit) journey begins.</p>
+
+<p>Ok so in 1991 a group lead by Kellum and Schedl were playing around with the positional effect. Breifly the positional effect refers to a general problem in GE that when you introduce a cloned gene into a genome and intergrate it, often (depending on the mechanism used) the insertion is random. Gene expression is very dependent on the spatial positioning of the gene at any given time, such that if a gene is inserted into a heterochromatic region it will be silenced and therefore not expressed, while if it is inserted into a region of open chromatin configuration it will be expressed. Kellum et al were able to show that when the W (dominant giving red eyes) was inserted randomly into the genomes of w- drosophila variable red eye expression was observed (owing to the positional effect). When the W gene was flanked by 1-2kb insulator elements the variable expression was lost and all progeny were red eyed. Kellums group interpreted this to mean that somehow the insulator elements were able to bring about changes in the chromatin where the transgene had inserted and bring about stable expression, or in more technical terms, establish a ‘functional domain’.</p>
+
+<p>Consider a situation where by we have two genes that are next door to each other. Let me introduce a bug with two genes: gene ‘go_left’ and gene ‘go_right’. Upstream of each of these genes are there respective control elements, which will turn on the expression of these genes. The signal to go left is received, and transcription begins from go_left, the bug goes left. But potentially the go_right gene could be transcribed from the go_lefts control element, and if this happens then the bug will end up in an infinate loop of go left, go right and never get where it wants to go. So god being good and great and awesome bla bla.. saw this mathematical conundrum and solved it with a stroke of genious – said ‘LET THERE BE INSULATION’ (p.s creationist’s dont belong in this blog)</p>
+
+<p>Ok so back to the point im trying to make to myself: INSULATORS DEFINE FUNCTIONAL DOMAINS.</p>
+
+<p>So NCBI disapointed on this topic. The article I read then went on to say that insulators do not them selfs provide insulation, but insulate by way of the proteins that they recruit. Also that it has been shown that such insulator binding proteins also bind to the nuclear matrix. From what I can gather about the nuclear matrix, I get the feeling that it is an extreamly important controler of gene regulation. One day shitwolf.. one day..<br/>
+Anyway so if these proteins that are binding to insulator elements, also bind to the nuclear matrix, you can imagin that insulators may be able to physically define structural and spatial domains in the chromatin. But then the article falls flat on its face, and runs away scared. I am sent else where on my journy…</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Iron Homeostatis and Cytoplasmic Control of Gene Expression]]></title>
+    <link href="http://amy.palamounta.in/2008/10/21/20081021iron-homeostatis-and-cytoplasmic-control-of-gene-expression-html/
+/"/>
+    <updated>2008-10-21T00:00:00+13:00</updated>
+    <id>http://amy.palamounta.in/2008/10/21/20081021iron-homeostatis-and-cytoplasmic-control-of-gene-expression-html/20081021iron-homeostatis-and-cytoplasmic-control-of-gene-expression-html</id>
+    <content type="html"><![CDATA[<h1></h1>
+
+<p>[![][2]][2]<br/>
+Iron. We all need it for many general cellular functions. When you don’t have enough Iron, your body cannot carry out those functions. On the flip side, you find that in high concentrations iron is toxic to the body. It is therefore critical that organism’s have a finely tuned system for regulating intracellular iron concentration.</p>
+
+<p>Iron is used in many proteins as a cofactor, this includes oxygen transport proteins, hemoglobin and myoglobin. Iron plays an important role in oxygen transport and energy production, therefore it is not surprising that a shortage of iron in humans results in anemia, giving an over all feeling of weakness.</p>
+
+<p>Two proteins, while not the only players in the regulation of iron homeostasis, provide an excellent and well studied example of regulation of gene expression post transcriptionally and in the cytoplasm. Let me introduce the players: Ferritin and the Transferrin receptor. Iron has extremely low solubility and is carried around by a third molecule (not discussed today) transferrin, and is taken up by the cell by the transferrin receptor, and stored by the cell in ferritin.</p>
+
+<p>The levels of each of our two key players are regulated acording to the levels of iron in the following ways. When iron levels are high, there is an increase in Ferritin by increasing the Ferritin mRNAs affinity for the ribosome, therefore ensuring that protein gets made at increased levels, and excess iron gets stored. At the same time the levels of the Transferrin receptor are decreaeses so that there is less iron being taken up by the cell. This is regulated by regulating the stability of the Transferrin receptor mRNA.When iron levels are low then Ferritin levels are decreased so that less iron is stored, and the levels of Transferrin Receptor are increased by increasing the stability of its mRNA, and thus increasing the ability of the cell to take up more iron. These two proteins are differentially regulated by the same proteins. Let us explore how this is achieved.<br/>
+<a href="http://s3.media.squarespace.com/production/745573/8761168/_dY1gnTSXDmg/SP2aye4oybI/AAAAAAAAAEE/LG5nMmwJdJs/s320/Stuff.jpg"><img src="http://s3.media.squarespace.com/production/745573/8761168/_dY1gnTSXDmg/SP2aye4oybI/AAAAAAAAAEE/LG5nMmwJdJs/s320/Stuff.jpg" alt="" /></a><br/>
+Iron Responsive Elements<br/>
+In the 5′ UTR (untranslated region) of the Ferritin mRNA a stem loop structure that forms via base pairing interactions in the stem. The loop region contains a particular sequence of bases, which can be bound by IBP (Iron binding proteins).</p>
+
+<p>In the 3′ UTR of the transferrin receptor are 5 of these stem loop IRE, which can bind the same IBP. These IRE’s are key to understanding the regulation of iron homeostasis.</p>
+
+<p> </p>
+
+<p>Regulation of Ferritin</p>
+
+<p> </p>
+
+<p>Ferritin translation is regulated by iron binding proteins. Such proteins are also RNA binding proteins that can recognize a specific hair-pin structured that is formed in the 3′ UTR of the Ferritin mRNA (its IRE). The affinity of the IBP for the IRE is controlled by the levels of iron in the cell. In iron deficient cells, the concentration of iron is too low to bind the IRP. In the absence of bound Iron these proteins are tightly bound to the Ferritin IRE and prevent the ribosome from initating translation.</p>
+
+<p>Regulation of Transferrin Receptor</p>
+
+<p>In the mRNA of the Transferrin receptor the 3′ UTR is 2.6 kb long and contains 5 IRE, whos sequence and structure is similar to the IRE found in the 5′ end of the ferritin mRNA. In the presence of low iron concentrations, the stability of the transferrin mRNA is increased by IBP, which bind to the IRE in the 3′ end. It is thought that such bound proteins prevent the receptor mRNA from entering the mRNA degredation pathway.</p>
+
+<p>Experimental Evidence<a href="http://s3.media.squarespace.com/production/745573/8761168/_dY1gnTSXDmg/SP2iLA8RbNI/AAAAAAAAAEc/K_StfiA0KQ4/s320/gelShift.png"><img src="http://s3.media.squarespace.com/production/745573/8761168/_dY1gnTSXDmg/SP2iLA8RbNI/AAAAAAAAAEc/K_StfiA0KQ4/s320/gelShift.png" alt="" /></a></p>
+
+<p>Gel Shift assays have demonstrated that the same protein that binds the TfR (Transferrin receptor) also binds the Ferritin IRE. A labled 3′ TrF mRNA was used in each of the lanes. Lane 1 has only cytoplasmic extract with no cold competitor added. We can see that there is an increase in the molecular weight of the labled mRNA, therefore showing that something has bound to the probe. Lane two contains a cold TrF mRNA, which is able to chase away the shift, therefore demonstrating that some protein is binding specifically to the TfR mRNA. Lane 3 shows that cold Ferritin can achieve the same thing, while lane 4 shows that in the presence of a cold non-specific competitor, specific binding still occurs.</p>
+
+<p>The proteins that bind the IRE’s have been pulled down by UV cross linking, and demonstrated by Gel shift again. I wont be discussing this further because I am tired.</p>
+]]></content>
+  </entry>
+  
+</feed>
