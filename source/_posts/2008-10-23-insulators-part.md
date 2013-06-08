@@ -9,10 +9,9 @@ categories:
   - Genetics
 tags:
   - insulators
-image: http://placekitten.com/200/200
-summary: hello and stuff
+image: /images/featured/insulators-one.jpg
+summary: Today I thought I could kill two birds with one stone, and study up about insulator elements, which i don’t really understand at all to be honest. So bear with me my avid readers (cough).
 ---
-# 
 
 Today I thought I could kill two birds with one stone, and study up about insulator elements, which i don’t really understand at all to be honest. So bear with me my avid readers (cough).
 
