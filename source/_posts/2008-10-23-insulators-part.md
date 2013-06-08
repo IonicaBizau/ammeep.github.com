@@ -1,5 +1,5 @@
 ---
-title: Insulators Part 1
+title: Insulators
 author: ammeep
 layout: post
 permalink: /2008/10/23/insulators-part/
