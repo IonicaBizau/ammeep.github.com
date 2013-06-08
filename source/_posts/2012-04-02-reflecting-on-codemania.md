@@ -1,21 +1,24 @@
 ---
 title: Reflecting on Codemania
 author: ammeep
-excerpt: "3 days post Codemania - it was a blast. Down here in New Zealand we don't often get the opportunity to listen to world class content, at a world class conference. We have Ian Randall and Ben Gracewood to thank for this. From the venue to the top notch speakers like Damian Edwards, Jared Wyles, Jacinta Richardson, Karl van Randow, Richard Easther and Aaron Morton . From start to finnish and everything in between, Ben an Ian did a fantastic job!"
+excerpt: 
 layout: post
 permalink: /2012/04/02/reflecting-on-codemania/
+comments: true
 dsq_thread_id:
   - 952295125
 categories:
   - Code
 tags:
   - Codemania
-image: http://placekitten.com/200/200
-summary: hello and stuff
+image: /images/featured/codemania.png
+summary: "3 days post Codemania - it was a blast. Down here in New Zealand we don't often get the opportunity to listen to world class content, at a world class conference. We have Ian Randall and Ben Gracewood to thank for this. From the venue to the top notch speakers like Damian Edwards, Jared Wyles, Jacinta Richardson, Karl van Randow and Aaron Morton . From start to finnish, Ben an Ian did a fantastic job!"
 ---
 # 
 
 3 days post [Codemania][1] – it was a blast. Down here in New Zealand we don’t often get the opportunity to listen to world class content, at a world class conference. We have [Ian Randall][2] and [Ben Gracewood][3] to thank for this. From the venue to the top notch speakers like [Damian Edwards][4], [Jared Wyles][5], [Jacinta Richardson][6], [Karl van Randow][7], [Richard Easther][8] and [Aaron Morton][9] . From start to finish and everything in between, [Ben][3] an [Ian][2] did a fantastic job!
+
+{% img center /images/posts/reflecting-on-codemania/swag.jpg%}
 
  [1]: http://codemania.co.nz/
  [2]: https://twitter.com/#!/kiwipom
@@ -27,11 +30,7 @@ summary: hello and stuff
  [8]: https://twitter.com/#!/reasther
  [9]: https://twitter.com/#!/AaronMorton
 
-[![][11]][11]
-
- []: http://amy.palamounta.in/2012/04/02/201242reflecting-on-codemania-html/5005d144e4b065dbfcb95ed8/
-
-Phil Haack giving his keynote ‘I fucking love to code’ where he talked about why we should do everything we can to keep our love for code alive. Anything that kills your passion, kills your mental flow, or the ability to code in anyway should be improved or removed. For example buy a decent chair. We spend more time sitting than we do sleeping as coders, so you better make damn sure your body is comfortable doing it. 
+Phil Haack have the keynote ‘I fucking love to code’ where he talked about why we should do everything we can to keep our love for code alive. Anything that kills your passion, kills your mental flow, or the ability to code in anyway should be improved or removed. For example buy a decent chair. We spend more time sitting than we do sleeping as coders, so you better make damn sure your body is comfortable doing it. 
 
 Of particular relevance for me was the few moments he spent addressing the recently resurged topic of ‘subtle sexism in the work place’. For women, all to often this can a major blocker of our love to code, and as coders we should all be doing our best to remove this from the work place. I have a few thoughts on this I would like to share .I’ll keep it brief and save the rant for another post.
 
