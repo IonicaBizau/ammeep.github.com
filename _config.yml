@@ -98,3 +98,11 @@ google_analytics_tracking_id:
 
 # Facebook Like
 facebook_like: false
+
+# Flickr
+flickr:
+  cache_dir:       ./_cache/flickr
+  api_key:         5253825203a7ba9a55a5eac04b030891
+  shared_secret:   871085a8820f75c1
+  access_token:    72157633897289517-19584179515304cb
+  access_secret:   43eb482d60d77fa7
