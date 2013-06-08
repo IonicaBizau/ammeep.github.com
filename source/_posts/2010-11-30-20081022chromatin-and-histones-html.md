@@ -1,9 +1,9 @@
 ---
 title: Chromatin and Histones
 author: ammeep
-excerpt: '<br />The basic building block of chromatin is the nucleosome, which contains 147 base pairs (bp) of DNA wrapped in a left-handed superhelix 1.7 times around a core histone octamer (two copies each of histones H2A, H2B, H3, and H4). Each core histone contains two separate functional domains: a signature "histone-fold" motif sufficient for both histone-histone and histone-DNA contacts within the nucleosome, and NH2-terminal and COOH-terminal "tail" domains that contain sites for posttranslational modifications (such as acetylation, methylation, phosphorylation, and ubiquitination).'
 layout: post
 permalink: /2010/11/30/20081022chromatin-and-histones-html/
+comments: true
 dsq_thread_id:
   - 952354303
 categories:
@@ -11,21 +11,19 @@ categories:
 tags:
   - Chromatin
   - Histone
-image: http://placekitten.com/200/200
-summary: hello and stuff
+image: /images/featured/chromatin-histones.jpg
+summary: 'The basic building block of chromatin is the nucleosome, which contains 147 base pairs (bp) of DNA wrapped in a left-handed superhelix 1.7 times around a core histone octamer (two copies each of histones H2A, H2B, H3, and H4).'
 ---
-# 
 
-[![][2]][2]  
 The basic building block of chromatin is the nucleosome, which contains 147 base pairs (bp) of DNA wrapped in a left-handed superhelix 1.7 times around a core histone octamer (two copies each of histones H2A, H2B, H3, and H4). Each core histone contains two separate functional domains: a signature “histone-fold” motif sufficient for both histone-histone and histone-DNA contacts within the nucleosome, and NH2-terminal and COOH-terminal “tail” domains that contain sites for posttranslational modifications (such as acetylation, methylation, phosphorylation, and ubiquitination). Although these histone tails are mostly unresolved in the crystal structure of the nucleosome, they appear to emanate radially from the nucleosome, conveniently positioned to associate with “linker” DNA residing between nucleosomes or with adjacent nucleosomes.
 
- []: http://s3.media.squarespace.com/production/745573/8761168/_dY1gnTSXDmg/SP58jSZWBII/AAAAAAAAAEk/zGWmivldDQg/s320/Dyad.png
- [2]: http://s3.media.squarespace.com/production/745573/8761168/_dY1gnTSXDmg/SP58jSZWBII/AAAAAAAAAEk/zGWmivldDQg/s320/Dyad.png
 
 In addition to the core histones, metazoan chromatin also contains linker histones (such as histone H1), which bind to nucleosomes and protect an additional ~20 bp of DNA from nuclease digestion at the core particle boundary. Linker histones are not related in sequence to the core histones, but they also contain a globular domain flanked by NH2-terminal and COOH-terminal tail domains. Although only the linker histone globular domain is essential for binding to nucleosomes, the tail domains are believed to be important for linker histone roles in chromatin folding.
 
+{% img center /images/posts/chromatin-histones/Dyad.png%}
   
-Histones
+
+## Histones
 
 Histone proteins are among the most highly conserved proteins of higher eukaryotes. Their status as such is reveling as to the importance of Histones both structurally and functionally to the cell. Mutations within the Histones are simply not tolerated, as the fine structure and balance of charge are critical to their functions. In Eukaryotic cells there are 5 main Histone proteins, a linker Histone H1, and the four core Histones H2A, H2B, H3 and H4. These proteins are extensively posttraslationally modified, particularly on their unstructured N termini tails. Histones are by far the most abundant DNA associated protein. Consistent with this role Histones have a high content of positively charged amino acids, where about 20% of all residues are either a Lysine or an Arginine. The core Histones is also relatively small protein ranging in size from 11 kDa to 15 kDa, while H1 is about 21 kDa. A Conserved region is found in each of the core Histones called the Histone fold domain, which is composed of three alpha helices separated by two unstructured loops. It is this domain that mediates the formation of the Histone core particle. Two heterodimers of H3 and H4 come together for form a tetramer core, which makes contacts with DNA. The core particle is then completed by the addition of two H2A H2B dimers. The core Histones each has an unstructured amino terminal tail. These tails are not required for DNA to contact the Histone octamer, but are instead the sites of extensive posttranslational modifications, which alter the function of the individual nucleosome.  
 Nucleosomes and the 10 nm fiber. DNA is wound around this octamer approximately twice (~147bp) to achieve a packing ratio of about 6. Though this is a considerable increase in packing it is still not enough. Interphase nuclei have a packing ratio of about 1000- 2000, while metaphase chromosomes have a packing ratio ~ 7000.
@@ -55,7 +53,3 @@ What is the structure of the chromatin fiber in vivo? Do 10-nm, bead-on-a-string
 What is the dynamic structural organization beyond the 30-nm fiber. But how do these structures influence gene function? Is transcription actually occurring on chromonema fibers, or are transcriptionally active regions less condensed? To answer these questions, Tumbar et al. used a mammalian cell line that contained a long, integrated array of LacI-binding sites. When imaged in living cells by decoration with a LacI-green fluorescent protein (GFP) fusion protein, this 90-Mbp tract appears as a single dot. In contrast, the foci decondensed when cells were transfected with an expression vector that produced a fusion of LacI-GFP to the VP16 transcriptional activation domain. The decondensed LacI tract appeared as an extended ribbon estimated to be 80 to 100 nm in diameter that coiled throughout a considerable volume of the nucleus. The 100-nm fiber colocalized with regions of bromodeoxyuridine-uradine 5′-phosphate incorporation, suggesting active transcription within the site, and recruitment of multiple HATs and increased histone acetylation were also observed. Thus, these data suggest that a 100-nm fiber may be the basic unit of higher order structure that is competent for gene expression. Because RNA polymerase II inhibitors did not block formation of the 100-nm fibers, the structural changes observed are not caused by transcriptional activity but more likely precede transcriptional activation at these sites. Fig. 2. Transcriptional activators induce large-scale changes in chromatin folding. (Left) DNA constructs containing LacI-binding sequences (orange boxes) upstream of a dihydrofolate reductase (DHFR) gene (navy blue) were integrated into chromosomes as tandem ~90-Mbp arrays by Tumbar and co-workers. This locus can be visualized in vivo by expressing a LacI-GFP fusion protein (yellow-green protein), which images as a single green focus within the nucleus (top). In contrast, expression of a LacI-GFP-VP16 activator protein (yellow-green-red protein) produced a ribbon like chromonema fiber within a subset of cells (bottom). On the basis of comparison of ribbon length with the known base pair length of the DNA tract, fiber width was estimated at ~100 nm, which is considerably larger and more compact than even a fully condensed 30-nm nucleosomal array.
 
 One concern with these studies is that these tandem LacI arrays are artificial and, thus, their behavior might be aberrant. To look in a more natural context, Mueller et al. examined the behavior of a tandem array of mouse mammary tumor virus (MMTV) promoters driving expression of a ras gene. Array structure and transcription were examined using a glucocorticoid receptor-GFP (GR-GFP) fusion protein to decorate the array in live cells and fluorescence in situ hybridization of fixed nuclei to verify transcription. The behavior of this MMTV array was dynamic. The addition of a GR agonist led to rapid (1 to 3 hours) decondensation of the arrays, with a rate that paralleled accumulation of ras mRNA. Even the decondensed, transcriptionally active arrays retained at least 50-fold more condensation than naked DNA, suggesting maintenance of at least a fully condensed 30-nm chromatin fiber. Therefore, both the LacI-GFP-VP16 activator and GR-GFP can drive local decondensation of a chromatin fiber. Because VP16 and GR are known to recruit either HATs or ATP-dependent chromatin-remodeling complexes, it is tempting to speculate that these activities play key roles in these decondensation events. In fact, the recruitment of transcriptional coactivators, including HATs and human SWI/SNF, was seen during MMTV array induction, and extensive histone acetylation accompanied VP16-dependent decondensation of the arrays examined by Tumbar et al..
-
-﻿
-
- 
