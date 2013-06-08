@@ -1,0 +1,78 @@
+---
+- !ruby/object:Jekyll::FlickrPhoto
+  title: IMG_1761
+  urlThumb: ''
+  urlEmbeded: ''
+  urlOpened: ''
+  urlVideo: ''
+  urlFlickr: ''
+- !ruby/object:Jekyll::FlickrPhoto
+  title: IMG_1762
+  urlThumb: ''
+  urlEmbeded: ''
+  urlOpened: ''
+  urlVideo: ''
+  urlFlickr: ''
+- !ruby/object:Jekyll::FlickrPhoto
+  title: IMG_1763
+  urlThumb: ''
+  urlEmbeded: ''
+  urlOpened: ''
+  urlVideo: ''
+  urlFlickr: ''
+- !ruby/object:Jekyll::FlickrPhoto
+  title: IMG_1764
+  urlThumb: ''
+  urlEmbeded: ''
+  urlOpened: ''
+  urlVideo: ''
+  urlFlickr: ''
+- !ruby/object:Jekyll::FlickrPhoto
+  title: IMG_1765
+  urlThumb: ''
+  urlEmbeded: ''
+  urlOpened: ''
+  urlVideo: ''
+  urlFlickr: ''
+- !ruby/object:Jekyll::FlickrPhoto
+  title: IMG_1767
+  urlThumb: ''
+  urlEmbeded: ''
+  urlOpened: ''
+  urlVideo: ''
+  urlFlickr: ''
+- !ruby/object:Jekyll::FlickrPhoto
+  title: IMG_1770
+  urlThumb: ''
+  urlEmbeded: ''
+  urlOpened: ''
+  urlVideo: ''
+  urlFlickr: ''
+- !ruby/object:Jekyll::FlickrPhoto
+  title: IMG_1771
+  urlThumb: ''
+  urlEmbeded: ''
+  urlOpened: ''
+  urlVideo: ''
+  urlFlickr: ''
+- !ruby/object:Jekyll::FlickrPhoto
+  title: IMG_1772
+  urlThumb: ''
+  urlEmbeded: ''
+  urlOpened: ''
+  urlVideo: ''
+  urlFlickr: ''
+- !ruby/object:Jekyll::FlickrPhoto
+  title: mindscape
+  urlThumb: ''
+  urlEmbeded: ''
+  urlOpened: ''
+  urlVideo: ''
+  urlFlickr: ''
+- !ruby/object:Jekyll::FlickrPhoto
+  title: xero-logo-hires-RGB
+  urlThumb: ''
+  urlEmbeded: ''
+  urlOpened: ''
+  urlVideo: ''
+  urlFlickr: ''

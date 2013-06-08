@@ -3,6 +3,7 @@ title: 'Global Day of Code Retreat &#8211; Wellington'
 author: ammeep
 layout: post
 permalink: /2012/12/09/global-day-of-code-retreat-wellington/
+comments: true
 dsq_thread_id:
   - 964892546
 categories:

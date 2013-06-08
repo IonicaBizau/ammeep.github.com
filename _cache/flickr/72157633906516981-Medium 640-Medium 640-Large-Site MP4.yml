@@ -1,0 +1,78 @@
+---
+- !ruby/object:Jekyll::FlickrPhoto
+  title: IMG_1761
+  urlThumb: http://farm9.staticflickr.com/8559/8939946166_6efdf3f27f_z.jpg
+  urlEmbeded: http://farm9.staticflickr.com/8559/8939946166_6efdf3f27f_z.jpg
+  urlOpened: http://farm9.staticflickr.com/8559/8939946166_6efdf3f27f_b.jpg
+  urlVideo: ''
+  urlFlickr: ''
+- !ruby/object:Jekyll::FlickrPhoto
+  title: IMG_1762
+  urlThumb: http://farm9.staticflickr.com/8269/8939946112_f6ff07e5ec_z.jpg
+  urlEmbeded: http://farm9.staticflickr.com/8269/8939946112_f6ff07e5ec_z.jpg
+  urlOpened: http://farm9.staticflickr.com/8269/8939946112_f6ff07e5ec_b.jpg
+  urlVideo: ''
+  urlFlickr: ''
+- !ruby/object:Jekyll::FlickrPhoto
+  title: IMG_1763
+  urlThumb: http://farm3.staticflickr.com/2857/8939945654_4c8a63273e_z.jpg
+  urlEmbeded: http://farm3.staticflickr.com/2857/8939945654_4c8a63273e_z.jpg
+  urlOpened: http://farm3.staticflickr.com/2857/8939945654_4c8a63273e_b.jpg
+  urlVideo: ''
+  urlFlickr: ''
+- !ruby/object:Jekyll::FlickrPhoto
+  title: IMG_1764
+  urlThumb: http://farm8.staticflickr.com/7439/8939324127_4850c7c572_z.jpg
+  urlEmbeded: http://farm8.staticflickr.com/7439/8939324127_4850c7c572_z.jpg
+  urlOpened: http://farm8.staticflickr.com/7439/8939324127_4850c7c572_b.jpg
+  urlVideo: ''
+  urlFlickr: ''
+- !ruby/object:Jekyll::FlickrPhoto
+  title: IMG_1765
+  urlThumb: http://farm6.staticflickr.com/5451/8939945380_efe9d4f1b5_z.jpg
+  urlEmbeded: http://farm6.staticflickr.com/5451/8939945380_efe9d4f1b5_z.jpg
+  urlOpened: http://farm6.staticflickr.com/5451/8939945380_efe9d4f1b5_b.jpg
+  urlVideo: ''
+  urlFlickr: ''
+- !ruby/object:Jekyll::FlickrPhoto
+  title: IMG_1767
+  urlThumb: http://farm8.staticflickr.com/7387/8939323565_ed45d6b78a_z.jpg
+  urlEmbeded: http://farm8.staticflickr.com/7387/8939323565_ed45d6b78a_z.jpg
+  urlOpened: http://farm8.staticflickr.com/7387/8939323565_ed45d6b78a_b.jpg
+  urlVideo: ''
+  urlFlickr: ''
+- !ruby/object:Jekyll::FlickrPhoto
+  title: IMG_1770
+  urlThumb: http://farm9.staticflickr.com/8405/8939323455_cbaf281c71_z.jpg
+  urlEmbeded: http://farm9.staticflickr.com/8405/8939323455_cbaf281c71_z.jpg
+  urlOpened: http://farm9.staticflickr.com/8405/8939323455_cbaf281c71_b.jpg
+  urlVideo: ''
+  urlFlickr: ''
+- !ruby/object:Jekyll::FlickrPhoto
+  title: IMG_1771
+  urlThumb: http://farm4.staticflickr.com/3681/8939322579_f8ac2ccf46_z.jpg
+  urlEmbeded: http://farm4.staticflickr.com/3681/8939322579_f8ac2ccf46_z.jpg
+  urlOpened: http://farm4.staticflickr.com/3681/8939322579_f8ac2ccf46_b.jpg
+  urlVideo: ''
+  urlFlickr: ''
+- !ruby/object:Jekyll::FlickrPhoto
+  title: IMG_1772
+  urlThumb: http://farm6.staticflickr.com/5332/8939322261_2a077f82bb_z.jpg
+  urlEmbeded: http://farm6.staticflickr.com/5332/8939322261_2a077f82bb_z.jpg
+  urlOpened: http://farm6.staticflickr.com/5332/8939322261_2a077f82bb_b.jpg
+  urlVideo: ''
+  urlFlickr: ''
+- !ruby/object:Jekyll::FlickrPhoto
+  title: mindscape
+  urlThumb: ''
+  urlEmbeded: ''
+  urlOpened: ''
+  urlVideo: ''
+  urlFlickr: ''
+- !ruby/object:Jekyll::FlickrPhoto
+  title: xero-logo-hires-RGB
+  urlThumb: http://farm6.staticflickr.com/5460/8939943480_1e3a4ff68b_z.jpg
+  urlEmbeded: http://farm6.staticflickr.com/5460/8939943480_1e3a4ff68b_z.jpg
+  urlOpened: http://farm6.staticflickr.com/5460/8939943480_1e3a4ff68b_b.jpg
+  urlVideo: ''
+  urlFlickr: ''
