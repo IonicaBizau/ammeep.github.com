@@ -13,8 +13,8 @@ tags:
   - Codemania
   - Deployment
   - talks
-image: http://placekitten.com/200/200
-summary: hello and stuff
+image: /images/featured/ten-traumas-ten-minutes.jpg
+summary: A 10 minute lightening talk given at Codemania After Dark. In ten minutes I covered my top ten 'traumas' of developing software for the cloud, and along the way gave some thoughts about what you need to keep in mind when doing so. It turns out developing for the cloud is really not that different from developing any other distributed application.
 ---
 # 
 
@@ -24,7 +24,7 @@ Here are the slides from the ten minute lightening talk I gave at [Codemania Aft
 
 The idea behind this talk, was to take you through ten parts of developing for the cloud which can cause headaches or confusion. But as it turns out most of what I mentioned actually applies more at a very broad level – which is awesome because developing for the cloud is really not that different from developing any other application
 
-
+{% speakerdeck 5084d183df78cd0002012545 %}
 
 The 10 traumas were:
 
