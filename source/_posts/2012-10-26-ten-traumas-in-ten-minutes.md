@@ -3,6 +3,7 @@ title: Ten Traumas In Ten Minutes
 author: ammeep
 layout: post
 permalink: /2012/10/26/ten-traumas-in-ten-minutes/
+comments: true
 dsq_thread_id:
   - 952222127
 categories:
