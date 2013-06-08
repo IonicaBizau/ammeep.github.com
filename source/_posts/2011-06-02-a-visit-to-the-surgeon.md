@@ -1,25 +1,20 @@
 ---
 title: A visit to the surgeon.
 author: ammeep
-excerpt: >
-  I have seen the surgeon for my follow up appointment. The bandage is off and the
-  stitches are out.
 layout: post
 permalink: /2011/06/02/a-visit-to-the-surgeon/
+comments: true
 dsq_thread_id:
   - 952339762
 categories:
   - Personal
 tags:
   - Scapholunate
-image: http://placekitten.com/200/200
-summary: hello and stuff
+image: /images/featured/a-visit-to-the-surgeon.jpeg
+summary: I have seen the surgeon for my follow up appointment. The bandage is off and the stitches are out.
 ---
-# 
 
-I have seen the surgeon for my follow up appointment. The bandage is off and the stitches are out. I have two small cuts from where the probe went in. Pain at this point is back to where it was previously, and any additional pain must just be scarring tissue. So doing quite well.[![][2]][2]
-
- []: http://amy.palamounta.in/2011/06/02/201162a-visit-to-the-surgeon-html/1000w-3/
+I have seen the surgeon for my follow up appointment. The bandage is off and the stitches are out. I have two small cuts from where the probe went in. Pain at this point is back to where it was previously, and any additional pain must just be scarring tissue. So doing quite well.
 
 We discussed exactly what he saw during the Arthroscopy and what is required to be done.
 
@@ -39,9 +34,7 @@ We discussed exactly what he saw during the Arthroscopy and what is required to 
 *   Arthritis – Possible.
 *   Surgeons question for me was – is changing jobs an option? I fired back with would he want to give up his job (he is very passionate very talented surgeon). Being a programmer is my lively hood. I will NOT give it up this early in the game.
 
-To me this is a no brainer, I am having the surgery. I have read around quite a lot and feel very informed about this procedure (Google books for Orthopedic Surgery text books for the win). I have also read about peoples experiences with this injury. Pain after the surgery sounds quite bad, the surgeon warned me of this and told me that his last patient was still eating Tramadol two weeks on. But he’s a silly boy and I am way tougher than any silly boy ![;)][2] I really hope I can be tougher – Tramadol is no fun, I am either asleep all day or completely out of my head.
-
- [2]: http://amy.palamounta.in/wp-content/plugins/php-image-cache/image.php?path=/wp-includes/images/smilies/icon_wink.gif
+To me this is a no brainer, I am having the surgery. I have read around quite a lot and feel very informed about this procedure (Google books for Orthopedic Surgery text books for the win). I have also read about peoples experiences with this injury. Pain after the surgery sounds quite bad, the surgeon warned me of this and told me that his last patient was still eating Tramadol two weeks on. But he’s a silly boy and I am way tougher than any silly boy ! I really hope I can be tougher – Tramadol is no fun, I am either asleep all day or completely out of my head.
 
 As for long term recovery – I have read many journal articles which give numbers which indicate perhaps 80% of people have good to excellent results and are completely pain free. Great news for me because I WILL be in that 80%. Determination and common sense should be all I need to ensure this.
 
