@@ -1,6 +1,10 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    POpen4 (0.1.4)
+      Platform (>= 0.4.0)
+      open4
+    Platform (0.4.0)
     RedCloth (4.2.9)
     chunky_png (1.2.5)
     classifier (1.3.3)
@@ -21,10 +25,14 @@ GEM
       liquid (~> 2.3)
       maruku (~> 0.5)
       pygments.rb (~> 0.3.2)
+    jekyll-asset-pipeline (0.1.6)
+      jekyll (~> 0.12)
+      liquid (~> 2.4)
     kramdown (0.13.8)
-    liquid (2.3.0)
+    liquid (2.4.1)
     maruku (0.6.1)
       syntax (>= 1.0.0)
+    open4 (1.3.0)
     posix-spawn (0.3.6)
     pygments.rb (0.3.4)
       posix-spawn (~> 0.3.6)
@@ -47,6 +55,8 @@ GEM
     syntax (1.0.0)
     tilt (1.3.7)
     yajl-ruby (1.1.0)
+    yui-compressor (0.9.6)
+      POpen4 (>= 0.1.4)
 
 PLATFORMS
   ruby
@@ -57,7 +67,8 @@ DEPENDENCIES
   flickraw (~> 0.9.6)
   haml (~> 3.1.7)
   jekyll (~> 0.12)
-  liquid (~> 2.3.0)
+  jekyll-asset-pipeline (~> 0.1.6)
+  liquid (~> 2.4.0)
   pygments.rb (~> 0.3.4)
   rake (~> 0.9)
   rb-fsevent (~> 0.9)
@@ -66,3 +77,4 @@ DEPENDENCIES
   sass-globbing (~> 1.0.0)
   sinatra (~> 1.4.2)
   stringex (~> 1.4.0)
+  yui-compressor (~> 0.9.6)

@@ -25,8 +25,9 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 */
+/*jslint nomen: true*/
 (function() {
-
+  'use strict';
   (function($, window, document) {
     var Plugin, defaults, pluginName;
     pluginName = "slidesjs";
@@ -207,7 +208,8 @@
           return paginationLink.click(function(e) {
             e.preventDefault();
             _this.stop(true);
-            return _this.goto(($(e.currentTarget).attr("data-slidesjs-item") * 1) + 1);
+            var thing = $(e.currentTarget).attr("data-slidesjs-item") * 1;
+            return _this.hellogoto(thing + 1);
           });
         });
       }
@@ -274,15 +276,15 @@
         return this._slide();
       }
     };
-    Plugin.prototype.goto = function(number) {
+    Plugin.prototype.hellogoto = function(number) {
       var $element, effect;
       $element = $(this.element);
       this.data = $.data(this);
-      if (effect === void 0) {
+      if (effect === undefined) {
         effect = this.options.pagination.effect;
       }
       if (number > this.data.total) {
-        number = this.data.total;
+        number = this.data.tota
       } else if (number < 1) {
         number = 1;
       }
@@ -622,3 +624,4 @@
   })(jQuery, window, document);
 
 }).call(this);
+/*jslint nomen: false*/
