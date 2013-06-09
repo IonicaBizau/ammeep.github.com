@@ -1,0 +1,238 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Code Contracts &#8211; Part 1 - Amy Palamountain</title>
+  <meta name="author" content="Amy Palamountain">
+
+  
+  <meta name="description" content="Code Contracts are still reasonably hot off the press from Microsoft Research and its high time we get our heads around using them. We all have &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://amy.palamounta.in/2011/01/03/code-contracts-part-1">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Amy Palamountain" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script type="text/javascript" src="//use.typekit.net/vck3wtq.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+	<h1>
+		<a class="home" href="/">Amy Palamountain</a>
+	</h1>
+	<img src="/images/amy-header.png" class="header-image" width="100px" height="100px" alt="Word"/> 
+</hgroup>
+<div class="header-container"></div>
+<nav role="navigation"><ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">About</a></li>
+</ul>
+<div class="social-links">
+	 <ul class="subscription">
+	  <li>
+	  	<a href="https://github.com/ammeep" rel="Github" title="Github">
+	  		<i class="icon-github icon-2x"></i>
+	  	</a>
+	  </li>
+	  <li>
+		<a href="https://twitter.com/ammeep" rel="Twitter" title="Twitter">
+	  		<i class="icon-twitter icon-2x"></i> 
+	  	</a>
+	  </li>
+	  <li><a href="https://plus.google.com/105801746174996249468/posts" rel="Google+" title="Google+">
+	  		<i class="icon-google-plus icon-2x"></i> 
+	  	</a> </li>
+	  <li>
+	  	<i class="icon-rss icon-2x"></i>
+	  	<a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS"></a>
+	  </li>
+	</ul>
+</div>
+</nav>
+
+
+</header>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Code Contracts &#8211; Part 1</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-03T00:00:00+13:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2011</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h1></h1>
+
+<p>Code Contracts are still reasonably hot off the press from Microsoft Research and its high time we get our heads around using them.</p>
+
+<p>We all have written guard code at the tops of our method bodies. While often necessary, this quickly gets tiresome,repetitive and rather boring.</p>
+
+<pre><code>    public void SomeRandomMethod(string arg)
+        {
+            if (string.IsNullOrEmpty(arg))
+            {
+                throw new ArgumentException("Saved by the bell");
+            }
+        }
+</code></pre>
+
+<p>Guard code such as this provides a way of preventing code from doing things which we do not expect, which is useful. However this approach has some limitations. We may do something later in the body of the method which would have thrown an unexpected exception, like trying to access the first char of a null string. Also when consuming a method with this kind of guard code, we may not find out we have done something stupid until our code executes and throws an exception.</p>
+
+<p>Imagine a world where each time you called your method and violated a guard pre-condition (like passing null) defined in guard code you got a compilation warning, or error. You are imagining the world of Code Contracts. This new innovation brings a design by contract approach to .NET, allows static contract verification and even (conveniently) document generation.</p>
+
+<p>How can you start living in such a world, I hear you ask. Well your first step is to install Code Contracts from the<strong> <a href="http://msdn.microsoft.com/en-us/devlabs/dd491992.aspx">DevLabs</a> </strong>site as they are not included as part of the visual studio install. The DevLabs install comes in two flavours, the premium and standard edition.</p>
+
+<p>The premium download contains three tools<strong> ccrewrite.exe, cccheck.exe and ccdoc.exe</strong>. Runtime checking of contracts is generated by the ccrewrite tool, while cccheck is a static checker which verifies contracts at compile time. ccdoc is our document generator responsible for adding contract information to existing XML documentation.</p>
+
+<p>Once installed (after a restart of Visual Studio) your project properties pages will have an extra tab “Code Contracts”. Now we can begin enjoying all the new goodies in the <strong><a href="http://msdn.microsoft.com/en-us/library/system.diagnostics.contracts.aspx">code contracts namespace</a></strong><br/>
+<img src="https://lh4.googleusercontent.com/87yxH5G-SCHbeudn-Fnrk2OGdaSSdygCLfQApKqIEszbH14i5kGEr2WTPUG-_jIGsja_izho1vGOV8LFY_hpr4dh92W6jVfVav8RfWw_v4U_pfpqKw" alt="" /></p>
+
+<p>That’s all on code contracts for now. Next up, I will show you how to configure code contracts for your project.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">ammeep</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-03T00:00:00+13:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/code/'>Code</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://amy.palamounta.in/2011/01/03/code-contracts-part-1/" data-via="ammeep" data-counturl="http://amy.palamounta.in/2011/01/03/code-contracts-part-1/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2010/11/30/20081022chromatin-and-histones-html/" title="Previous Post: Chromatin and Histones">&laquo; Chromatin and Histones</a>
+      
+      
+        <a class="basic-alignment right" href="/2011/01/04/code-contracts-part-2-the-static-checker/" title="Next Post: Code Contracts &#8211; Part 2 : The static checker">Code Contracts &#8211; Part 2 : The static checker &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+
+</div>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Amy Palamountain -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'amylog';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
