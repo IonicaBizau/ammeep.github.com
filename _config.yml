@@ -97,7 +97,7 @@ disqus_show_comment_count: true
 google_analytics_tracking_id: UA-32180901-1
 
 # Facebook Like
-facebook_like: true
+facebook_like: false
 
 # Flickr
 flickr:
@@ -106,3 +106,11 @@ flickr:
   shared_secret:   871085a8820f75c1
   access_token:    72157633897289517-19584179515304cb
   access_secret:   43eb482d60d77fa7
+
+# Bundling
+asset_pipeline:
+  bundle: true            # Default = true
+  compress: true          # Default = true
+  output_path: javascript     # Default = assets
+  display_path: javascript       # Default = nil
+  gzip: true             # Default = false
