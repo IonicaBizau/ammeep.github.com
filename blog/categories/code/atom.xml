@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Code | Amy Palamountain]]></title>
-  <link href="http://amy.palamounta.in/blog/categories/code/atom.xml" rel="self"/>
-  <link href="http://amy.palamounta.in/"/>
-  <updated>2013-06-09T20:52:56+12:00</updated>
-  <id>http://amy.palamounta.in/</id>
+  <link href="http://ammeep.github.io/blog/categories/code/atom.xml" rel="self"/>
+  <link href="http://ammeep.github.io/"/>
+  <updated>2013-06-10T18:04:31+12:00</updated>
+  <id>http://ammeep.github.io/</id>
   <author>
     <name><![CDATA[Amy Palamountain]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Unsuck your backbone]]></title>
-    <link href="http://amy.palamounta.in/2013/04/12/unsuck-your-backbone/"/>
+    <link href="http://ammeep.github.io/2013/04/12/unsuck-your-backbone/"/>
     <updated>2013-04-12T00:00:00+12:00</updated>
-    <id>http://amy.palamounta.in/2013/04/12/unsuck-your-backbone</id>
+    <id>http://ammeep.github.io/2013/04/12/unsuck-your-backbone</id>
     <content type="html"><![CDATA[<h1></h1>
 
 <p>I gave a talk at <a href="http://codemania.co.nz/" title="Codemania">Codemania</a> - Unsuck your backbone. It was a lot of fun, I hope you all enjoyed it as much as I did.</p>
@@ -46,9 +46,9 @@
   
   <entry>
     <title type="html"><![CDATA[Game Master Kids]]></title>
-    <link href="http://amy.palamounta.in/2013/02/22/games-masters-workshops-kids-can-code/"/>
+    <link href="http://ammeep.github.io/2013/02/22/games-masters-workshops-kids-can-code/"/>
     <updated>2013-02-22T00:00:00+13:00</updated>
-    <id>http://amy.palamounta.in/2013/02/22/games-masters-workshops-kids-can-code</id>
+    <id>http://ammeep.github.io/2013/02/22/games-masters-workshops-kids-can-code</id>
     <content type="html"><![CDATA[<h1></h1>
 
 <p>If you came to the Digital Media Careers Day at Te Papa, and attended my workshop, you may be here looking for the game we built together.</p>
@@ -65,9 +65,9 @@
   
   <entry>
     <title type="html"><![CDATA[Global Day of Code Retreat &#8211; Wellington]]></title>
-    <link href="http://amy.palamounta.in/2012/12/09/global-day-of-code-retreat-wellington/"/>
+    <link href="http://ammeep.github.io/2012/12/09/global-day-of-code-retreat-wellington/"/>
     <updated>2012-12-09T00:00:00+13:00</updated>
-    <id>http://amy.palamounta.in/2012/12/09/global-day-of-code-retreat-wellington</id>
+    <id>http://ammeep.github.io/2012/12/09/global-day-of-code-retreat-wellington</id>
     <content type="html"><![CDATA[<h1></h1>
 
 <p><img class="center" src="/images/posts/gdcr/gdcr_ad.png"></p>
@@ -103,9 +103,9 @@
   
   <entry>
     <title type="html"><![CDATA[On Service Location]]></title>
-    <link href="http://amy.palamounta.in/2012/10/26/on-service-location/"/>
+    <link href="http://ammeep.github.io/2012/10/26/on-service-location/"/>
     <updated>2012-10-26T00:00:00+13:00</updated>
-    <id>http://amy.palamounta.in/2012/10/26/on-service-location</id>
+    <id>http://ammeep.github.io/2012/10/26/on-service-location</id>
     <content type="html"><![CDATA[<p>I have some pretty strong feelings about the use of the Service Locator pattern in the software we build. They go along the lines of ‘why would you ever use it?’ and possibly (and somewhat mellow dramatically) rocking slowly backwards and forth in the corner of the shower after being exposed to it. So to ease my pain, and perhaps yours, I have compiled an explanation of why I feel so intolerant toward this pattern.</p>
 
 <p><img class="center" src="/images/posts/onservicelocation/servicelocator.jpg"></p>
@@ -292,9 +292,9 @@
   
   <entry>
     <title type="html"><![CDATA[Reflecting on Codemania]]></title>
-    <link href="http://amy.palamounta.in/2012/04/02/reflecting-on-codemania/"/>
+    <link href="http://ammeep.github.io/2012/04/02/reflecting-on-codemania/"/>
     <updated>2012-04-02T00:00:00+12:00</updated>
-    <id>http://amy.palamounta.in/2012/04/02/reflecting-on-codemania</id>
+    <id>http://ammeep.github.io/2012/04/02/reflecting-on-codemania</id>
     <content type="html"><![CDATA[<h1></h1>
 
 <p>3 days post <a href="http://codemania.co.nz/">Codemania</a> – it was a blast. Down here in New Zealand we don’t often get the opportunity to listen to world class content, at a world class conference. We have <a href="https://twitter.com/#!/kiwipom">Ian Randall</a> and <a href="https://twitter.com/#!/nzben">Ben Gracewood</a> to thank for this. From the venue to the top notch speakers like <a href="https://twitter.com/#!/DamianEdwards">Damian Edwards</a>, <a href="https://twitter.com/#!/rioter">Jared Wyles</a>, <a href="https://twitter.com/#!/jarichaust">Jacinta Richardson</a>, <a href="https://twitter.com/#!/avon">Karl van Randow</a>, <a href="https://twitter.com/#!/reasther">Richard Easther</a> and <a href="https://twitter.com/#!/AaronMorton">Aaron Morton</a> . From start to finish and everything in between, <a href="https://twitter.com/#!/nzben">Ben</a> an <a href="https://twitter.com/#!/kiwipom">Ian</a> did a fantastic job!</p>

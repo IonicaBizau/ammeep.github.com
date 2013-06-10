@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://amy.palamounta.in/sitemap.xml 
+Sitemap: http://ammeep.github.io/sitemap.xml 
