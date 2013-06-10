@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Talks | Amy Palamountain]]></title>
+  <link href="http://amy.palamounta.in/blog/categories/talks/atom.xml" rel="self"/>
+  <link href="http://amy.palamounta.in/"/>
+  <updated>2013-06-09T20:52:56+12:00</updated>
+  <id>http://amy.palamounta.in/</id>
+  <author>
+    <name><![CDATA[Amy Palamountain]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Unsuck your backbone]]></title>
+    <link href="http://amy.palamounta.in/2013/04/12/unsuck-your-backbone/"/>
+    <updated>2013-04-12T00:00:00+12:00</updated>
+    <id>http://amy.palamounta.in/2013/04/12/unsuck-your-backbone</id>
+    <content type="html"><![CDATA[<h1></h1>
+
+<p>I gave a talk at <a href="http://codemania.co.nz/" title="Codemania">Codemania</a> - Unsuck your backbone. It was a lot of fun, I hope you all enjoyed it as much as I did.</p>
+
+<p><strong>Slides</strong><br/>
+<script async="true" class="speakerdeck-embed" data-id="cf29dcf084890130af0d12313d053a9e" src="//speakerdeck.com/assets/embed.js"> </script></p>
+
+<p><strong>Video</strong>
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/0o2whtCJw8I "></iframe></div></p>
+
+<p>The purpose of the talk is to introduce some simple architectural patterns that you can use in your large JavaScript applications to help you achieve a scalable code base.</p>
+
+<p>The general gist is:</p>
+
+<ul>
+<li>Backbone is awesome, but its scaling it is hard.</li>
+<li>MVC is a presentation pattern, and if we are to scale our JS apps we need to look beyond it</li>
+<li>People have been using composite application architecture successfully when building desktop applications for a long time now, so can we do the same with JavaScript apps?</li>
+<li>We go through some of the concepts behind modules and application objects and patterns, pub/sub and how the interaction between them might work,</li>
+<li>Then introduce marionette.js as a set of extensions to backbone which allow you to achieve a composite application architecture .
+*</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Game Master Kids]]></title>
+    <link href="http://amy.palamounta.in/2013/02/22/games-masters-workshops-kids-can-code/"/>
+    <updated>2013-02-22T00:00:00+13:00</updated>
+    <id>http://amy.palamounta.in/2013/02/22/games-masters-workshops-kids-can-code</id>
+    <content type="html"><![CDATA[<h1></h1>
+
+<p>If you came to the Digital Media Careers Day at Te Papa, and attended my workshop, you may be here looking for the game we built together.</p>
+
+<p>You can find it here</p>
+
+<p><a href="http://ammeep.github.com/CollieInSpace/" title="http://ammeep.github.com/CollieInSpace/">http://ammeep.github.com/CollieInSpace/</a></p>
+
+<p>This is a link to the source code. From here you are able to play the game, download the code, and even try and add some more features to the game. Any questions, or just want to know more about what you can do to learn more about programming, just send me a message bellow!</p>
+
+<p><script async="true" class="speakerdeck-embed" data-id="c92f46d05efb01307e0412313b031ac2" src="//speakerdeck.com/assets/embed.js"> </script></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Global Day of Code Retreat &#8211; Wellington]]></title>
+    <link href="http://amy.palamounta.in/2012/12/09/global-day-of-code-retreat-wellington/"/>
+    <updated>2012-12-09T00:00:00+13:00</updated>
+    <id>http://amy.palamounta.in/2012/12/09/global-day-of-code-retreat-wellington</id>
+    <content type="html"><![CDATA[<h1></h1>
+
+<p><img class="center" src="/images/posts/gdcr/gdcr_ad.png"></p>
+
+<p>Yesterday a group of dedicated developers in Wellington and Auckland woke early on a saturday morning to help kick of the Global Day of Code Retreat in style. We came from all walks of development life, from Haskell to C#, from JavaScript to Perl, we all came together with a common goal – to practice our craft. In 6 45 minute sessions we coded <a href="http://en.wikipedia.org/wiki/Conway's_Game_of_Life">Conway’s Game of Life</a> each time with a new constraint, <strong>deleting</strong> all traces of the code afterwards.</p>
+
+<p>The most interesting thing about the day was that initially there was reluctance to delete code. It was amazing to see that by the end of the day everyone was more than happy to delete their code, seeing the value on iterating on ideas to reach an awesome solution.</p>
+
+<p>It was incredible to see the range of solutions people came up with to work around constraints. One pair used try – catch blocks to avoid ‘if’ statements, and another pair built an eventing system to avoid the need for return values. The diversity of solutions was great to see!</p>
+
+<p>Some massive thank you’s are in order! First, to the brains behind the idea of a Code Retreat, <a href="http://coreyhaines.com/">Corey Haines</a> <a href="https://twitter.com/jthurne">Jim Hurne</a> <a href="https://twitter.com/volunteerjunkie">Alissa Conaty</a>  and <a href="https://twitter.com/adibolb">Adi Bolboaca</a> have put in a massive amount of work to ensuring that the Global Day of Code Retreat was a success by supporting all the facilitators around the world. Secondly to our <a href="http://globalday.coderetreat.org/sponsors.html">GlobalSponsors</a> particulaly <a href="http://www.jetbrains.com/">JetBrains</a>. Locally – the day would not have been possible if not for the support of <a href="http://www.xero.com/">Xero</a> ( who gave us our beautiful venue) and <a href="http://www.mindscapehq.com/">Mindscape</a> ( who kept us feed on the day) Both these companies do such an amazing job at supporting the local developer community and we appreciate it so much!</p>
+
+<p>Thanks to every one who came and made the day what it was.  This is  what made the day so successful. <a href="https://twitter.com/martin308">Martin</a> and I had such a great time facilitating the event!.Can’t wait for the next one!</p>
+
+<p><div class="flexslider">
+      <img src="">
+      <img src="">
+      <img src="">
+      <img src="">
+      <img src="">
+      <img src="">
+      <img src="">
+      <img src="">
+      <img src="">
+      <img src="">
+      <img src="">
+    </ul>
+  </div>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ten Traumas In Ten Minutes]]></title>
+    <link href="http://amy.palamounta.in/2012/10/26/ten-traumas-in-ten-minutes/"/>
+    <updated>2012-10-26T00:00:00+13:00</updated>
+    <id>http://amy.palamounta.in/2012/10/26/ten-traumas-in-ten-minutes</id>
+    <content type="html"><![CDATA[<h1></h1>
+
+<p>Here are the slides from the ten minute lightening talk I gave at <a href="http://codemania.co.nz">Codemania After Dark</a> this Friday. My very first talk given to an audience of reasonable size – thank you all for coming out.</p>
+
+<p>The idea behind this talk, was to take you through ten parts of developing for the cloud which can cause headaches or confusion. But as it turns out most of what I mentioned actually applies more at a very broad level – which is awesome because developing for the cloud is really not that different from developing any other application</p>
+
+<p><script async="true" class="speakerdeck-embed" data-id="5084d183df78cd0002012545" src="//speakerdeck.com/assets/embed.js"> </script></p>
+
+<p>The 10 traumas were:</p>
+
+<ol>
+<li>Deployments are painful – Deployment automation in the cloud is easy</li>
+<li>I’m married to my cloud –  How to avoid being tied to one cloud</li>
+<li>The definition of insanity – Transient fault handling</li>
+<li>Limitations of storage – How to work around them</li>
+<li>We’ve got to we ‘web scale’ – What does that even mean? You can still use what you already know</li>
+<li>Go Daddy goes down  - Simple DNS failover</li>
+<li>Our app is slow – Why performance shouldn’t be slapped on at the end</li>
+<li>You have lupus – Better diagnostics</li>
+<li>The cloud chaos monkey – Be prepared for failures in the cloud</li>
+<li>Your going to do it wrong – Accept that your designs might change</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>

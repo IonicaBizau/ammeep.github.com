@@ -1,0 +1,429 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>On Service Location - Amy Palamountain</title>
+  <meta name="author" content="Amy Palamountain">
+
+  
+  <meta name="description" content="I have some pretty strong feelings about the use of the Service Locator pattern in the software we build. They go along the lines of ‘why would you &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://amy.palamounta.in/2012/10/26/on-service-location">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Amy Palamountain" type="application/atom+xml">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
+  <script type="text/javascript" src="//use.typekit.net/vck3wtq.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-32180901-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+	<h1>
+		<a class="home" href="/">Amy Palamountain</a>
+	</h1>
+	<img src="/images/amy-header.png" class="header-image" width="100px" height="100px" alt="Word"/> 
+</hgroup>
+<div class="header-container"></div>
+<nav role="navigation"><ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/about">About</a></li>
+</ul>
+<div class="social-links">
+	 <ul class="subscription">
+	  <li>
+	  	<a href="https://github.com/ammeep" rel="Github" title="Github">
+	  		<i class="icon-github icon-2x"></i>
+	  	</a>
+	  </li>
+	  <li>
+		<a href="https://twitter.com/ammeep" rel="Twitter" title="Twitter">
+	  		<i class="icon-twitter icon-2x"></i> 
+	  	</a>
+	  </li>
+	  <li><a href="https://plus.google.com/105801746174996249468/posts" rel="Google+" title="Google+">
+	  		<i class="icon-google-plus icon-2x"></i> 
+	  	</a> </li>
+	  <li>
+	  	<i class="icon-rss icon-2x"></i>
+	  	<a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS"></a>
+	  </li>
+	</ul>
+</div>
+</nav>
+
+
+</header>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">On Service Location</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-26T00:00:00+13:00" pubdate data-updated="true">Oct 26<span>th</span>, 2012</time>
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I have some pretty strong feelings about the use of the Service Locator pattern in the software we build. They go along the lines of ‘why would you ever use it?’ and possibly (and somewhat mellow dramatically) rocking slowly backwards and forth in the corner of the shower after being exposed to it. So to ease my pain, and perhaps yours, I have compiled an explanation of why I feel so intolerant toward this pattern.</p>
+
+<p><img class="center" src="/images/posts/onservicelocation/servicelocator.jpg"></p>
+
+<h2>Coupled To The Service Locator</h2>
+
+<p>I’ll wager that you have heard about loose coupling in software. It’s something that developers from all walks of life can agree on – we should strive to build loosely coupled software. We do this for many reasons, to achieve composability, for ease of maintenance, testability and more generally, the sanity of the other developers on your team.</p>
+
+<p>A technique used to achieve loosely coupled components is dependency injection. Dependency injection can come in many forms. From dependencies being provided at object construction time, all the way to being resolved, via a service locator, during the execution of a some operation on that object.</p>
+
+<p><img class="center" src="/images/posts/onservicelocation/graph.jpg"></p>
+
+<p>By injecting dependencies when an object is constructed, you have the most chance of successfully building loosely coupled applications.</p>
+
+<p>Somewhere in the middle, is property injection. Depending on how your property injection is implemented your chances of building loosely coupled components vary.</p>
+
+<p>And at the very extreme – The Service Locator. When you implement a call to a static service locator during the execution of a methods, the net result is a hard coupling to the service locator.</p>
+
+<p><img class="center" src="/images/posts/onservicelocation/looslycoupledthing.jpg"></p>
+
+<p>Am i loosely coupled? One could argue that our class is loosely coupled because is not reliant on a given implementation of the ILooselyCoupledDicisionEngine, and yes strictly speaking, this is true. But in regard to the how coupled this object is to other objects, this is a moot point.</p>
+
+<p>The base level of coupling has already been set, we are already coupled to our static service locator. LooselyCoupledThing is <strong>directly</strong> coupled to the ServiceLocator object.</p>
+
+<p>LooselyCoupledThing is unable to be an object in its own right, without relying on its dirty friend the service locator to help it along in life.</p>
+
+<p>By using the ServiceLocator object you have introduced coupling where your goal was to reduce it.</p>
+
+<h2>Unit Tests Scream Warning Signs</h2>
+
+<p>One of the first things I notice when working with an application which has heavy use of a service locator, is the extra unit testing baggage which comes with it. Usually there is a marked lack of discoverability of dependencies, and over time unit tests projects seem to grow in complexity until they are more complex than what they are testing.</p>
+
+<p>Unit tests are a measuring stick for complexity in the code they are testing. The amount of setup work involved with getting a test to pass can be a strong indication for things like poor encapsulation and separation of concerns. When your unit test requires a full set up of your service locator object, alarm bells should be sounding, perhaps your components are not following the principals of SOLID as closely as they could. Let me explain.</p>
+
+<p>As an example, lets define a class to represent a car. I’ll admit, I don’t know lot about cars so this could get interesting.</p>
+
+<p><img class="center" src="/images/posts/onservicelocation/car1.jpg"></p>
+
+<p>It doesn’t do a lot and its super easy to write a unit test for.</p>
+
+<p><img class="center" src="/images/posts/onservicelocation/car2.jpg"></p>
+
+<p><img class="center" src="/images/posts/onservicelocation/car4.jpg"></p>
+
+<p>All is well in the world, the test passes, and the car is able to drive around.</p>
+
+<p>Until someone who is very knowledgeable about cars spots my nieve implementation, and decides that a car needs an engine to start. The engine is resolved using our (dirty) friend, the service locator.</p>
+
+<p><img class="center" src="/images/posts/onservicelocation/car5.jpg"></p>
+
+<p>And now, the test fails. Our static service locator is unable to resolve our IEngine implementation.</p>
+
+<p><img class="center" src="/images/posts/onservicelocation/car6.jpg"></p>
+
+<p>But wait, our car is able to driven when our application runs outside of the context of the test, so what is different here? In the context of the test, we have not registered any of our dependencies with our service locator. Lets set them up now to get our test to pass.</p>
+
+<p><img class="center" src="/images/posts/onservicelocation/car7.jpg">
+<img class="center" src="/images/posts/onservicelocation/car8.jpg"></p>
+
+<p><strong>For every new dependency</strong> which is resolved in line via a service locator like this, we need to ensure that our test suit has a corresponding dependency set up in its registry.</p>
+
+<p>Hopefully you can see the problem here.<strong> </strong>This is a very trivial example, in the real world you can have many hundreds of services wired up in your unit test project like this. I commonly see *monolithic* test base classes, which before the start of *every* test fixture (or worse, an individual test) will set up every possible dependency that could be requested from the service locator object.</p>
+
+<p>This is massive overhead, for both the running time of your tests and for ease of understanding of what is actually being tested.</p>
+
+<p>These kinds of unit test are telling you two things</p>
+
+<ul>
+<li> That you are tightly coupled to your service locator.</li>
+<li> That you are violating the principal of single responsibility.</li>
+</ul>
+
+
+<p>The car object has a single responsibility – to drive. It should not be involved with the resolution of its engine. Imagine if every time you had to drive into work you first had to find the correct engine for your car, and assemble the car with said engine before you could start it. This makes no sense conceptually, yet this is exactly the kind of design our service locator has given us.</p>
+
+<p>So following that logic – when we call our cars constructor, we should have everything we need up, set up and ready to go, so that our object is ready to carry out its behaviours.</p>
+
+<p><img class="center" src="/images/posts/onservicelocation/car9.jpg"></p>
+
+<p>Ok – its a little better. But not much. We are still coupled to our service locator object and our test still require our service locator object to be bootstrapped and ready to go.</p>
+
+<p><img class="center" src="/images/posts/onservicelocation/car10.jpg"></p>
+
+<p>Lets turn our ServiceLocator object into an injectable dependency. I can almost hear proponents of the service locator pattern nodding in agreement. But the question is, is this any better? Its defiantly better than using a static service locator. We can easily discover when we construct a car object that it takes an IServiceLocator dependency.</p>
+
+<p><img class="center" src="/images/posts/onservicelocation/car12.jpg"></p>
+
+<p>But, this is starting to feel like we need to write a lot of ‘plumbing code’ in our unit test. The purpose of this test is to assert that we are able to drive our car, so why does it feel like all we are really showing is that we are able to set up a service locator?</p>
+
+<p><strong>Over</strong> <strong>half</strong> the lines of code in this test class are about our service locator! Over half the lines of code in this test class are concerned with <strong>plumbing.</strong></p>
+
+<p>Just mock the service locator!<strong>  O_O </strong></p>
+
+<p><img class="center" src="/images/posts/onservicelocation/car13.jpg"></p>
+
+<p>Our test class looks a little cleaner. But, is this enough? What happens when we decide that in order to drive, not only do we need an engine, but we also need some wheels?</p>
+
+<p><img class="center" src="/images/posts/onservicelocation/car14.jpg"></p>
+
+<p>Remember our test?</p>
+
+<p><img class="center" src="/images/posts/onservicelocation/car15.jpg">
+<img class="center" src="/images/posts/onservicelocation/car16.jpg"></p>
+
+<p>Our service locator mock knows nothing about our flash new wheels, and the test fails. The point here is at compile time we could not <strong>discover</strong> the new dependency on wheels. Our test are indicating that injecting a service locator object is a brittle approach, because we can never be clear about the <strong>intent</strong> of the car object.</p>
+
+<p>A much simpler approach, is to be explicit and inject our dependencies up front.</p>
+
+<p><img class="center" src="/images/posts/onservicelocation/car17.jpg"></p>
+
+<p>Now we know, if we want to construct a car, we will need an engine and a collection of wheels. And when someone decides we need a radio in order to drive our car, a compile error will warn us a new dependency has been added to our car.</p>
+
+<p><img class="center" src="/images/posts/onservicelocation/car18.jpg"></p>
+
+<p>And look at our test! Much simpler, much more explicit, and it only tests one thing!</p>
+
+<h2>Lifetime Management Hell</h2>
+
+<p>A commonly overlooked side effect of introducing Inversion of Control to your software, are changes life time management of objects.  A lack of understanding of this side effect, combined with excessive or blind use of a service locator object, can have unexpected and even catastrophic side effects.</p>
+
+<p>To understand what I mean by this lets look at a very simple example – a sloth repository.</p>
+
+<p><img class="center" src="/images/posts/onservicelocation/sloth.jpg"></p>
+
+<p>In this example, when we want to query our datastore for all the sloths, we have direct control over when our unit of work gets disposed. Or in other words, we can manage the lifetime of the unit of work object.</p>
+
+<p>If we choose to inject the unit of work via our inversion of control mechanism, we loose the ability to choose when the unit of work gets disposed. We can no longer wrap it up in a nice using statement. The unit of work needs to disposed of by the object which is responsible for constructing our repository.</p>
+
+<p><img class="center" src="/images/posts/onservicelocation/sloth2.jpg"></p>
+
+<p>If you are using an IOC container then it will be its responsibility to coordinate the call to Dispose. But – how can the container possibly know when unit of work is ready to be disposed of?</p>
+
+<p>Luckily, the cleaver guys and gals who have created your IOC containers understand that out of inversion of control naturally arises the need to manage object scope and lifetime. Modern IOC containers provide out of the box support for managing the lifetime of an object, in the scope of a thread, an http request or even in singleton scope. Modern inversion of control containers are smart enough to cover almost any lifetime scope we can dream up.</p>
+
+<p>Nicholas Blumhardt covers this in more detail in <a href="http://nblumhardt.com/2011/01/an-autofac-lifetime-primer/">this excellent blog post</a> if these concepts are new to you, I strongly recommend reading his description.</p>
+
+<p>So what about the service locator’s pattern? When calling into your service locator’s in line in your class, what lifetime scope should be used to request the object? The parent object has already been constructed and the information the container needs to give you a correctly scoped dependency is gone. The service locator is highly likely to give you an object which does not match the scope of its parent.</p>
+
+<p>How can getting the incorrectly scoped object have catastrophic effects?</p>
+
+<p><img class="center" src="/images/posts/onservicelocation/sloth3.jpg"></p>
+
+<p>In a web app, a unit of work is something that makes sense to be scoped per HTTP request. If our service locator resolves an incorrectly scoped unit of work (i.e. one outside the current HTTP request) all kinds of funny things can start happening. In the above example one HTTP request thread is inserting a sloth. When save is called, we find that a different HTTP request thread has already disposed of our unit of work.</p>
+
+<p>The example is one that you would probably catch pretty early on, as it throws an exception, but you can imagine that not all cases will not throw exceptions but silently work without any obvious indication of incorrect functionality.</p>
+
+<p>Imagine a simple attribute (created in singleton scope) which is used to validate user permissions.</p>
+
+<p> <img class="center" src="/images/posts/onservicelocation/perm.jpg"></p>
+
+<p>It uses a service locator to resolve the current user object. It then uses this object to validate that the current user had permission to do something. Everything works great. Until you check the debug logging under load. The current thread user, and the object the attribute was using to validate permissions were actually different! The service locator knows nothing about what scope it should resolve the current user from. Some users get denied when they had permission, and some users are let through when in reality they shouldn’t have. Eeek!</p>
+
+<p>It is super important that when using techniques such as inversion of control that we understand the implications to life time management. If we don’t understand this concept, and we blindly use the service locator pattern, there will be trouble in your future.</p>
+
+<h1>When is it ok?</h1>
+
+<p>Never.</p>
+
+<p>Ok, thats a bit of stretch. Sometimes you cant avoid it.</p>
+
+<p>There are generally two broad cases where you might need to break out and call the service locator.</p>
+
+<ul>
+<li> When your class interactions have been designed in a way which are not easily injectable. In this case the advice is <strong>refactor</strong> your code to support it.</li>
+<li> When you are using a framework component which does not support constructor injection – which I often find cases for in ASP.NET</li>
+</ul>
+
+
+<p>There is a third, more specialised case, where I can see an argument to use a service locator object. When building libraries which have swappable components. This case would be a good use (the only one I can think of) of the common service locator project <a href="http://commonservicelocator.codeplex.com">http://commonservicelocator.codeplex.com</a> What this would enable developers consuming your library or framework is to plug in their dependencies without needing to know the implementation details of your own IOC container. <strong>However</strong>, this should be the extent of its use. The library or frameworks internal code should still follow the principals of SOLID. There is still no need to have service locator calls sprinkled through out its code base.</p>
+
+<p>During the description of testing a Car class I eluded to the fact that when using service location inline the car is responsible both for its own behaviour and its construction. This is the fundamental difference between dependency injection, and service location. In dependency injection, all objects are created externally, dependent objects are<strong> given </strong>to objects which need them. In service location, dependencies are <strong>requested. </strong>As much as I hate to admit, I can see that in some application architectures, the<strong> requesting</strong> of dependencies might be more appropriate. Though I can not see how this would ever need to be the sole way of injecting dependencies, throughout an application.</p>
+
+<h1>Final thoughts</h1>
+
+<p>The heavy use of service location in your code is generally a sign of few things. A tight coupling between objects, and objects resolution, objects which have more than one single responsibility, and a mine field of lifetime management hell.</p>
+
+<p>If you find yourself in a position where your test projects require a similar level of maintenance and are of comparable complexity to you application code, have a good look into if you have baked in service locator object as a core concept in your application.</p>
+
+<p>When we write software, we should be concerned the the business functions we are trying to solve – our core concepts are our business objects, not a service locator.</p>
+
+<p>[![Kick It][27]][27]</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">ammeep</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-26T00:00:00+13:00" pubdate data-updated="true">Oct 26<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/code/'>Code</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://amy.palamounta.in/2012/10/26/on-service-location/" data-via="ammeep" data-counturl="http://amy.palamounta.in/2012/10/26/on-service-location/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/10/22/2012528a-recipe-to-make-boys-and-girls-html/" title="Previous Post: A Recipe To Make Girls">&laquo; A Recipe To Make Girls</a>
+      
+      
+        <a class="basic-alignment right" href="/2012/10/26/ten-traumas-in-ten-minutes/" title="Next Post: Ten Traumas In Ten Minutes">Ten Traumas In Ten Minutes &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Amy Palamountain -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+  <script src='/javascript/global-12bc839c6300fa3379060d6cb00a3406.js' type='text/javascript'></script>
+
+<script type="text/javascript">
+	$(function(){
+	  $(".flexslider").slidesjs({
+	    width: 320,
+	    height: 240,
+	    play: {
+	        auto: true,
+	    },
+	    effect: {
+			fade: {speed: 300, crossfade: true}
+		}
+	    
+	  });
+	});
+</script>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'amylog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://amy.palamounta.in/2012/10/26/on-service-location/';
+        var disqus_url = 'http://amy.palamounta.in/2012/10/26/on-service-location/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
