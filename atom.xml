@@ -4,7 +4,7 @@
   <title><![CDATA[Amy Palamountain]]></title>
   <link href="http://ammeep.github.io/atom.xml" rel="self"/>
   <link href="http://ammeep.github.io/"/>
-  <updated>2013-07-29T21:47:56+12:00</updated>
+  <updated>2013-07-29T22:24:31+12:00</updated>
   <id>http://ammeep.github.io/</id>
   <author>
     <name><![CDATA[Amy Palamountain]]></name>
@@ -12,6 +12,23 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Exist in the web - Not on it]]></title>
+    <link href="http://ammeep.github.io/blog/2013/07/29/exist-in-the-web-not-on-it/"/>
+    <updated>2013-07-29T22:06:00+12:00</updated>
+    <id>http://ammeep.github.io/blog/2013/07/29/exist-in-the-web-not-on-it</id>
+    <content type="html"><![CDATA[<p>I gave a talk at <a href="http://wdcnz.com/" title="WCDNZ">WDCNZ 2013</a> - Exist in the web, not on it. If you came to the conference, then thanks so much. I hope you had a fantastic day. Otherwise, watch this space for the video. It will be up soon</p>
+
+<p><strong>Slides</strong></p>
+
+<script async="true" class="speakerdeck-embed" data-id="2fe9e700d795013087d05e0fffb1f05d" src="http://ammeep.github.io//speakerdeck.com/assets/embed.js"> </script>
+
+
+<p><strong>Video</strong>
+Coming soon</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Unsuck your backbone]]></title>
