@@ -1,0 +1,16 @@
+.about_body{
+	width:100%;
+	display: table;
+    vertical-align:top;
+	.about_main_content{
+		width:70%;
+		float: left;
+		display: table-cell;
+	}
+
+	.about_sidebar{
+		width:29%;
+		float: right;
+		display: table-cell;
+	}
+}

@@ -72,13 +72,12 @@ module Jekyll
              output += "        <br/><span class=\"alt-flickr\"><a href=\"#{photo.urlFlickr}\" target=\"_blank\">Voir la video en grand</a></span>\n"
              output += "      </li>\n"
            else
-             output += "      <img src=\"#{photo.urlThumb}\">\n"
+             output += "      <img src=\"#{photo.urlThumb}\"\>\n"
              #output += "      <li><a class=\"th\" href=\"#{photo.urlOpened}\"><img src=\"#{photo.urlThumb}\"></a></li>\n"
            end
         end
 
         output += "    </ul>\n"
-        output += "  </div>\n"
         output += "</div>\n"
       end
 
