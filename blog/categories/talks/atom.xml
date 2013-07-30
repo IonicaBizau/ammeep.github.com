@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Talks | Amy Palamountain]]></title>
-  <link href="http://ammeep.github.io/blog/categories/talks/atom.xml" rel="self"/>
-  <link href="http://ammeep.github.io/"/>
-  <updated>2013-07-29T22:24:31+12:00</updated>
-  <id>http://ammeep.github.io/</id>
+  <link href="http://amy.palamounta.in/blog/categories/talks/atom.xml" rel="self"/>
+  <link href="http://amy.palamounta.in/"/>
+  <updated>2013-07-30T19:22:58+12:00</updated>
+  <id>http://amy.palamounta.in/</id>
   <author>
     <name><![CDATA[Amy Palamountain]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Exist in the web - Not on it]]></title>
-    <link href="http://ammeep.github.io/blog/2013/07/29/exist-in-the-web-not-on-it/"/>
+    <link href="http://amy.palamounta.in/blog/2013/07/29/exist-in-the-web-not-on-it/"/>
     <updated>2013-07-29T22:06:00+12:00</updated>
-    <id>http://ammeep.github.io/blog/2013/07/29/exist-in-the-web-not-on-it</id>
+    <id>http://amy.palamounta.in/blog/2013/07/29/exist-in-the-web-not-on-it</id>
     <content type="html"><![CDATA[<p>I gave a talk at <a href="http://wdcnz.com/" title="WCDNZ">WDCNZ 2013</a> - Exist in the web, not on it. If you came to the conference, then thanks so much. I hope you had a fantastic day. Otherwise, watch this space for the video. It will be up soon</p>
 
 <p><strong>Slides</strong><br/>
@@ -30,9 +30,9 @@ Coming soon</p>
   
   <entry>
     <title type="html"><![CDATA[Unsuck your backbone]]></title>
-    <link href="http://ammeep.github.io/2013/04/12/unsuck-your-backbone/"/>
+    <link href="http://amy.palamounta.in/2013/04/12/unsuck-your-backbone/"/>
     <updated>2013-04-12T00:00:00+12:00</updated>
-    <id>http://ammeep.github.io/2013/04/12/unsuck-your-backbone</id>
+    <id>http://amy.palamounta.in/2013/04/12/unsuck-your-backbone</id>
     <content type="html"><![CDATA[<h1></h1>
 
 <p>I gave a talk at <a href="http://codemania.co.nz/" title="Codemania">Codemania</a> - Unsuck your backbone. It was a lot of fun, I hope you all enjoyed it as much as I did.</p>
@@ -61,9 +61,9 @@ Coming soon</p>
   
   <entry>
     <title type="html"><![CDATA[Game Master Kids]]></title>
-    <link href="http://ammeep.github.io/2013/02/22/games-masters-workshops-kids-can-code/"/>
+    <link href="http://amy.palamounta.in/2013/02/22/games-masters-workshops-kids-can-code/"/>
     <updated>2013-02-22T00:00:00+13:00</updated>
-    <id>http://ammeep.github.io/2013/02/22/games-masters-workshops-kids-can-code</id>
+    <id>http://amy.palamounta.in/2013/02/22/games-masters-workshops-kids-can-code</id>
     <content type="html"><![CDATA[<h1></h1>
 
 <p>If you came to the Digital Media Careers Day at Te Papa, and attended my workshop, you may be here looking for the game we built together.</p>
@@ -80,9 +80,9 @@ Coming soon</p>
   
   <entry>
     <title type="html"><![CDATA[Global Day of Code Retreat &#8211; Wellington]]></title>
-    <link href="http://ammeep.github.io/2012/12/09/global-day-of-code-retreat-wellington/"/>
+    <link href="http://amy.palamounta.in/2012/12/09/global-day-of-code-retreat-wellington/"/>
     <updated>2012-12-09T00:00:00+13:00</updated>
-    <id>http://ammeep.github.io/2012/12/09/global-day-of-code-retreat-wellington</id>
+    <id>http://amy.palamounta.in/2012/12/09/global-day-of-code-retreat-wellington</id>
     <content type="html"><![CDATA[<h1></h1>
 
 <p><img class="center" src="/images/posts/gdcr/gdcr_ad.png"></p>
@@ -117,9 +117,9 @@ Coming soon</p>
   
   <entry>
     <title type="html"><![CDATA[Ten Traumas In Ten Minutes]]></title>
-    <link href="http://ammeep.github.io/2012/10/26/ten-traumas-in-ten-minutes/"/>
+    <link href="http://amy.palamounta.in/2012/10/26/ten-traumas-in-ten-minutes/"/>
     <updated>2012-10-26T00:00:00+13:00</updated>
-    <id>http://ammeep.github.io/2012/10/26/ten-traumas-in-ten-minutes</id>
+    <id>http://amy.palamounta.in/2012/10/26/ten-traumas-in-ten-minutes</id>
     <content type="html"><![CDATA[<h1></h1>
 
 <p>Here are the slides from the ten minute lightening talk I gave at <a href="http://codemania.co.nz">Codemania After Dark</a> this Friday. My very first talk given to an audience of reasonable size – thank you all for coming out.</p>
