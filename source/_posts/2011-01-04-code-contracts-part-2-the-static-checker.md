@@ -47,7 +47,7 @@ To see this in action, let us examine a group of animals getting ready to party
 
 and they all want to attend a party
 
-{% codeblock lang:c# %}
+{% codeblock testing lang:c# %}
 
         public class AnimalParty
         {
