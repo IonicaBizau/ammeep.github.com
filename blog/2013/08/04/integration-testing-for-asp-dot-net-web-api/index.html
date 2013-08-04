@@ -9,7 +9,8 @@
   <meta name="author" content="Amy Palamountain">
 
   
-  <meta name="description" content="Want to know what kind of HTTP APIs suck? The ones that break all of their clients ever time a new version is minted. Everybody shipping an HTTP API &hellip;">
+  <meta name="description" content="Want to know what kind of HTTP APIs suck? The ones that break all of their clients every time a new version is minted.
+Everybody shipping an HTTP API &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,19 +111,18 @@
   </header>
 
 
-<div class="entry-content"><p>Want to know what kind of HTTP APIs suck? The ones that break all of their clients ever time a new version is minted.</p>
-
-<p>Everybody shipping an HTTP API, shoud have one question at the top of their mind.</p>
+<div class="entry-content"><p>Want to know what kind of HTTP APIs suck? The ones that break all of their clients every time a new version is minted.
+Everybody shipping an HTTP API, shoud have one question at the top of their mind.</p>
 
 <blockquote><p>Is this change going to break my existing clients? How can I keep breaking changes to a minimum?</p></blockquote>
 
-<p>One way to be sure that you arent going to build one of <em>those</em> apis, is to set up a series of automated integration tests. In this post I will show you an approach I found helpful to integration testing HTTP APIs built on top of ASP.NET Web API.</p>
+<p>One way to be sure that you arent going to build one of <em>those</em> APIs, is to set up a series of automated integration tests. In this post I will show you an approach I found helpful to integration testing HTTP APIs built on top of ASP.NET Web API.</p>
 
 <h2>Host Anywhere, Test Anywhere</h2>
 
 <p><img class="right" src="/images/posts/intergration-testing-webapi/movableapi.png"></p>
 
-<p>The utopia of an api integration test suite, would be a suite which could be executed quickly, and in memory, on our dev machines. This would allow us to more quickly become aware of breaking changes at the boundary of our API.</p>
+<p>The utopia of an API integration test suite, would be a suite which could be executed quickly, and in memory, on our dev machines. This would allow us to more quickly become aware of breaking changes at the boundary of our API.</p>
 
 <p>When starting a new ASP.NET Web API project, you have two choices for how to host it. It can be hosted in a self hosted environment, or it can be hosted inside IIS. If your requirements dictate that you will host your API inside IIS, you shouldn&rsquo;t have to wait for a deployment to the test environment before you can run the test suite. What we need is a way to host our API in memory, to allow us to quickly execute the suite before check in.</p>
 
