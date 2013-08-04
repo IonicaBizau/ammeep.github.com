@@ -1,0 +1,661 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Integration Testing ASP.NET Web API - Amy Palamountain</title>
+  <meta name="author" content="Amy Palamountain">
+
+  
+  <meta name="description" content="Want to know what kind of HTTP APIs suck? The ones that break all of their clients ever time a new version is minted. Everybody shipping an HTTP API &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://amy.palamounta.in/blog/2013/08/04/integration-testing-for-asp-dot-net-web-api">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Amy Palamountain" type="application/atom+xml">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
+  <script type="text/javascript" src="//use.typekit.net/vck3wtq.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-32180901-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+	<h1>
+		<a class="home" href="/">Amy Palamountain</a>
+	</h1>
+	<img src="/images/amy-header.png" class="header-image" width="100px" height="100px" alt="Word"/> 
+</hgroup>
+<div class="header-container"></div>
+<nav role="navigation"><ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="http://aimlessamy.palamounta.in/">Aimless</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/about">About</a></li>
+</ul>
+<div class="social-links">
+	 <ul class="subscription">
+	  <li>
+	  	<a href="https://github.com/ammeep" rel="Github" title="Github">
+	  		<i class="icon-github icon-2x"></i>
+	  	</a>
+	  </li>
+	  <li>
+		<a href="https://twitter.com/ammeep" rel="Twitter" title="Twitter">
+	  		<i class="icon-twitter icon-2x"></i> 
+	  	</a>
+	  </li>
+	  <li><a href="https://plus.google.com/105801746174996249468/posts" rel="Google+" title="Google+">
+	  		<i class="icon-google-plus icon-2x"></i> 
+	  	</a> </li>
+	  <li>
+	  	<i class="icon-rss icon-2x"></i>
+	  	<a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS"></a>
+	  </li>
+	</ul>
+</div>
+</nav>
+
+
+</header>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Integration Testing ASP.NET Web API</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-04T13:23:00+12:00" pubdate data-updated="true">Aug 4<span>th</span>, 2013</time>
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Want to know what kind of HTTP APIs suck? The ones that break all of their clients ever time a new version is minted.</p>
+
+<p>Everybody shipping an HTTP API, shoud have one question at the top of their mind.</p>
+
+<blockquote><p>Is this change going to break my existing clients? How can I keep breaking changes to a minimum?</p></blockquote>
+
+<p>One way to be sure that you arent going to build one of <em>those</em> apis, is to set up a series of automated integration tests. In this post I will show you an approach I found helpful to integration testing HTTP APIs built on top of ASP.NET Web API.</p>
+
+<h2>Host Anywhere, Test Anywhere</h2>
+
+<p><img class="right" src="/images/posts/intergration-testing-webapi/movableapi.png"></p>
+
+<p>The utopia of an api integration test suite, would be a suite which could be executed quickly, and in memory, on our dev machines. This would allow us to more quickly become aware of breaking changes at the boundary of our API.</p>
+
+<p>When starting a new ASP.NET Web API project, you have two choices for how to host it. It can be hosted in a self hosted environment, or it can be hosted inside IIS. If your requirements dictate that you will host your API inside IIS, you shouldn&rsquo;t have to wait for a deployment to the test environment before you can run the test suite. What we need is a way to host our API in memory, to allow us to quickly execute the suite before check in.</p>
+
+<p>To do this, we need to design our API in a way that supports a host anywhere — test anywhere mentality. Our application must first be designed in a way that can be started in both the IIS hosted environmnt, and the self hosted environment.</p>
+
+<p>Encapsulating the root of our API application is an important first step. When either the ASP.NET web host, or the self hosted API kicks off, it is able to call into our API application and call <em>Start()</em>. At this point all the configuration required for API can be carried out.</p>
+
+<figure class='code'><figcaption><span>API Application Interface </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='c#'><span class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">IApiApplication</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">void</span> <span class="nf">Start</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When our hosting environment starts, we are able to carry out all the configuration required for our API application to run. We can attach all of our custom message handlers, add any custom media type formatters, and configure our routes. What this achieves is a way for us to bootstrap our API, independent of the host infrastructure.</p>
+
+<figure class='code'><figcaption><span>Api Application Implementation </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='c#'><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">MyApiApplication</span> <span class="p">:</span> <span class="n">IApiApplication</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">private</span> <span class="k">readonly</span> <span class="n">HttpConfiguration</span> <span class="n">_configuration</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="nf">MyApiApplication</span><span class="p">(</span><span class="n">HttpConfiguration</span> <span class="n">configuration</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="n">_configuration</span> <span class="p">=</span> <span class="n">configuration</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// composition root activites</span>
+</span><span class='line'>        <span class="c1">// set up DI container</span>
+</span><span class='line'>        <span class="c1">// set seralisation settings on configuratin object</span>
+</span><span class='line'>        <span class="c1">// set up routes</span>
+</span><span class='line'>        <span class="n">_configuration</span><span class="p">.</span><span class="n">Routes</span><span class="p">.</span><span class="n">MapHttpRoute</span><span class="p">(</span>
+</span><span class='line'>            <span class="n">name</span><span class="p">:</span> <span class="s">&quot;API Default&quot;</span><span class="p">,</span>
+</span><span class='line'>            <span class="n">routeTemplate</span><span class="p">:</span> <span class="s">&quot;api/{controller}/{id}&quot;</span><span class="p">,</span>
+</span><span class='line'>            <span class="n">defaults</span><span class="p">:</span> <span class="k">new</span> <span class="p">{</span> <span class="n">id</span> <span class="p">=</span> <span class="n">RouteParameter</span><span class="p">.</span><span class="n">Optional</span> <span class="p">}</span>
+</span><span class='line'>        <span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now we can take our IApiApplication, and place it in a different host. Each host is able to call <em>Start()</em>, and magically our API is bootstrapped in the way we expect.</p>
+
+<h2>Testing the API application</h2>
+
+<p>This is great news for our integration test suite. We can now take our API, which we may have previously hosted inside IIS, and host it in memory — inside a test session.</p>
+
+<p>Start out by creating abstractions in your API server</p>
+
+<figure class='code'><figcaption><span>API Server Interface </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='c#'><span class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">IApiServer</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">void</span> <span class="nf">Start</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">void</span> <span class="nf">Stop</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We can now create an in memory version of the API server, which is responsible for starting the API applciation, and hosting it inside the web API self host.</p>
+
+<figure class='code'><figcaption><span>An in memory API server to use in our tests </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+</pre></td><td class='code'><pre><code class='c#'><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">InMemoryApiServer</span> <span class="p">:</span> <span class="n">IApiServer</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">private</span> <span class="k">readonly</span> <span class="n">Uri</span> <span class="n">_serverUri</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">private</span> <span class="k">readonly</span> <span class="n">IApiApplication</span> <span class="n">_apiApplication</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">private</span> <span class="k">readonly</span> <span class="n">HttpSelfHostConfiguration</span> <span class="n">_config</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">private</span> <span class="n">HttpSelfHostServer</span> <span class="n">_server</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="nf">InMemoryApiServer</span><span class="p">(</span><span class="n">Uri</span> <span class="n">serverUri</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="n">_serverUri</span> <span class="p">=</span> <span class="n">serverUri</span><span class="p">;</span>
+</span><span class='line'>        <span class="n">_config</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpSelfHostConfiguration</span><span class="p">(</span><span class="n">serverUri</span><span class="p">);</span>
+</span><span class='line'>        <span class="n">_apiApplication</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyApiApplication</span><span class="p">(</span><span class="n">_config</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">public</span> <span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">try</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="n">_server</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpSelfHostServer</span><span class="p">(</span><span class="n">_config</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="n">_apiApplication</span><span class="p">.</span><span class="n">Start</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="n">_server</span><span class="p">.</span><span class="n">OpenAsync</span><span class="p">().</span><span class="n">Wait</span><span class="p">();</span>
+</span><span class='line'>            <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Listening on &quot;</span> <span class="p">+</span> <span class="n">_serverUri</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>        <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">e</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Could not start server: {0}&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="nf">Stop</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">try</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="n">_server</span><span class="p">.</span><span class="n">CloseAsync</span><span class="p">().</span><span class="n">Wait</span><span class="p">();</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>        <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">e</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Could not stop server: {0}&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>From our test project now we can write test fixtures which start the in memory host during the test fixture setup phase, and tear it down when they are done. Once the in memory hosted API is up and running, we are free to use the Http client libraries to call into the API, executing gets, posts puts and deletes until your heart&rsquo;s content. We can assert that when a resource is not found, the appropriate status code is always returned. We can feel confident that when a new API route is added, all the old ones still work. These things will no longer keep you awake at night, now that you can run your integration tests in memory, before you commit your code.</p>
+
+<figure class='code'><figcaption><span>NUnit Intergration Test of our API in memory </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class='c#'><span class='line'><span class="na">[TestFixture]</span>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">ValueApiTests</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">private</span> <span class="n">Uri</span> <span class="n">_localUri</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">private</span> <span class="n">IApiServer</span> <span class="n">_server</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">    [SetUp]</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="nf">Setup</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="n">_localUri</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Uri</span><span class="p">(</span><span class="s">&quot;http://localhost:3098&quot;</span><span class="p">);</span>
+</span><span class='line'>        <span class="n">_server</span> <span class="p">=</span> <span class="k">new</span> <span class="n">InMemoryApiServer</span><span class="p">(</span><span class="n">_localUri</span><span class="p">);</span>
+</span><span class='line'>        <span class="n">_server</span><span class="p">.</span><span class="n">Start</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">    [TearDown]</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="nf">TearDown</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="n">_server</span><span class="p">.</span><span class="n">Stop</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">    [Test]</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="nf">CanSuccessfullyGetAllValues</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="kt">var</span> <span class="n">valuesUri</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Uri</span><span class="p">(</span><span class="n">_server</span><span class="p">.</span><span class="n">Uri</span><span class="p">,</span> <span class="s">&quot;api/values&quot;</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpClient</span><span class="p">())</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="n">HttpResponseMessage</span> <span class="n">httpResponseMessage</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">GetAsync</span><span class="p">(</span><span class="n">valuesUri</span><span class="p">).</span><span class="n">Result</span><span class="p">;</span>
+</span><span class='line'>            <span class="n">Assert</span><span class="p">.</span><span class="n">That</span><span class="p">(</span><span class="n">httpResponseMessage</span><span class="p">.</span><span class="n">IsSuccessStatusCode</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="n">IList</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">result</span> <span class="p">=</span> <span class="n">httpResponseMessage</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsAsync</span><span class="p">&lt;</span><span class="n">IList</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;&gt;().</span><span class="n">Result</span><span class="p">;</span>
+</span><span class='line'>            <span class="n">Assert</span><span class="p">.</span><span class="n">That</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">Is</span><span class="p">.</span><span class="n">Not</span><span class="p">.</span><span class="n">Null</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img class="center" src="/images/posts/intergration-testing-webapi/simple-test-results.png"></p>
+
+<h2>It gets better!</h2>
+
+<p>There <em>are</em> some difference between an API hosted inside IIS, and an API hosted in a self hosted environment.  So, while running your integration tests in memory gives you great confidence you haven&rsquo;t introduced any breaking changes.There still is a chance some may sneak in, due to these differences.</p>
+
+<p>Is there a way we can take the integration test suite, and execute it against a real server running our api? Perhaps in a test environment. Absolutely. In fact, I would encourage you to do this, and luckily, our test suite supports this.</p>
+
+<figure class='code'><figcaption><span>Level Up Testing </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+</pre></td><td class='code'><pre><code class='c#'><span class='line'><span class="na">[TestFixture]</span>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">InMemoryValueApiTests</span> <span class="p">:</span> <span class="n">ValueApiTest</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">private</span> <span class="k">readonly</span> <span class="k">static</span> <span class="n">Uri</span> <span class="n">LocalUri</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Uri</span><span class="p">(</span><span class="s">&quot;http://localhost:3098&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="nf">InMemoryValueApiTests</span><span class="p">()</span> <span class="p">:</span> <span class="k">base</span><span class="p">(</span><span class="k">new</span> <span class="n">InMemoryApiServer</span><span class="p">(</span><span class="n">LocalUri</span><span class="p">))</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">[TestFixture]</span>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">TestEnvironmentServerApiTests</span> <span class="p">:</span> <span class="n">ValueApiTest</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">private</span> <span class="k">readonly</span> <span class="k">static</span> <span class="n">Uri</span> <span class="n">LocalUri</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Uri</span><span class="p">(</span><span class="s">&quot;http://myapi.org&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="nf">TestEnvironmentServerApiTests</span><span class="p">()</span> <span class="p">:</span> <span class="k">base</span><span class="p">(</span><span class="k">new</span> <span class="n">AspNetApiServer</span><span class="p">(</span><span class="n">LocalUri</span><span class="p">))</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">public</span> <span class="k">abstract</span> <span class="k">class</span> <span class="nc">ValueApiTest</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">private</span> <span class="k">readonly</span> <span class="n">IApiServer</span> <span class="n">_server</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">protected</span> <span class="nf">ValueApiTest</span><span class="p">(</span><span class="n">IApiServer</span> <span class="n">apiServer</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="n">_server</span> <span class="p">=</span> <span class="n">apiServer</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">    [SetUp]</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="nf">Setup</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="n">_server</span><span class="p">.</span><span class="n">Start</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">    [TearDown]</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="nf">TearDown</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="n">_server</span><span class="p">.</span><span class="n">Stop</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">    [Test]</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="nf">CanSuccessfullyGetAllValues</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="kt">var</span>  <span class="n">valuesUri</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Uri</span><span class="p">(</span><span class="n">_server</span><span class="p">.</span><span class="n">Uri</span><span class="p">,</span><span class="s">&quot;api/values&quot;</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpClient</span><span class="p">())</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="n">HttpResponseMessage</span> <span class="n">httpResponseMessage</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">GetAsync</span><span class="p">(</span><span class="n">valuesUri</span><span class="p">).</span><span class="n">Result</span><span class="p">;</span>
+</span><span class='line'>            <span class="n">Assert</span><span class="p">.</span><span class="n">That</span><span class="p">(</span><span class="n">httpResponseMessage</span><span class="p">.</span><span class="n">IsSuccessStatusCode</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="n">IList</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">result</span> <span class="p">=</span> <span class="n">httpResponseMessage</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsAsync</span><span class="p">&lt;</span><span class="n">IList</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;&gt;().</span><span class="n">Result</span><span class="p">;</span>
+</span><span class='line'>            <span class="n">Assert</span><span class="p">.</span><span class="n">That</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="n">Is</span><span class="p">.</span><span class="n">Not</span><span class="p">.</span><span class="n">Null</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img class="right" src="/images/posts/intergration-testing-webapi/testingapi.png"></p>
+
+<p>Above, I have turned our unit test into abstract class, and created two test classes which inherit from it. One executes the tests against the InMemoryApiServer, and the other, against the Test Server. Allowing the same test suite to be quickly executed in memory, <em>and</em> against the test server when we are ready to.</p>
+
+<p>You may not like using abstract classes in unit tests in this way. Great! Feel free to take these ideas and mould them into your own approach. The thing that I personally have found helpful in this approach has been, it has allowed me to build a comprehensive suite of tests, which I can run before I check in. Equally on the build server, I can make up the tests which execute against the test environment, with an nUnit category (or similar in your test framework of choice) and run those tests as part of a longer running build.</p>
+
+<p>I hope you were able to find something in this approach that may help you do the same.</p>
+
+<p><em>As an aside many parts of ASP.NET Web API are built in a way that supports </em>unit testing<em>. This blog post focuses on a different kind of testing — integration testing. I would encourage you to unit test your components in the first instance.</em></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Amy Palamountain</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-04T13:23:00+12:00" pubdate data-updated="true">Aug 4<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/asp-dot-net-web-api/'>ASP.NET Web Api</a>, <a class='category' href='/blog/categories/code/'>Code</a>, <a class='category' href='/blog/categories/rest/'>REST</a>, <a class='category' href='/blog/categories/testing/'>Testing</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://amy.palamounta.in/blog/2013/08/04/integration-testing-for-asp-dot-net-web-api/" data-via="ammeep" data-counturl="http://amy.palamounta.in/blog/2013/08/04/integration-testing-for-asp-dot-net-web-api/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/07/29/exist-in-the-web-not-on-it/" title="Previous Post: Exist in the web - Not on it">&laquo; Exist in the web - Not on it</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Amy Palamountain -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+  <script src='/javascript/global-12bc839c6300fa3379060d6cb00a3406.js' type='text/javascript'></script>
+
+<script type="text/javascript">
+	$(function(){
+	  $(".flexslider").slidesjs({
+	    width: 320,
+	    height: 240,
+	    play: {
+	        auto: true,
+	    },
+	    effect: {
+			fade: {speed: 300, crossfade: true}
+		}
+	    
+	  });
+	});
+</script>
+<script type="text/javascript">
+  var _gauges = _gauges || [];
+  (function() {
+    var t   = document.createElement('script');
+    t.type  = 'text/javascript';
+    t.async = true;
+    t.id    = 'gauges-tracker';
+    t.setAttribute('data-site-id', '51b56959108d7b44f1000035');
+    t.src = '//secure.gaug.es/track.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(t, s);
+  })();
+</script>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'amylog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://amy.palamounta.in/blog/2013/08/04/integration-testing-for-asp-dot-net-web-api/';
+        var disqus_url = 'http://amy.palamounta.in/blog/2013/08/04/integration-testing-for-asp-dot-net-web-api/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

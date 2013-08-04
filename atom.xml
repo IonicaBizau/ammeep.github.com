@@ -4,7 +4,7 @@
   <title><![CDATA[Amy Palamountain]]></title>
   <link href="http://amy.palamounta.in/atom.xml" rel="self"/>
   <link href="http://amy.palamounta.in/"/>
-  <updated>2013-07-30T19:22:58+12:00</updated>
+  <updated>2013-08-04T22:37:18+12:00</updated>
   <id>http://amy.palamounta.in/</id>
   <author>
     <name><![CDATA[Amy Palamountain]]></name>
@@ -12,6 +12,415 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Integration Testing ASP.NET Web API]]></title>
+    <link href="http://amy.palamounta.in/blog/2013/08/04/integration-testing-for-asp-dot-net-web-api/"/>
+    <updated>2013-08-04T13:23:00+12:00</updated>
+    <id>http://amy.palamounta.in/blog/2013/08/04/integration-testing-for-asp-dot-net-web-api</id>
+    <content type="html"><![CDATA[<p>Want to know what kind of HTTP APIs suck? The ones that break all of their clients ever time a new version is minted.</p>
+
+<p>Everybody shipping an HTTP API, shoud have one question at the top of their mind.</p>
+
+<blockquote><p>Is this change going to break my existing clients? How can I keep breaking changes to a minimum?</p></blockquote>
+
+<p>One way to be sure that you arent going to build one of <em>those</em> apis, is to set up a series of automated integration tests. In this post I will show you an approach I found helpful to integration testing HTTP APIs built on top of ASP.NET Web API.</p>
+
+<h2>Host Anywhere, Test Anywhere</h2>
+
+<p><img class="right" src="http://amy.palamounta.in/images/posts/intergration-testing-webapi/movableapi.png"></p>
+
+<p>The utopia of an api integration test suite, would be a suite which could be executed quickly, and in memory, on our dev machines. This would allow us to more quickly become aware of breaking changes at the boundary of our API.</p>
+
+<p>When starting a new ASP.NET Web API project, you have two choices for how to host it. It can be hosted in a self hosted environment, or it can be hosted inside IIS. If your requirements dictate that you will host your API inside IIS, you shouldn&rsquo;t have to wait for a deployment to the test environment before you can run the test suite. What we need is a way to host our API in memory, to allow us to quickly execute the suite before check in.</p>
+
+<p>To do this, we need to design our API in a way that supports a host anywhere — test anywhere mentality. Our application must first be designed in a way that can be started in both the IIS hosted environmnt, and the self hosted environment.</p>
+
+<p>Encapsulating the root of our API application is an important first step. When either the ASP.NET web host, or the self hosted API kicks off, it is able to call into our API application and call <em>Start()</em>. At this point all the configuration required for API can be carried out.</p>
+
+<figure class='code'><figcaption><span>API Application Interface </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='c#'><span class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">IApiApplication</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">void</span> <span class="nf">Start</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When our hosting environment starts, we are able to carry out all the configuration required for our API application to run. We can attach all of our custom message handlers, add any custom media type formatters, and configure our routes. What this achieves is a way for us to bootstrap our API, independent of the host infrastructure.</p>
+
+<figure class='code'><figcaption><span>Api Application Implementation </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='c#'><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">MyApiApplication</span> <span class="p">:</span> <span class="n">IApiApplication</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">private</span> <span class="k">readonly</span> <span class="n">HttpConfiguration</span> <span class="n">_configuration</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="nf">MyApiApplication</span><span class="p">(</span><span class="n">HttpConfiguration</span> <span class="n">configuration</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="n">_configuration</span> <span class="p">=</span> <span class="n">configuration</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// composition root activites</span>
+</span><span class='line'>        <span class="c1">// set up DI container</span>
+</span><span class='line'>        <span class="c1">// set seralisation settings on configuratin object</span>
+</span><span class='line'>        <span class="c1">// set up routes</span>
+</span><span class='line'>        <span class="n">_configuration</span><span class="p">.</span><span class="n">Routes</span><span class="p">.</span><span class="n">MapHttpRoute</span><span class="p">(</span>
+</span><span class='line'>            <span class="n">name</span><span class="p">:</span> <span class="s">&quot;API Default&quot;</span><span class="p">,</span>
+</span><span class='line'>            <span class="n">routeTemplate</span><span class="p">:</span> <span class="s">&quot;api/{controller}/{id}&quot;</span><span class="p">,</span>
+</span><span class='line'>            <span class="n">defaults</span><span class="p">:</span> <span class="k">new</span> <span class="p">{</span> <span class="n">id</span> <span class="p">=</span> <span class="n">RouteParameter</span><span class="p">.</span><span class="n">Optional</span> <span class="p">}</span>
+</span><span class='line'>        <span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now we can take our IApiApplication, and place it in a different host. Each host is able to call <em>Start()</em>, and magically our API is bootstrapped in the way we expect.</p>
+
+<h2>Testing the API application</h2>
+
+<p>This is great news for our integration test suite. We can now take our API, which we may have previously hosted inside IIS, and host it in memory — inside a test session.</p>
+
+<p>Start out by creating abstractions in your API server</p>
+
+<figure class='code'><figcaption><span>API Server Interface </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='c#'><span class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">IApiServer</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">void</span> <span class="nf">Start</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">void</span> <span class="nf">Stop</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We can now create an in memory version of the API server, which is responsible for starting the API applciation, and hosting it inside the web API self host.</p>
+
+<figure class='code'><figcaption><span>An in memory API server to use in our tests </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+</pre></td><td class='code'><pre><code class='c#'><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">InMemoryApiServer</span> <span class="p">:</span> <span class="n">IApiServer</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">private</span> <span class="k">readonly</span> <span class="n">Uri</span> <span class="n">_serverUri</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">private</span> <span class="k">readonly</span> <span class="n">IApiApplication</span> <span class="n">_apiApplication</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">private</span> <span class="k">readonly</span> <span class="n">HttpSelfHostConfiguration</span> <span class="n">_config</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">private</span> <span class="n">HttpSelfHostServer</span> <span class="n">_server</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="nf">InMemoryApiServer</span><span class="p">(</span><span class="n">Uri</span> <span class="n">serverUri</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="n">_serverUri</span> <span class="p">=</span> <span class="n">serverUri</span><span class="p">;</span>
+</span><span class='line'>        <span class="n">_config</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpSelfHostConfiguration</span><span class="p">(</span><span class="n">serverUri</span><span class="p">);</span>
+</span><span class='line'>        <span class="n">_apiApplication</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyApiApplication</span><span class="p">(</span><span class="n">_config</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">public</span> <span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">try</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="n">_server</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpSelfHostServer</span><span class="p">(</span><span class="n">_config</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="n">_apiApplication</span><span class="p">.</span><span class="n">Start</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="n">_server</span><span class="p">.</span><span class="n">OpenAsync</span><span class="p">().</span><span class="n">Wait</span><span class="p">();</span>
+</span><span class='line'>            <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Listening on &quot;</span> <span class="p">+</span> <span class="n">_serverUri</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>        <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">e</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Could not start server: {0}&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="nf">Stop</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">try</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="n">_server</span><span class="p">.</span><span class="n">CloseAsync</span><span class="p">().</span><span class="n">Wait</span><span class="p">();</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>        <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">e</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Could not stop server: {0}&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>From our test project now we can write test fixtures which start the in memory host during the test fixture setup phase, and tear it down when they are done. Once the in memory hosted API is up and running, we are free to use the Http client libraries to call into the API, executing gets, posts puts and deletes until your heart&rsquo;s content. We can assert that when a resource is not found, the appropriate status code is always returned. We can feel confident that when a new API route is added, all the old ones still work. These things will no longer keep you awake at night, now that you can run your integration tests in memory, before you commit your code.</p>
+
+<figure class='code'><figcaption><span>NUnit Intergration Test of our API in memory </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class='c#'><span class='line'><span class="na">[TestFixture]</span>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">ValueApiTests</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">private</span> <span class="n">Uri</span> <span class="n">_localUri</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">private</span> <span class="n">IApiServer</span> <span class="n">_server</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">    [SetUp]</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="nf">Setup</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="n">_localUri</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Uri</span><span class="p">(</span><span class="s">&quot;http://localhost:3098&quot;</span><span class="p">);</span>
+</span><span class='line'>        <span class="n">_server</span> <span class="p">=</span> <span class="k">new</span> <span class="n">InMemoryApiServer</span><span class="p">(</span><span class="n">_localUri</span><span class="p">);</span>
+</span><span class='line'>        <span class="n">_server</span><span class="p">.</span><span class="n">Start</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">    [TearDown]</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="nf">TearDown</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="n">_server</span><span class="p">.</span><span class="n">Stop</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">    [Test]</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="nf">CanSuccessfullyGetAllValues</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="kt">var</span> <span class="n">valuesUri</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Uri</span><span class="p">(</span><span class="n">_server</span><span class="p">.</span><span class="n">Uri</span><span class="p">,</span> <span class="s">&quot;api/values&quot;</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpClient</span><span class="p">())</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="n">HttpResponseMessage</span> <span class="n">httpResponseMessage</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">GetAsync</span><span class="p">(</span><span class="n">valuesUri</span><span class="p">).</span><span class="n">Result</span><span class="p">;</span>
+</span><span class='line'>            <span class="n">Assert</span><span class="p">.</span><span class="n">That</span><span class="p">(</span><span class="n">httpResponseMessage</span><span class="p">.</span><span class="n">IsSuccessStatusCode</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="n">IList</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">result</span> <span class="p">=</span> <span class="n">httpResponseMessage</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsAsync</span><span class="p">&lt;</span><span class="n">IList</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;&gt;().</span><span class="n">Result</span><span class="p">;</span>
+</span><span class='line'>            <span class="n">Assert</span><span class="p">.</span><span class="n">That</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">Is</span><span class="p">.</span><span class="n">Not</span><span class="p">.</span><span class="n">Null</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img class="center" src="http://amy.palamounta.in/images/posts/intergration-testing-webapi/simple-test-results.png"></p>
+
+<h2>It gets better!</h2>
+
+<p>There <em>are</em> some difference between an API hosted inside IIS, and an API hosted in a self hosted environment.  So, while running your integration tests in memory gives you great confidence you haven&rsquo;t introduced any breaking changes.There still is a chance some may sneak in, due to these differences.</p>
+
+<p>Is there a way we can take the integration test suite, and execute it against a real server running our api? Perhaps in a test environment. Absolutely. In fact, I would encourage you to do this, and luckily, our test suite supports this.</p>
+
+<figure class='code'><figcaption><span>Level Up Testing </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+</pre></td><td class='code'><pre><code class='c#'><span class='line'><span class="na">[TestFixture]</span>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">InMemoryValueApiTests</span> <span class="p">:</span> <span class="n">ValueApiTest</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">private</span> <span class="k">readonly</span> <span class="k">static</span> <span class="n">Uri</span> <span class="n">LocalUri</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Uri</span><span class="p">(</span><span class="s">&quot;http://localhost:3098&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="nf">InMemoryValueApiTests</span><span class="p">()</span> <span class="p">:</span> <span class="k">base</span><span class="p">(</span><span class="k">new</span> <span class="n">InMemoryApiServer</span><span class="p">(</span><span class="n">LocalUri</span><span class="p">))</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">[TestFixture]</span>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">TestEnvironmentServerApiTests</span> <span class="p">:</span> <span class="n">ValueApiTest</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">private</span> <span class="k">readonly</span> <span class="k">static</span> <span class="n">Uri</span> <span class="n">LocalUri</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Uri</span><span class="p">(</span><span class="s">&quot;http://myapi.org&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="nf">TestEnvironmentServerApiTests</span><span class="p">()</span> <span class="p">:</span> <span class="k">base</span><span class="p">(</span><span class="k">new</span> <span class="n">AspNetApiServer</span><span class="p">(</span><span class="n">LocalUri</span><span class="p">))</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">public</span> <span class="k">abstract</span> <span class="k">class</span> <span class="nc">ValueApiTest</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">private</span> <span class="k">readonly</span> <span class="n">IApiServer</span> <span class="n">_server</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">protected</span> <span class="nf">ValueApiTest</span><span class="p">(</span><span class="n">IApiServer</span> <span class="n">apiServer</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="n">_server</span> <span class="p">=</span> <span class="n">apiServer</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">    [SetUp]</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="nf">Setup</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="n">_server</span><span class="p">.</span><span class="n">Start</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">    [TearDown]</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="nf">TearDown</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="n">_server</span><span class="p">.</span><span class="n">Stop</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">    [Test]</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="nf">CanSuccessfullyGetAllValues</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="kt">var</span>  <span class="n">valuesUri</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Uri</span><span class="p">(</span><span class="n">_server</span><span class="p">.</span><span class="n">Uri</span><span class="p">,</span><span class="s">&quot;api/values&quot;</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpClient</span><span class="p">())</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="n">HttpResponseMessage</span> <span class="n">httpResponseMessage</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">GetAsync</span><span class="p">(</span><span class="n">valuesUri</span><span class="p">).</span><span class="n">Result</span><span class="p">;</span>
+</span><span class='line'>            <span class="n">Assert</span><span class="p">.</span><span class="n">That</span><span class="p">(</span><span class="n">httpResponseMessage</span><span class="p">.</span><span class="n">IsSuccessStatusCode</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="n">IList</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">result</span> <span class="p">=</span> <span class="n">httpResponseMessage</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsAsync</span><span class="p">&lt;</span><span class="n">IList</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;&gt;().</span><span class="n">Result</span><span class="p">;</span>
+</span><span class='line'>            <span class="n">Assert</span><span class="p">.</span><span class="n">That</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="n">Is</span><span class="p">.</span><span class="n">Not</span><span class="p">.</span><span class="n">Null</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img class="right" src="http://amy.palamounta.in/images/posts/intergration-testing-webapi/testingapi.png"></p>
+
+<p>Above, I have turned our unit test into abstract class, and created two test classes which inherit from it. One executes the tests against the InMemoryApiServer, and the other, against the Test Server. Allowing the same test suite to be quickly executed in memory, <em>and</em> against the test server when we are ready to.</p>
+
+<p>You may not like using abstract classes in unit tests in this way. Great! Feel free to take these ideas and mould them into your own approach. The thing that I personally have found helpful in this approach has been, it has allowed me to build a comprehensive suite of tests, which I can run before I check in. Equally on the build server, I can make up the tests which execute against the test environment, with an nUnit category (or similar in your test framework of choice) and run those tests as part of a longer running build.</p>
+
+<p>I hope you were able to find something in this approach that may help you do the same.</p>
+
+<p><em>As an aside many parts of ASP.NET Web API are built in a way that supports </em>unit testing<em>. This blog post focuses on a different kind of testing — integration testing. I would encourage you to unit test your components in the first instance.</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Exist in the web - Not on it]]></title>
@@ -670,7 +1079,8 @@ This will tell the static checker to look at all the points where messages are b
 
 <p>and they all want to attend a party</p>
 
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>testing </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -867,48 +1277,6 @@ best place to start. So a quick book search and i see that apparently ‘insulat
 
 <p>So NCBI disapointed on this topic. The article I read then went on to say that insulators do not them selfs provide insulation, but insulate by way of the proteins that they recruit. Also that it has been shown that such insulator binding proteins also bind to the nuclear matrix. From what I can gather about the nuclear matrix, I get the feeling that it is an extreamly important controler of gene regulation. One day shitwolf.. one day..<br/>
 Anyway so if these proteins that are binding to insulator elements, also bind to the nuclear matrix, you can imagin that insulators may be able to physically define structural and spatial domains in the chromatin. But then the article falls flat on its face, and runs away scared. I am sent else where on my journy…</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Iron Homeostatis and Cytoplasmic Control of Gene Expression]]></title>
-    <link href="http://amy.palamounta.in/2008/10/21/iron-homeostatis-and-cytoplasmic-control-of-gene-expression-html"/>
-    <updated>2008-10-21T00:00:00+13:00</updated>
-    <id>http://amy.palamounta.in/2008/10/21/2008-iron-homeostatis-and-cytoplasmic-control-of-gene-expression-html</id>
-    <content type="html"><![CDATA[<p>Iron. We all need it for many general cellular functions. When you don’t have enough Iron, your body cannot carry out those functions. On the flip side, you find that in high concentrations iron is toxic to the body. It is therefore critical that organism’s have a finely tuned system for regulating intracellular iron concentration.</p>
-
-<p><img class="center" src="http://amy.palamounta.in/images/posts/iron-homeostasis/Cycle.jpg"></p>
-
-<p>Iron is used in many proteins as a cofactor, this includes oxygen transport proteins, hemoglobin and myoglobin. Iron plays an important role in oxygen transport and energy production, therefore it is not surprising that a shortage of iron in humans results in anemia, giving an over all feeling of weakness.</p>
-
-<p>Two proteins, while not the only players in the regulation of iron homeostasis, provide an excellent and well studied example of regulation of gene expression post transcriptionally and in the cytoplasm. Let me introduce the players: Ferritin and the Transferrin receptor. Iron has extremely low solubility and is carried around by a third molecule (not discussed today) transferrin, and is taken up by the cell by the transferrin receptor, and stored by the cell in ferritin.</p>
-
-<p>The levels of each of our two key players are regulated acording to the levels of iron in the following ways. When iron levels are high, there is an increase in Ferritin by increasing the Ferritin mRNAs affinity for the ribosome, therefore ensuring that protein gets made at increased levels, and excess iron gets stored. At the same time the levels of the Transferrin receptor are decreaeses so that there is less iron being taken up by the cell. This is regulated by regulating the stability of the Transferrin receptor mRNA.When iron levels are low then Ferritin levels are decreased so that less iron is stored, and the levels of Transferrin Receptor are increased by increasing the stability of its mRNA, and thus increasing the ability of the cell to take up more iron. These two proteins are differentially regulated by the same proteins. Let us explore how this is achieved.</p>
-
-<p><img class="center" src="http://amy.palamounta.in/images/posts/iron-homeostasis/5prime.jpg"></p>
-
-<h2>Iron Responsive Elements</h2>
-
-<p>In the 5′ UTR (untranslated region) of the Ferritin mRNA a stem loop structure that forms via base pairing interactions in the stem. The loop region contains a particular sequence of bases, which can be bound by IBP (Iron binding proteins).</p>
-
-<p>In the 3′ UTR of the transferrin receptor are 5 of these stem loop IRE, which can bind the same IBP. These IRE’s are key to understanding the regulation of iron homeostasis.
- </p>
-
-<h2>Regulation of Ferritin</h2>
-
-<p>Ferritin translation is regulated by iron binding proteins. Such proteins are also RNA binding proteins that can recognize a specific hair-pin structured that is formed in the 3′ UTR of the Ferritin mRNA (its IRE). The affinity of the IBP for the IRE is controlled by the levels of iron in the cell. In iron deficient cells, the concentration of iron is too low to bind the IRP. In the absence of bound Iron these proteins are tightly bound to the Ferritin IRE and prevent the ribosome from initating translation.</p>
-
-<h2>Regulation of Transferrin Receptor</h2>
-
-<p>In the mRNA of the Transferrin receptor the 3′ UTR is 2.6 kb long and contains 5 IRE, whos sequence and structure is similar to the IRE found in the 5′ end of the ferritin mRNA. In the presence of low iron concentrations, the stability of the transferrin mRNA is increased by IBP, which bind to the IRE in the 3′ end. It is thought that such bound proteins prevent the receptor mRNA from entering the mRNA degredation pathway.</p>
-
-<p>Experimental Evidence[![][5]][5]</p>
-
-<p><img class="center" src="http://amy.palamounta.in/images/posts/iron-homeostasis/gelShift.png"></p>
-
-<p>Gel Shift assays have demonstrated that the same protein that binds the TfR (Transferrin receptor) also binds the Ferritin IRE. A labled 3′ TrF mRNA was used in each of the lanes. Lane 1 has only cytoplasmic extract with no cold competitor added. We can see that there is an increase in the molecular weight of the labled mRNA, therefore showing that something has bound to the probe. Lane two contains a cold TrF mRNA, which is able to chase away the shift, therefore demonstrating that some protein is binding specifically to the TfR mRNA. Lane 3 shows that cold Ferritin can achieve the same thing, while lane 4 shows that in the presence of a cold non-specific competitor, specific binding still occurs.</p>
-
-<p>The proteins that bind the IRE’s have been pulled down by UV cross linking, and demonstrated by Gel shift again. I wont be discussing this further because I am tired.</p>
 ]]></content>
   </entry>
   
