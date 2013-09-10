@@ -98,7 +98,7 @@ Ok – its a little better. But not much. We are still coupled to our service lo
 
 {% img center /images/posts/onservicelocation/car10.jpg%}
 
-Lets turn our ServiceLocator object into an injectable dependency. I can almost hear proponents of the service locator pattern nodding in agreement. But the question is, is this any better? Its defiantly better than using a static service locator. We can easily discover when we construct a car object that it takes an IServiceLocator dependency.
+Lets turn our ServiceLocator object into an injectable dependency. I can almost hear proponents of the service locator pattern nodding in agreement. But the question is, is this any better? Its definitely better than using a static service locator. We can easily discover when we construct a car object that it takes an IServiceLocator dependency.
 
 {% img center /images/posts/onservicelocation/car12.jpg%}
 
