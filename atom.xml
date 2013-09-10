@@ -4,7 +4,7 @@
   <title><![CDATA[Amy Palamountain]]></title>
   <link href="http://amy.palamounta.in/atom.xml" rel="self"/>
   <link href="http://amy.palamounta.in/"/>
-  <updated>2013-08-28T08:21:20+12:00</updated>
+  <updated>2013-09-10T14:53:37+12:00</updated>
   <id>http://amy.palamounta.in/</id>
   <author>
     <name><![CDATA[Amy Palamountain]]></name>
@@ -705,7 +705,7 @@ Everybody shipping an HTTP API, shoud have one question at the top of their mind
 
 <p><img class="center" src="http://amy.palamounta.in/images/posts/onservicelocation/car10.jpg"></p>
 
-<p>Lets turn our ServiceLocator object into an injectable dependency. I can almost hear proponents of the service locator pattern nodding in agreement. But the question is, is this any better? Its defiantly better than using a static service locator. We can easily discover when we construct a car object that it takes an IServiceLocator dependency.</p>
+<p>Lets turn our ServiceLocator object into an injectable dependency. I can almost hear proponents of the service locator pattern nodding in agreement. But the question is, is this any better? Its definitely better than using a static service locator. We can easily discover when we construct a car object that it takes an IServiceLocator dependency.</p>
 
 <p><img class="center" src="http://amy.palamounta.in/images/posts/onservicelocation/car12.jpg"></p>
 
