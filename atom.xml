@@ -4,7 +4,7 @@
   <title><![CDATA[Amy Palamountain]]></title>
   <link href="http://amy.palamounta.in/atom.xml" rel="self"/>
   <link href="http://amy.palamounta.in/"/>
-  <updated>2013-09-22T12:10:58+12:00</updated>
+  <updated>2013-09-22T12:14:23+12:00</updated>
   <id>http://amy.palamounta.in/</id>
   <author>
     <name><![CDATA[Amy Palamountain]]></name>
@@ -25,7 +25,7 @@ Everybody shipping an HTTP API, shoud have one question at the top of their mind
 
 <p>One way to be sure that you arent going to build one of <em>those</em> APIs, is to set up a series of automated integration tests. In this post I will show you an approach I found helpful to integration testing HTTP APIs built on top of ASP.NET Web API.</p>
 
-<h2>Host Anywhere, Test Anywhere</h2>
+<h2>Test With Zero HTTP Traffic</h2>
 
 <p>The utopia of an API integration test suite, would be a suite which could be executed quickly, and in memory, on our dev machines. Without <em>any</em> HTTP traffic. This would allow us to more quickly become aware of breaking changes at the boundary of our API. Wouldnt it also be great if we could then take those <em>same</em> tests, and run them against our test deployment?</p>
 
@@ -439,6 +439,8 @@ exposed by the HttpClinet, which will allow us to pass the <em>server</em> code 
 <p>I hope you were able to find something in this approach that may help you do the same.</p>
 
 <p><em>As an aside many parts of ASP.NET Web API are built in a way that supports </em>unit testing<em>. This blog post focuses on a different kind of testing — integration testing. I would encourage you to unit test your components in the first instance.</em></p>
+
+<p>Checkout the tests in this sample project as an example <a href="https://github.com/ammeep/hyper-library/">Hyper Library</a></p>
 ]]></content>
   </entry>
   
