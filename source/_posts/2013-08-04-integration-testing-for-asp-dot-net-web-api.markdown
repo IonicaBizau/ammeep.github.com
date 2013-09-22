@@ -26,11 +26,7 @@ One way to be sure that you arent going to build one of *those* APIs, is to set 
 
 ## Host Anywhere, Test Anywhere
 
-{% img right /images/posts/intergration-testing-webapi/movableapi.png%}
-
-The utopia of an API integration test suite, would be a suite which could be executed quickly, and in memory, on our dev machines. This would allow us to more quickly become aware of breaking changes at the boundary of our API.
-
-When starting a new ASP.NET Web API project, you have two choices for how to host it. It can be hosted in a self hosted environment, or it can be hosted inside IIS. If your requirements dictate that you will host your API inside IIS, you shouldn't have to wait for a deployment to the test environment before you can run the test suite. What we need is a way to host our API in memory, to allow us to quickly execute the suite before check in.
+The utopia of an API integration test suite, would be a suite which could be executed quickly, and in memory, on our dev machines. Without *any* HTTP traffic. This would allow us to more quickly become aware of breaking changes at the boundary of our API. Wouldnt it also be great if we could then take those *same* tests, and run them against our test deployment?
 
 To do this, we need to design our API in a way that supports a host anywhere — test anywhere mentality. Our application must first be designed in a way that can be started in both the IIS hosted environmnt, and the self hosted environment. 
 
@@ -86,44 +82,43 @@ Start out by creating abstractions in your API server
 
 public interface IApiServer
 {
+    HttpMessageHandler ServerHandler { get; }
     void Start();
     void Stop();
 }
 
 {% endcodeblock %}
 
-We can now create an in memory version of the API server, which is responsible for starting the API applciation, and hosting it inside the web API self host. 
+We can now create a version of the API server, which is responsible for starting the API applciation, and hosting it inside our unit tests. 
 
 {% codeblock An in memory API server to use in our tests lang:c# %}
 
 public class InMemoryApiServer : IApiServer
 {
-    private readonly Uri _serverUri;
-    private readonly IApiApplication _apiApplication;
-    private readonly HttpSelfHostConfiguration _config;
-    private HttpSelfHostServer _server;
+    private HttpServer _server;
 
-    public InMemoryApiServer(Uri serverUri)
+    public Uri BaseAddress { get { return new Uri("http://localhost"); }}
+
+    public ApiServerHost Kind
     {
-        _serverUri = serverUri;
-        _config = new HttpSelfHostConfiguration(serverUri);
-        _apiApplication = new MyApiApplication(_config);
+        get { return ApiServerHost.InMemory; }
     }
 
-	public void Start()
+    public HttpMessageHandler ServerHandler { get { return _server; } }
+
+    public void Start()
     {
         try
         {
-            _server = new HttpSelfHostServer(_config);
-
-            _apiApplication.Start();
-
-            _server.OpenAsync().Wait();
-            Console.WriteLine("Listening on " + _serverUri);
+            var httpConfig = new HttpConfiguration();
+            var apiConfig = new ApiServiceConfiguration(httpConfig);
+            apiConfig.Configure();
+            _server = new HttpServer(httpConfig);
         }
         catch (Exception e)
         {
-            Console.WriteLine("Could not start server: {0}", e);
+            Console.WriteLine("Could not create server: {0}", e);
+            Assert.Fail("Could not create server: {0}", e);
         }
     }
 
@@ -131,7 +126,7 @@ public class InMemoryApiServer : IApiServer
     {
         try
         {
-            _server.CloseAsync().Wait();
+            _server.Dispose();
         }
         catch (Exception e)
         {
@@ -140,86 +135,41 @@ public class InMemoryApiServer : IApiServer
     }
 }
 
+{% endcodeblock %}
+
+From our test project now we can write test fixtures which start the in memory server during the test fixture setup phase, and tear it down when they are done. 
+
+The IApiServer exposes a ServerHandler. We are going to use this handler to take advantage of a neat trick 
+exposed by the HttpClinet, which will allow us to pass the *server* code directly to the client. In this way *ZERO* HTTP traffic will be generated. 
+
+{% codeblock API Server Interface lang:c# %}
+
+public interface IApiServer
+{
+    HttpMessageHandler ServerHandler { get; }
+    // other bits
+}
+
+// in our test
+
+using (var client = new HttpClient(_server.ServerHandler))
+{
+    //do stuff
+}
 
 {% endcodeblock %}
 
-From our test project now we can write test fixtures which start the in memory host during the test fixture setup phase, and tear it down when they are done. Once the in memory hosted API is up and running, we are free to use the Http client libraries to call into the API, executing gets, posts puts and deletes until your heart's content. We can assert that when a resource is not found, the appropriate status code is always returned. We can feel confident that when a new API route is added, all the old ones still work. These things will no longer keep you awake at night, now that you can run your integration tests in memory, before you commit your code.  
 
 {% codeblock NUnit Intergration Test of our API in memory lang:c# %}
 
 [TestFixture]
-public class ValueApiTests
-{
-    private Uri _localUri;
-    private IApiServer _server;
-
-    [SetUp]
-    public void Setup()
-    {
-        _localUri = new Uri("http://localhost:3098");
-        _server = new InMemoryApiServer(_localUri);
-        _server.Start();
-    }
-
-    [TearDown]
-    public void TearDown()
-    {
-        _server.Stop();
-    }
-
-    [Test]
-    public void CanSuccessfullyGetAllValues()
-    {
-        var valuesUri = new Uri(_server.Uri, "api/values");
-        using (var client = new HttpClient())
-        {
-            HttpResponseMessage httpResponseMessage = client.GetAsync(valuesUri).Result;
-            Assert.That(httpResponseMessage.IsSuccessStatusCode);
-
-            IList<string> result = httpResponseMessage.Content.ReadAsAsync<IList<string>>().Result;
-            Assert.That(result, Is.Not.Null);
-        }
-    }
-}
-
-{% endcodeblock %}
-
-{% img center /images/posts/intergration-testing-webapi/simple-test-results.png%}
-
-##It gets better!
-
-
-There *are* some difference between an API hosted inside IIS, and an API hosted in a self hosted environment.  So, while running your integration tests in memory gives you great confidence you haven't introduced any breaking changes.There still is a chance some may sneak in, due to these differences.
-
-Is there a way we can take the integration test suite, and execute it against a real server running our api? Perhaps in a test environment. Absolutely. In fact, I would encourage you to do this, and luckily, our test suite supports this.
-
-{% codeblock Level Up Testing lang:c# %}
-
-[TestFixture]
-public class InMemoryValueApiTests : ValueApiTest
-{
-    private readonly static Uri LocalUri = new Uri("http://localhost:3098");
-
-    public InMemoryValueApiTests() : base(new InMemoryApiServer(LocalUri))
-    {
-    }
-}
-
-[TestFixture]
-public class TestEnvironmentServerApiTests : ValueApiTest
-{
-    private readonly static Uri LocalUri = new Uri("http://myapi.org");
-
-    public TestEnvironmentServerApiTests() : base(new AspNetApiServer(LocalUri))
-    {
-    }
-}
-
-public abstract class ValueApiTest
+public abstract class BookApiTests
 {
     private readonly IApiServer _server;
 
-    protected ValueApiTest(IApiServer apiServer)
+    private const string BooksRelativeUri = "api/books/1";
+
+    protected BookApiTests(IApiServer apiServer)
     {
         _server = apiServer;
     }
@@ -237,16 +187,76 @@ public abstract class ValueApiTest
     }
 
     [Test]
-    public void CanSuccessfullyGetAllValues()
+    public void GetOneBookReturnsSuccessfulStatusCode()
     {
-        var  valuesUri = new Uri(_server.Uri,"api/values");
-        using (var client = new HttpClient())
+        var valuesUri = new Uri(_server.BaseAddress, BooksRelativeUri);
+        using (var client = new HttpClient(_server.ServerHandler))
         {
             HttpResponseMessage httpResponseMessage = client.GetAsync(valuesUri).Result;
             Assert.That(httpResponseMessage.IsSuccessStatusCode);
+            Assert.That(httpResponseMessage.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+        }
+    }
+}
 
-            IList<string> result = httpResponseMessage.Content.ReadAsAsync<IList<string>>().Result;
-            Assert.That(result,Is.Not.Null);
+{% endcodeblock %}
+
+{% img center /images/posts/intergration-testing-webapi/simple-test-results.png%}
+
+##It gets better!
+
+Is there a way we can take the integration test suite, and execute it against a real server running our api? Perhaps in a test environment. Absolutely. In fact, I would encourage you to do this, and luckily, our test suite supports this.
+
+{% codeblock Level Up Testing lang:c# %}
+
+[TestFixture]
+public class InMemoryBooksApiTests : BooksApiTests
+{
+    public InMemoryBooksApiTests() : base(new InMemoryApiServer())
+    {
+    }
+}
+
+[TestFixture]
+public class AgainstServerBooksApiTests : BooksApiTests
+{
+    public AgainstServerBooksApiTests(): base(new AspNetApiServer(ApiHost.URI))
+    {
+    }
+}
+
+public abstract class BookApiTests
+{
+    private readonly IApiServer _server;
+
+    private const string BooksRelativeUri = "api/books/1";
+
+    protected BookApiTests(IApiServer apiServer)
+    {
+        _server = apiServer;
+    }
+
+    [SetUp]
+    public void Setup()
+    {
+        _server.Start();
+    }
+
+    [TearDown]
+    public void TearDown()
+    {
+        _server.Stop();
+    }
+
+    [Test]
+    public void GetOneBookReturnsSuccessfulStatusCode()
+    {
+        var valuesUri = new Uri(_server.BaseAddress, BooksRelativeUri);
+        using (var client = new HttpClient(_server.ServerHandler))
+        {
+            HttpResponseMessage httpResponseMessage = client.GetAsync(valuesUri).Result;
+            Assert.That(httpResponseMessage.IsSuccessStatusCode);
+            Assert.That(httpResponseMessage.StatusCode, Is.EqualTo(HttpStatusCode.OK));
         }
     }
 }
