@@ -24,7 +24,7 @@ Everybody shipping an HTTP API, shoud have one question at the top of their mind
 One way to be sure that you arent going to build one of *those* APIs, is to set up a series of automated integration tests. In this post I will show you an approach I found helpful to integration testing HTTP APIs built on top of ASP.NET Web API.
 
 
-## Host Anywhere, Test Anywhere
+## Test With Zero HTTP Traffic
 
 The utopia of an API integration test suite, would be a suite which could be executed quickly, and in memory, on our dev machines. Without *any* HTTP traffic. This would allow us to more quickly become aware of breaking changes at the boundary of our API. Wouldnt it also be great if we could then take those *same* tests, and run them against our test deployment?
 
@@ -271,4 +271,6 @@ You may not like using abstract classes in unit tests in this way. Great! Feel f
 I hope you were able to find something in this approach that may help you do the same.
 
 *As an aside many parts of ASP.NET Web API are built in a way that supports *unit testing*. This blog post focuses on a different kind of testing — integration testing. I would encourage you to unit test your components in the first instance.*
+
+Checkout the tests in this sample project as an example [Hyper Library](https://github.com/ammeep/hyper-library/)
 
