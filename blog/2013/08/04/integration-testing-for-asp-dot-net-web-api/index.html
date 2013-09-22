@@ -120,11 +120,7 @@ Everybody shipping an HTTP API, shoud have one question at the top of their mind
 
 <h2>Host Anywhere, Test Anywhere</h2>
 
-<p><img class="right" src="/images/posts/intergration-testing-webapi/movableapi.png"></p>
-
-<p>The utopia of an API integration test suite, would be a suite which could be executed quickly, and in memory, on our dev machines. This would allow us to more quickly become aware of breaking changes at the boundary of our API.</p>
-
-<p>When starting a new ASP.NET Web API project, you have two choices for how to host it. It can be hosted in a self hosted environment, or it can be hosted inside IIS. If your requirements dictate that you will host your API inside IIS, you shouldn&rsquo;t have to wait for a deployment to the test environment before you can run the test suite. What we need is a way to host our API in memory, to allow us to quickly execute the suite before check in.</p>
+<p>The utopia of an API integration test suite, would be a suite which could be executed quickly, and in memory, on our dev machines. Without <em>any</em> HTTP traffic. This would allow us to more quickly become aware of breaking changes at the boundary of our API. Wouldnt it also be great if we could then take those <em>same</em> tests, and run them against our test deployment?</p>
 
 <p>To do this, we need to design our API in a way that supports a host anywhere — test anywhere mentality. Our application must first be designed in a way that can be started in both the IIS hosted environmnt, and the self hosted environment.</p>
 
@@ -206,15 +202,17 @@ Everybody shipping an HTTP API, shoud have one question at the top of their mind
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
+<span class='line-number'>6</span>
 </pre></td><td class='code'><pre><code class='c#'><span class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">IApiServer</span>
 </span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">HttpMessageHandler</span> <span class="n">ServerHandler</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
 </span><span class='line'>    <span class="k">void</span> <span class="nf">Start</span><span class="p">();</span>
 </span><span class='line'>    <span class="k">void</span> <span class="nf">Stop</span><span class="p">();</span>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>We can now create an in memory version of the API server, which is responsible for starting the API applciation, and hosting it inside the web API self host.</p>
+<p>We can now create a version of the API server, which is responsible for starting the API applciation, and hosting it inside our unit tests.</p>
 
 <figure class='code'><figcaption><span>An in memory API server to use in our tests </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -258,36 +256,32 @@ Everybody shipping an HTTP API, shoud have one question at the top of their mind
 <span class='line-number'>39</span>
 <span class='line-number'>40</span>
 <span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
 </pre></td><td class='code'><pre><code class='c#'><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">InMemoryApiServer</span> <span class="p">:</span> <span class="n">IApiServer</span>
 </span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="k">private</span> <span class="k">readonly</span> <span class="n">Uri</span> <span class="n">_serverUri</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">private</span> <span class="k">readonly</span> <span class="n">IApiApplication</span> <span class="n">_apiApplication</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">private</span> <span class="k">readonly</span> <span class="n">HttpSelfHostConfiguration</span> <span class="n">_config</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">private</span> <span class="n">HttpSelfHostServer</span> <span class="n">_server</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">private</span> <span class="n">HttpServer</span> <span class="n">_server</span><span class="p">;</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="k">public</span> <span class="nf">InMemoryApiServer</span><span class="p">(</span><span class="n">Uri</span> <span class="n">serverUri</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">public</span> <span class="n">Uri</span> <span class="n">BaseAddress</span> <span class="p">{</span> <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="k">new</span> <span class="n">Uri</span><span class="p">(</span><span class="s">&quot;http://localhost&quot;</span><span class="p">);</span> <span class="p">}}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="n">ApiServerHost</span> <span class="n">Kind</span>
 </span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>        <span class="n">_serverUri</span> <span class="p">=</span> <span class="n">serverUri</span><span class="p">;</span>
-</span><span class='line'>        <span class="n">_config</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpSelfHostConfiguration</span><span class="p">(</span><span class="n">serverUri</span><span class="p">);</span>
-</span><span class='line'>        <span class="n">_apiApplication</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyApiApplication</span><span class="p">(</span><span class="n">_config</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="n">ApiServerHost</span><span class="p">.</span><span class="n">InMemory</span><span class="p">;</span> <span class="p">}</span>
 </span><span class='line'>    <span class="p">}</span>
 </span><span class='line'>
-</span><span class='line'>  <span class="k">public</span> <span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
+</span><span class='line'>    <span class="k">public</span> <span class="n">HttpMessageHandler</span> <span class="n">ServerHandler</span> <span class="p">{</span> <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_server</span><span class="p">;</span> <span class="p">}</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
 </span><span class='line'>    <span class="p">{</span>
 </span><span class='line'>        <span class="k">try</span>
 </span><span class='line'>        <span class="p">{</span>
-</span><span class='line'>            <span class="n">_server</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpSelfHostServer</span><span class="p">(</span><span class="n">_config</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>            <span class="n">_apiApplication</span><span class="p">.</span><span class="n">Start</span><span class="p">();</span>
-</span><span class='line'>
-</span><span class='line'>            <span class="n">_server</span><span class="p">.</span><span class="n">OpenAsync</span><span class="p">().</span><span class="n">Wait</span><span class="p">();</span>
-</span><span class='line'>            <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Listening on &quot;</span> <span class="p">+</span> <span class="n">_serverUri</span><span class="p">);</span>
+</span><span class='line'>            <span class="kt">var</span> <span class="n">httpConfig</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpConfiguration</span><span class="p">();</span>
+</span><span class='line'>            <span class="kt">var</span> <span class="n">apiConfig</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ApiServiceConfiguration</span><span class="p">(</span><span class="n">httpConfig</span><span class="p">);</span>
+</span><span class='line'>            <span class="n">apiConfig</span><span class="p">.</span><span class="n">Configure</span><span class="p">();</span>
+</span><span class='line'>            <span class="n">_server</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpServer</span><span class="p">(</span><span class="n">httpConfig</span><span class="p">);</span>
 </span><span class='line'>        <span class="p">}</span>
 </span><span class='line'>        <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">e</span><span class="p">)</span>
 </span><span class='line'>        <span class="p">{</span>
-</span><span class='line'>            <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Could not start server: {0}&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">);</span>
+</span><span class='line'>            <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Could not create server: {0}&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">);</span>
+</span><span class='line'>            <span class="n">Assert</span><span class="p">.</span><span class="n">Fail</span><span class="p">(</span><span class="s">&quot;Could not create server: {0}&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">);</span>
 </span><span class='line'>        <span class="p">}</span>
 </span><span class='line'>    <span class="p">}</span>
 </span><span class='line'>
@@ -295,7 +289,7 @@ Everybody shipping an HTTP API, shoud have one question at the top of their mind
 </span><span class='line'>    <span class="p">{</span>
 </span><span class='line'>        <span class="k">try</span>
 </span><span class='line'>        <span class="p">{</span>
-</span><span class='line'>            <span class="n">_server</span><span class="p">.</span><span class="n">CloseAsync</span><span class="p">().</span><span class="n">Wait</span><span class="p">();</span>
+</span><span class='line'>            <span class="n">_server</span><span class="p">.</span><span class="n">Dispose</span><span class="p">();</span>
 </span><span class='line'>        <span class="p">}</span>
 </span><span class='line'>        <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">e</span><span class="p">)</span>
 </span><span class='line'>        <span class="p">{</span>
@@ -306,7 +300,40 @@ Everybody shipping an HTTP API, shoud have one question at the top of their mind
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>From our test project now we can write test fixtures which start the in memory host during the test fixture setup phase, and tear it down when they are done. Once the in memory hosted API is up and running, we are free to use the Http client libraries to call into the API, executing gets, posts puts and deletes until your heart&rsquo;s content. We can assert that when a resource is not found, the appropriate status code is always returned. We can feel confident that when a new API route is added, all the old ones still work. These things will no longer keep you awake at night, now that you can run your integration tests in memory, before you commit your code.</p>
+<p>From our test project now we can write test fixtures which start the in memory server during the test fixture setup phase, and tear it down when they are done.</p>
+
+<p>The IApiServer exposes a ServerHandler. We are going to use this handler to take advantage of a neat trick
+exposed by the HttpClinet, which will allow us to pass the <em>server</em> code directly to the client. In this way <em>ZERO</em> HTTP traffic will be generated.</p>
+
+<figure class='code'><figcaption><span>API Server Interface </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='c#'><span class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">IApiServer</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">HttpMessageHandler</span> <span class="n">ServerHandler</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>    <span class="c1">// other bits</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// in our test</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpClient</span><span class="p">(</span><span class="n">_server</span><span class="p">.</span><span class="n">ServerHandler</span><span class="p">))</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="c1">//do stuff</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
 
 <figure class='code'><figcaption><span>NUnit Intergration Test of our API in memory </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -343,17 +370,23 @@ Everybody shipping an HTTP API, shoud have one question at the top of their mind
 <span class='line-number'>32</span>
 <span class='line-number'>33</span>
 <span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
 </pre></td><td class='code'><pre><code class='c#'><span class='line'><span class="na">[TestFixture]</span>
-</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">ValueApiTests</span>
+</span><span class='line'><span class="k">public</span> <span class="k">abstract</span> <span class="k">class</span> <span class="nc">BookApiTests</span>
 </span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="k">private</span> <span class="n">Uri</span> <span class="n">_localUri</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">private</span> <span class="n">IApiServer</span> <span class="n">_server</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">private</span> <span class="k">readonly</span> <span class="n">IApiServer</span> <span class="n">_server</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">private</span> <span class="k">const</span> <span class="kt">string</span> <span class="n">BooksRelativeUri</span> <span class="p">=</span> <span class="s">&quot;api/books/1&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">protected</span> <span class="nf">BookApiTests</span><span class="p">(</span><span class="n">IApiServer</span> <span class="n">apiServer</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="n">_server</span> <span class="p">=</span> <span class="n">apiServer</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
 </span><span class='line'>
 </span><span class='line'><span class="na">    [SetUp]</span>
 </span><span class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="nf">Setup</span><span class="p">()</span>
 </span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>        <span class="n">_localUri</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Uri</span><span class="p">(</span><span class="s">&quot;http://localhost:3098&quot;</span><span class="p">);</span>
-</span><span class='line'>        <span class="n">_server</span> <span class="p">=</span> <span class="k">new</span> <span class="n">InMemoryApiServer</span><span class="p">(</span><span class="n">_localUri</span><span class="p">);</span>
 </span><span class='line'>        <span class="n">_server</span><span class="p">.</span><span class="n">Start</span><span class="p">();</span>
 </span><span class='line'>    <span class="p">}</span>
 </span><span class='line'>
@@ -364,16 +397,14 @@ Everybody shipping an HTTP API, shoud have one question at the top of their mind
 </span><span class='line'>    <span class="p">}</span>
 </span><span class='line'>
 </span><span class='line'><span class="na">    [Test]</span>
-</span><span class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="nf">CanSuccessfullyGetAllValues</span><span class="p">()</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="nf">GetOneBookReturnsSuccessfulStatusCode</span><span class="p">()</span>
 </span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>        <span class="kt">var</span> <span class="n">valuesUri</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Uri</span><span class="p">(</span><span class="n">_server</span><span class="p">.</span><span class="n">Uri</span><span class="p">,</span> <span class="s">&quot;api/values&quot;</span><span class="p">);</span>
-</span><span class='line'>        <span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpClient</span><span class="p">())</span>
+</span><span class='line'>        <span class="kt">var</span> <span class="n">valuesUri</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Uri</span><span class="p">(</span><span class="n">_server</span><span class="p">.</span><span class="n">BaseAddress</span><span class="p">,</span> <span class="n">BooksRelativeUri</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpClient</span><span class="p">(</span><span class="n">_server</span><span class="p">.</span><span class="n">ServerHandler</span><span class="p">))</span>
 </span><span class='line'>        <span class="p">{</span>
 </span><span class='line'>            <span class="n">HttpResponseMessage</span> <span class="n">httpResponseMessage</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">GetAsync</span><span class="p">(</span><span class="n">valuesUri</span><span class="p">).</span><span class="n">Result</span><span class="p">;</span>
 </span><span class='line'>            <span class="n">Assert</span><span class="p">.</span><span class="n">That</span><span class="p">(</span><span class="n">httpResponseMessage</span><span class="p">.</span><span class="n">IsSuccessStatusCode</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>            <span class="n">IList</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">result</span> <span class="p">=</span> <span class="n">httpResponseMessage</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsAsync</span><span class="p">&lt;</span><span class="n">IList</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;&gt;().</span><span class="n">Result</span><span class="p">;</span>
-</span><span class='line'>            <span class="n">Assert</span><span class="p">.</span><span class="n">That</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">Is</span><span class="p">.</span><span class="n">Not</span><span class="p">.</span><span class="n">Null</span><span class="p">);</span>
+</span><span class='line'>            <span class="n">Assert</span><span class="p">.</span><span class="n">That</span><span class="p">(</span><span class="n">httpResponseMessage</span><span class="p">.</span><span class="n">StatusCode</span><span class="p">,</span> <span class="n">Is</span><span class="p">.</span><span class="n">EqualTo</span><span class="p">(</span><span class="n">HttpStatusCode</span><span class="p">.</span><span class="n">OK</span><span class="p">));</span>
 </span><span class='line'>        <span class="p">}</span>
 </span><span class='line'>    <span class="p">}</span>
 </span><span class='line'><span class="p">}</span>
@@ -383,8 +414,6 @@ Everybody shipping an HTTP API, shoud have one question at the top of their mind
 <p><img class="center" src="/images/posts/intergration-testing-webapi/simple-test-results.png"></p>
 
 <h2>It gets better!</h2>
-
-<p>There <em>are</em> some difference between an API hosted inside IIS, and an API hosted in a self hosted environment.  So, while running your integration tests in memory gives you great confidence you haven&rsquo;t introduced any breaking changes.There still is a chance some may sneak in, due to these differences.</p>
 
 <p>Is there a way we can take the integration test suite, and execute it against a real server running our api? Perhaps in a test environment. Absolutely. In fact, I would encourage you to do this, and luckily, our test suite supports this.</p>
 
@@ -440,35 +469,29 @@ Everybody shipping an HTTP API, shoud have one question at the top of their mind
 <span class='line-number'>49</span>
 <span class='line-number'>50</span>
 <span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
 </pre></td><td class='code'><pre><code class='c#'><span class='line'><span class="na">[TestFixture]</span>
-</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">InMemoryValueApiTests</span> <span class="p">:</span> <span class="n">ValueApiTest</span>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">InMemoryBooksApiTests</span> <span class="p">:</span> <span class="n">BooksApiTests</span>
 </span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="k">private</span> <span class="k">readonly</span> <span class="k">static</span> <span class="n">Uri</span> <span class="n">LocalUri</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Uri</span><span class="p">(</span><span class="s">&quot;http://localhost:3098&quot;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">public</span> <span class="nf">InMemoryValueApiTests</span><span class="p">()</span> <span class="p">:</span> <span class="k">base</span><span class="p">(</span><span class="k">new</span> <span class="n">InMemoryApiServer</span><span class="p">(</span><span class="n">LocalUri</span><span class="p">))</span>
+</span><span class='line'>    <span class="k">public</span> <span class="nf">InMemoryBooksApiTests</span><span class="p">()</span> <span class="p">:</span> <span class="k">base</span><span class="p">(</span><span class="k">new</span> <span class="n">InMemoryApiServer</span><span class="p">())</span>
 </span><span class='line'>    <span class="p">{</span>
 </span><span class='line'>    <span class="p">}</span>
 </span><span class='line'><span class="p">}</span>
 </span><span class='line'>
 </span><span class='line'><span class="na">[TestFixture]</span>
-</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">TestEnvironmentServerApiTests</span> <span class="p">:</span> <span class="n">ValueApiTest</span>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">AgainstServerBooksApiTests</span> <span class="p">:</span> <span class="n">BooksApiTests</span>
 </span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="k">private</span> <span class="k">readonly</span> <span class="k">static</span> <span class="n">Uri</span> <span class="n">LocalUri</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Uri</span><span class="p">(</span><span class="s">&quot;http://myapi.org&quot;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">public</span> <span class="nf">TestEnvironmentServerApiTests</span><span class="p">()</span> <span class="p">:</span> <span class="k">base</span><span class="p">(</span><span class="k">new</span> <span class="n">AspNetApiServer</span><span class="p">(</span><span class="n">LocalUri</span><span class="p">))</span>
+</span><span class='line'>    <span class="k">public</span> <span class="nf">AgainstServerBooksApiTests</span><span class="p">():</span> <span class="k">base</span><span class="p">(</span><span class="k">new</span> <span class="n">AspNetApiServer</span><span class="p">(</span><span class="n">ApiHost</span><span class="p">.</span><span class="n">URI</span><span class="p">))</span>
 </span><span class='line'>    <span class="p">{</span>
 </span><span class='line'>    <span class="p">}</span>
 </span><span class='line'><span class="p">}</span>
 </span><span class='line'>
-</span><span class='line'><span class="k">public</span> <span class="k">abstract</span> <span class="k">class</span> <span class="nc">ValueApiTest</span>
+</span><span class='line'><span class="k">public</span> <span class="k">abstract</span> <span class="k">class</span> <span class="nc">BookApiTests</span>
 </span><span class='line'><span class="p">{</span>
 </span><span class='line'>    <span class="k">private</span> <span class="k">readonly</span> <span class="n">IApiServer</span> <span class="n">_server</span><span class="p">;</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="k">protected</span> <span class="nf">ValueApiTest</span><span class="p">(</span><span class="n">IApiServer</span> <span class="n">apiServer</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">private</span> <span class="k">const</span> <span class="kt">string</span> <span class="n">BooksRelativeUri</span> <span class="p">=</span> <span class="s">&quot;api/books/1&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">protected</span> <span class="nf">BookApiTests</span><span class="p">(</span><span class="n">IApiServer</span> <span class="n">apiServer</span><span class="p">)</span>
 </span><span class='line'>    <span class="p">{</span>
 </span><span class='line'>        <span class="n">_server</span> <span class="p">=</span> <span class="n">apiServer</span><span class="p">;</span>
 </span><span class='line'>    <span class="p">}</span>
@@ -486,16 +509,14 @@ Everybody shipping an HTTP API, shoud have one question at the top of their mind
 </span><span class='line'>    <span class="p">}</span>
 </span><span class='line'>
 </span><span class='line'><span class="na">    [Test]</span>
-</span><span class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="nf">CanSuccessfullyGetAllValues</span><span class="p">()</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="nf">GetOneBookReturnsSuccessfulStatusCode</span><span class="p">()</span>
 </span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>        <span class="kt">var</span>  <span class="n">valuesUri</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Uri</span><span class="p">(</span><span class="n">_server</span><span class="p">.</span><span class="n">Uri</span><span class="p">,</span><span class="s">&quot;api/values&quot;</span><span class="p">);</span>
-</span><span class='line'>        <span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpClient</span><span class="p">())</span>
+</span><span class='line'>        <span class="kt">var</span> <span class="n">valuesUri</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Uri</span><span class="p">(</span><span class="n">_server</span><span class="p">.</span><span class="n">BaseAddress</span><span class="p">,</span> <span class="n">BooksRelativeUri</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HttpClient</span><span class="p">(</span><span class="n">_server</span><span class="p">.</span><span class="n">ServerHandler</span><span class="p">))</span>
 </span><span class='line'>        <span class="p">{</span>
 </span><span class='line'>            <span class="n">HttpResponseMessage</span> <span class="n">httpResponseMessage</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">GetAsync</span><span class="p">(</span><span class="n">valuesUri</span><span class="p">).</span><span class="n">Result</span><span class="p">;</span>
 </span><span class='line'>            <span class="n">Assert</span><span class="p">.</span><span class="n">That</span><span class="p">(</span><span class="n">httpResponseMessage</span><span class="p">.</span><span class="n">IsSuccessStatusCode</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>            <span class="n">IList</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">result</span> <span class="p">=</span> <span class="n">httpResponseMessage</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsAsync</span><span class="p">&lt;</span><span class="n">IList</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;&gt;().</span><span class="n">Result</span><span class="p">;</span>
-</span><span class='line'>            <span class="n">Assert</span><span class="p">.</span><span class="n">That</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="n">Is</span><span class="p">.</span><span class="n">Not</span><span class="p">.</span><span class="n">Null</span><span class="p">);</span>
+</span><span class='line'>            <span class="n">Assert</span><span class="p">.</span><span class="n">That</span><span class="p">(</span><span class="n">httpResponseMessage</span><span class="p">.</span><span class="n">StatusCode</span><span class="p">,</span> <span class="n">Is</span><span class="p">.</span><span class="n">EqualTo</span><span class="p">(</span><span class="n">HttpStatusCode</span><span class="p">.</span><span class="n">OK</span><span class="p">));</span>
 </span><span class='line'>        <span class="p">}</span>
 </span><span class='line'>    <span class="p">}</span>
 </span><span class='line'><span class="p">}</span>
