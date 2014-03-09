@@ -2,30 +2,52 @@
 	float:left;
 }
 
-.blog_summary {
+@media (max-width: 500px) {
 
-	height:150px;
-	
-	.image {
-		max-width: 20%;
-		margin-right: 20px;
-	}
+	.blog_summary {
+		height:150px;
 
-	.blog_title {
-		max-width: 75%;
-		h1{
-			margin-bottom:0;
-			a{
-				text-decoration:none;
-				&:hover{
-				
+		.image {
+			display:none;
+		}
+
+		.blog_title {
+			max-width: 100%;
+			
+			h1{
+				margin-bottom:0;
+
+				a{
+					text-decoration:none;
+					&:hover{}
 				}
 			}
-			
 		}
 
 	}
-
-	
 }
 
+@media (min-width: 500px) {
+
+	.blog_summary {
+		height:150px;
+
+		.image {
+			max-width: 20%;
+			margin-right: 20px;
+		}
+
+		.blog_title {
+			max-width: 75%;
+
+			h1{
+				margin-bottom:0;
+
+				a{
+					text-decoration:none;
+					&:hover{}
+				}
+			}
+		}
+	}
+}
