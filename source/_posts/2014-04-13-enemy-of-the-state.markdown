@@ -20,3 +20,6 @@ This talk was given at [JSConfAU 2014][1] - Taking a critical look at some of t
 If you came to the conference, then thanks so much. I hope you had a fantastic day.
 
  [1]: http://jsconf.au.com/ "JSConfAU 2014"
+
+ **Slides**  
+{% speakerdeck ad379110a3350131e6b14a876c891ef7 %}
