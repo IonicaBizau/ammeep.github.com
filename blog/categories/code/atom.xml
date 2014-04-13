@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Code | Amy Palamountain]]></title>
   <link href="http://amy.palamounta.in/blog/categories/code/atom.xml" rel="self"/>
   <link href="http://amy.palamounta.in/"/>
-  <updated>2014-03-09T21:41:45+13:00</updated>
+  <updated>2014-04-14T09:40:31+12:00</updated>
   <id>http://amy.palamounta.in/</id>
   <author>
     <name><![CDATA[Amy Palamountain]]></name>
@@ -12,6 +12,20 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Enemy of the State]]></title>
+    <link href="http://amy.palamounta.in/blog/2014/04/13/enemy-of-the-state/"/>
+    <updated>2014-04-13T18:11:00+12:00</updated>
+    <id>http://amy.palamounta.in/blog/2014/04/13/enemy-of-the-state</id>
+    <content type="html"><![CDATA[<p>This talk was given at <a href="http://jsconf.au.com/" title="JSConfAU 2014">JSConfAU 2014</a> - Taking a critical look at some of the patterns we see being applied in common JS frameworks JS frameworks to see if the give us ways of handling state and events in a scaleable, maintainable fashion. And then take a look at some tactics you can use to help you better embrace both state and events, without sacrificing clarity in your architecture.</p>
+
+<p>If you came to the conference, then thanks so much. I hope you had a fantastic day.</p>
+
+<p> <strong>Slides</strong><br/>
+<script async="true" class="speakerdeck-embed" data-id="ad379110a3350131e6b14a876c891ef7" src="//speakerdeck.com/assets/embed.js"> </script></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Integration Testing ASP.NET Web API]]></title>
@@ -614,43 +628,6 @@ exposed by the HttpClinet, which will allow us to pass the <em>server</em> code 
 <p>This is a link to the source code. From here you are able to play the game, download the code, and even try and add some more features to the game. Any questions, or just want to know more about what you can do to learn more about programming, just send me a message bellow!</p>
 
 <p><script async="true" class="speakerdeck-embed" data-id="c92f46d05efb01307e0412313b031ac2" src="//speakerdeck.com/assets/embed.js"> </script></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Global Day of Code Retreat &#8211; Wellington]]></title>
-    <link href="http://amy.palamounta.in/2012/12/09/global-day-of-code-retreat-wellington/"/>
-    <updated>2012-12-09T00:00:00+13:00</updated>
-    <id>http://amy.palamounta.in/2012/12/09/global-day-of-code-retreat-wellington</id>
-    <content type="html"><![CDATA[<h1></h1>
-
-<p><img class="center" src="/images/posts/gdcr/gdcr_ad.png"></p>
-
-<p>Yesterday a group of dedicated developers in Wellington and Auckland woke early on a saturday morning to help kick of the Global Day of Code Retreat in style. We came from all walks of development life, from Haskell to C#, from JavaScript to Perl, we all came together with a common goal – to practice our craft. In 6 45 minute sessions we coded <a href="http://en.wikipedia.org/wiki/Conway's_Game_of_Life">Conway’s Game of Life</a> each time with a new constraint, <strong>deleting</strong> all traces of the code afterwards.</p>
-
-<p>The most interesting thing about the day was that initially there was reluctance to delete code. It was amazing to see that by the end of the day everyone was more than happy to delete their code, seeing the value on iterating on ideas to reach an awesome solution.</p>
-
-<p>It was incredible to see the range of solutions people came up with to work around constraints. One pair used try – catch blocks to avoid ‘if’ statements, and another pair built an eventing system to avoid the need for return values. The diversity of solutions was great to see!</p>
-
-<p>Some massive thank you’s are in order! First, to the brains behind the idea of a Code Retreat, <a href="http://coreyhaines.com/">Corey Haines</a> <a href="https://twitter.com/jthurne">Jim Hurne</a> <a href="https://twitter.com/volunteerjunkie">Alissa Conaty</a>  and <a href="https://twitter.com/adibolb">Adi Bolboaca</a> have put in a massive amount of work to ensuring that the Global Day of Code Retreat was a success by supporting all the facilitators around the world. Secondly to our <a href="http://globalday.coderetreat.org/sponsors.html">GlobalSponsors</a> particulaly <a href="http://www.jetbrains.com/">JetBrains</a>. Locally – the day would not have been possible if not for the support of <a href="http://www.xero.com/">Xero</a> ( who gave us our beautiful venue) and <a href="http://www.mindscapehq.com/">Mindscape</a> ( who kept us feed on the day) Both these companies do such an amazing job at supporting the local developer community and we appreciate it so much!</p>
-
-<p>Thanks to every one who came and made the day what it was.  This is  what made the day so successful. <a href="https://twitter.com/martin308">Martin</a> and I had such a great time facilitating the event!.Can’t wait for the next one!</p>
-
-<p><div class="flexslider">
-      <img src="">
-      <img src="">
-      <img src="">
-      <img src="">
-      <img src="">
-      <img src="">
-      <img src="">
-      <img src="">
-      <img src="">
-      <img src="">
-      <img src="">
-    </ul>
-</div>
-</p>
 ]]></content>
   </entry>
   

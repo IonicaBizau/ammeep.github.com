@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Talks | Amy Palamountain]]></title>
   <link href="http://amy.palamounta.in/blog/categories/talks/atom.xml" rel="self"/>
   <link href="http://amy.palamounta.in/"/>
-  <updated>2014-03-09T21:41:45+13:00</updated>
+  <updated>2014-04-14T09:40:31+12:00</updated>
   <id>http://amy.palamounta.in/</id>
   <author>
     <name><![CDATA[Amy Palamountain]]></name>
@@ -12,6 +12,20 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Enemy of the State]]></title>
+    <link href="http://amy.palamounta.in/blog/2014/04/13/enemy-of-the-state/"/>
+    <updated>2014-04-13T18:11:00+12:00</updated>
+    <id>http://amy.palamounta.in/blog/2014/04/13/enemy-of-the-state</id>
+    <content type="html"><![CDATA[<p>This talk was given at <a href="http://jsconf.au.com/" title="JSConfAU 2014">JSConfAU 2014</a> - Taking a critical look at some of the patterns we see being applied in common JS frameworks JS frameworks to see if the give us ways of handling state and events in a scaleable, maintainable fashion. And then take a look at some tactics you can use to help you better embrace both state and events, without sacrificing clarity in your architecture.</p>
+
+<p>If you came to the conference, then thanks so much. I hope you had a fantastic day.</p>
+
+<p> <strong>Slides</strong><br/>
+<script async="true" class="speakerdeck-embed" data-id="ad379110a3350131e6b14a876c891ef7" src="//speakerdeck.com/assets/embed.js"> </script></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Exist in the web - Not on it]]></title>
@@ -114,37 +128,6 @@
     </ul>
 </div>
 </p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Ten Traumas In Ten Minutes]]></title>
-    <link href="http://amy.palamounta.in/2012/10/26/ten-traumas-in-ten-minutes/"/>
-    <updated>2012-10-26T00:00:00+13:00</updated>
-    <id>http://amy.palamounta.in/2012/10/26/ten-traumas-in-ten-minutes</id>
-    <content type="html"><![CDATA[<h1></h1>
-
-<p>Here are the slides from the ten minute lightening talk I gave at <a href="http://codemania.co.nz">Codemania After Dark</a> this Friday. My very first talk given to an audience of reasonable size – thank you all for coming out.</p>
-
-<p>The idea behind this talk, was to take you through ten parts of developing for the cloud which can cause headaches or confusion. But as it turns out most of what I mentioned actually applies more at a very broad level – which is awesome because developing for the cloud is really not that different from developing any other application</p>
-
-<p><script async="true" class="speakerdeck-embed" data-id="5084d183df78cd0002012545" src="//speakerdeck.com/assets/embed.js"> </script></p>
-
-<p>The 10 traumas were:</p>
-
-<ol>
-<li>Deployments are painful – Deployment automation in the cloud is easy</li>
-<li>I’m married to my cloud –  How to avoid being tied to one cloud</li>
-<li>The definition of insanity – Transient fault handling</li>
-<li>Limitations of storage – How to work around them</li>
-<li>We’ve got to we ‘web scale’ – What does that even mean? You can still use what you already know</li>
-<li>Go Daddy goes down  - Simple DNS failover</li>
-<li>Our app is slow – Why performance shouldn’t be slapped on at the end</li>
-<li>You have lupus – Better diagnostics</li>
-<li>The cloud chaos monkey – Be prepared for failures in the cloud</li>
-<li>Your going to do it wrong – Accept that your designs might change</li>
-</ol>
-
 ]]></content>
   </entry>
   
