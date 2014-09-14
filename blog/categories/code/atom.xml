@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Code | Amy Palamountain]]></title>
   <link href="http://amy.palamounta.in/blog/categories/code/atom.xml" rel="self"/>
   <link href="http://amy.palamounta.in/"/>
-  <updated>2014-04-14T09:40:31+12:00</updated>
+  <updated>2014-09-14T17:15:22+02:00</updated>
   <id>http://amy.palamounta.in/</id>
   <author>
     <name><![CDATA[Amy Palamountain]]></name>
@@ -16,9 +16,9 @@
   <entry>
     <title type="html"><![CDATA[Enemy of the State]]></title>
     <link href="http://amy.palamounta.in/blog/2014/04/13/enemy-of-the-state/"/>
-    <updated>2014-04-13T18:11:00+12:00</updated>
+    <updated>2014-04-13T18:11:00+02:00</updated>
     <id>http://amy.palamounta.in/blog/2014/04/13/enemy-of-the-state</id>
-    <content type="html"><![CDATA[<p>This talk was given at <a href="http://jsconf.au.com/" title="JSConfAU 2014">JSConfAU 2014</a> - Taking a critical look at some of the patterns we see being applied in common JS frameworks JS frameworks to see if the give us ways of handling state and events in a scaleable, maintainable fashion. And then take a look at some tactics you can use to help you better embrace both state and events, without sacrificing clarity in your architecture.</p>
+    <content type="html"><![CDATA[<p>This talk was given at <a href="http://2014.jsconf.eu/" title="JSConfEU 2014">JsConfEU 2014</a> and <a href="http://jsconf.au.com/" title="JSConfAU 2014">JSConfAU 2014</a> &ndash; Taking a critical look at some of the patterns we see being applied in common JS frameworks JS frameworks to see if the give us ways of handling state and events in a scaleable, maintainable fashion. And then take a look at some tactics you can use to help you better embrace both state and events, without sacrificing clarity in your architecture.</p>
 
 <p>If you came to the conference, then thanks so much. I hope you had a fantastic day.</p>
 
@@ -30,7 +30,7 @@
   <entry>
     <title type="html"><![CDATA[Integration Testing ASP.NET Web API]]></title>
     <link href="http://amy.palamounta.in/blog/2013/08/04/integration-testing-for-asp-dot-net-web-api/"/>
-    <updated>2013-08-04T13:23:00+12:00</updated>
+    <updated>2013-08-04T13:23:00+02:00</updated>
     <id>http://amy.palamounta.in/blog/2013/08/04/integration-testing-for-asp-dot-net-web-api</id>
     <content type="html"><![CDATA[<p>Want to know what kind of HTTP APIs suck? The ones that break all of their clients every time a new version is minted.
 Everybody shipping an HTTP API, shoud have one question at the top of their mind.</p>
@@ -567,7 +567,7 @@ exposed by the HttpClinet, which will allow us to pass the <em>server</em> code 
   <entry>
     <title type="html"><![CDATA[Exist in the web - Not on it]]></title>
     <link href="http://amy.palamounta.in/blog/2013/07/29/exist-in-the-web-not-on-it/"/>
-    <updated>2013-07-29T22:06:00+12:00</updated>
+    <updated>2013-07-29T22:06:00+02:00</updated>
     <id>http://amy.palamounta.in/blog/2013/07/29/exist-in-the-web-not-on-it</id>
     <content type="html"><![CDATA[<p>I gave a talk at <a href="http://wdcnz.com/" title="WCDNZ">WDCNZ 2013</a> - Exist in the web, not on it. It&rsquo;s a 30,000 ft view on how we can model our public Web APIs close to how HTTP was designed to be used, and an illustration of what kinds of problems hypermedia web apis can try and solve for your in your public Web APIs.</p>
 
@@ -584,7 +584,7 @@ exposed by the HttpClinet, which will allow us to pass the <em>server</em> code 
   <entry>
     <title type="html"><![CDATA[Unsuck your backbone]]></title>
     <link href="http://amy.palamounta.in/2013/04/12/unsuck-your-backbone/"/>
-    <updated>2013-04-12T00:00:00+12:00</updated>
+    <updated>2013-04-12T00:00:00+02:00</updated>
     <id>http://amy.palamounta.in/2013/04/12/unsuck-your-backbone</id>
     <content type="html"><![CDATA[<h1></h1>
 
@@ -615,7 +615,7 @@ exposed by the HttpClinet, which will allow us to pass the <em>server</em> code 
   <entry>
     <title type="html"><![CDATA[Game Master Kids]]></title>
     <link href="http://amy.palamounta.in/2013/02/22/games-masters-workshops-kids-can-code/"/>
-    <updated>2013-02-22T00:00:00+13:00</updated>
+    <updated>2013-02-22T00:00:00+01:00</updated>
     <id>http://amy.palamounta.in/2013/02/22/games-masters-workshops-kids-can-code</id>
     <content type="html"><![CDATA[<h1></h1>
 

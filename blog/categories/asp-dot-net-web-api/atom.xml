@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ASP.NET Web Api | Amy Palamountain]]></title>
   <link href="http://amy.palamounta.in/blog/categories/asp-dot-net-web-api/atom.xml" rel="self"/>
   <link href="http://amy.palamounta.in/"/>
-  <updated>2014-04-14T09:40:31+12:00</updated>
+  <updated>2014-09-14T17:15:22+02:00</updated>
   <id>http://amy.palamounta.in/</id>
   <author>
     <name><![CDATA[Amy Palamountain]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Integration Testing ASP.NET Web API]]></title>
     <link href="http://amy.palamounta.in/blog/2013/08/04/integration-testing-for-asp-dot-net-web-api/"/>
-    <updated>2013-08-04T13:23:00+12:00</updated>
+    <updated>2013-08-04T13:23:00+02:00</updated>
     <id>http://amy.palamounta.in/blog/2013/08/04/integration-testing-for-asp-dot-net-web-api</id>
     <content type="html"><![CDATA[<p>Want to know what kind of HTTP APIs suck? The ones that break all of their clients every time a new version is minted.
 Everybody shipping an HTTP API, shoud have one question at the top of their mind.</p>

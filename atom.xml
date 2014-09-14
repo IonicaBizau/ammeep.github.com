@@ -4,7 +4,7 @@
   <title><![CDATA[Amy Palamountain]]></title>
   <link href="http://amy.palamounta.in/atom.xml" rel="self"/>
   <link href="http://amy.palamounta.in/"/>
-  <updated>2014-04-14T09:40:31+12:00</updated>
+  <updated>2014-09-14T17:15:22+02:00</updated>
   <id>http://amy.palamounta.in/</id>
   <author>
     <name><![CDATA[Amy Palamountain]]></name>
@@ -16,9 +16,9 @@
   <entry>
     <title type="html"><![CDATA[Enemy of the State]]></title>
     <link href="http://amy.palamounta.in/blog/2014/04/13/enemy-of-the-state/"/>
-    <updated>2014-04-13T18:11:00+12:00</updated>
+    <updated>2014-04-13T18:11:00+02:00</updated>
     <id>http://amy.palamounta.in/blog/2014/04/13/enemy-of-the-state</id>
-    <content type="html"><![CDATA[<p>This talk was given at <a href="http://jsconf.au.com/" title="JSConfAU 2014">JSConfAU 2014</a> - Taking a critical look at some of the patterns we see being applied in common JS frameworks JS frameworks to see if the give us ways of handling state and events in a scaleable, maintainable fashion. And then take a look at some tactics you can use to help you better embrace both state and events, without sacrificing clarity in your architecture.</p>
+    <content type="html"><![CDATA[<p>This talk was given at <a href="http://2014.jsconf.eu/" title="JSConfEU 2014">JsConfEU 2014</a> and <a href="http://jsconf.au.com/" title="JSConfAU 2014">JSConfAU 2014</a> &ndash; Taking a critical look at some of the patterns we see being applied in common JS frameworks JS frameworks to see if the give us ways of handling state and events in a scaleable, maintainable fashion. And then take a look at some tactics you can use to help you better embrace both state and events, without sacrificing clarity in your architecture.</p>
 
 <p>If you came to the conference, then thanks so much. I hope you had a fantastic day.</p>
 
@@ -32,7 +32,7 @@
   <entry>
     <title type="html"><![CDATA[Integration Testing ASP.NET Web API]]></title>
     <link href="http://amy.palamounta.in/blog/2013/08/04/integration-testing-for-asp-dot-net-web-api/"/>
-    <updated>2013-08-04T13:23:00+12:00</updated>
+    <updated>2013-08-04T13:23:00+02:00</updated>
     <id>http://amy.palamounta.in/blog/2013/08/04/integration-testing-for-asp-dot-net-web-api</id>
     <content type="html"><![CDATA[<p>Want to know what kind of HTTP APIs suck? The ones that break all of their clients every time a new version is minted.
 Everybody shipping an HTTP API, shoud have one question at the top of their mind.</p>
@@ -463,7 +463,7 @@ exposed by the HttpClinet, which will allow us to pass the <em>server</em> code 
   <entry>
     <title type="html"><![CDATA[Exist in the web - Not on it]]></title>
     <link href="http://amy.palamounta.in/blog/2013/07/29/exist-in-the-web-not-on-it/"/>
-    <updated>2013-07-29T22:06:00+12:00</updated>
+    <updated>2013-07-29T22:06:00+02:00</updated>
     <id>http://amy.palamounta.in/blog/2013/07/29/exist-in-the-web-not-on-it</id>
     <content type="html"><![CDATA[<p>I gave a talk at <a href="http://wdcnz.com/" title="WCDNZ">WDCNZ 2013</a> - Exist in the web, not on it. It&rsquo;s a 30,000 ft view on how we can model our public Web APIs close to how HTTP was designed to be used, and an illustration of what kinds of problems hypermedia web apis can try and solve for your in your public Web APIs.</p>
 
@@ -484,7 +484,7 @@ exposed by the HttpClinet, which will allow us to pass the <em>server</em> code 
   <entry>
     <title type="html"><![CDATA[Unsuck your backbone]]></title>
     <link href="http://amy.palamounta.in/2013/04/12/unsuck-your-backbone/"/>
-    <updated>2013-04-12T00:00:00+12:00</updated>
+    <updated>2013-04-12T00:00:00+02:00</updated>
     <id>http://amy.palamounta.in/2013/04/12/unsuck-your-backbone</id>
     <content type="html"><![CDATA[<h1></h1>
 
@@ -519,7 +519,7 @@ exposed by the HttpClinet, which will allow us to pass the <em>server</em> code 
   <entry>
     <title type="html"><![CDATA[Game Master Kids]]></title>
     <link href="http://amy.palamounta.in/2013/02/22/games-masters-workshops-kids-can-code/"/>
-    <updated>2013-02-22T00:00:00+13:00</updated>
+    <updated>2013-02-22T00:00:00+01:00</updated>
     <id>http://amy.palamounta.in/2013/02/22/games-masters-workshops-kids-can-code</id>
     <content type="html"><![CDATA[<h1></h1>
 
@@ -539,7 +539,7 @@ exposed by the HttpClinet, which will allow us to pass the <em>server</em> code 
   <entry>
     <title type="html"><![CDATA[Dealing to power-plays]]></title>
     <link href="http://amy.palamounta.in/2012/12/22/how-do-we-deal-with-sexist-power-plays/"/>
-    <updated>2012-12-22T00:00:00+13:00</updated>
+    <updated>2012-12-22T00:00:00+01:00</updated>
     <id>http://amy.palamounta.in/2012/12/22/how-do-we-deal-with-sexist-power-plays</id>
     <content type="html"><![CDATA[<h1></h1>
 
@@ -588,7 +588,7 @@ exposed by the HttpClinet, which will allow us to pass the <em>server</em> code 
   <entry>
     <title type="html"><![CDATA[Global Day of Code Retreat &#8211; Wellington]]></title>
     <link href="http://amy.palamounta.in/2012/12/09/global-day-of-code-retreat-wellington/"/>
-    <updated>2012-12-09T00:00:00+13:00</updated>
+    <updated>2012-12-09T00:00:00+01:00</updated>
     <id>http://amy.palamounta.in/2012/12/09/global-day-of-code-retreat-wellington</id>
     <content type="html"><![CDATA[<h1></h1>
 
@@ -627,7 +627,7 @@ exposed by the HttpClinet, which will allow us to pass the <em>server</em> code 
   <entry>
     <title type="html"><![CDATA[Ten Traumas In Ten Minutes]]></title>
     <link href="http://amy.palamounta.in/2012/10/26/ten-traumas-in-ten-minutes/"/>
-    <updated>2012-10-26T00:00:00+13:00</updated>
+    <updated>2012-10-26T00:00:00+02:00</updated>
     <id>http://amy.palamounta.in/2012/10/26/ten-traumas-in-ten-minutes</id>
     <content type="html"><![CDATA[<h1></h1>
 
@@ -659,7 +659,7 @@ exposed by the HttpClinet, which will allow us to pass the <em>server</em> code 
   <entry>
     <title type="html"><![CDATA[On Service Location]]></title>
     <link href="http://amy.palamounta.in/2012/10/26/on-service-location/"/>
-    <updated>2012-10-26T00:00:00+13:00</updated>
+    <updated>2012-10-26T00:00:00+02:00</updated>
     <id>http://amy.palamounta.in/2012/10/26/on-service-location</id>
     <content type="html"><![CDATA[<p>I have some pretty strong feelings about the use of the Service Locator pattern in the software we build. They go along the lines of ‘why would you ever use it?’ and possibly (and somewhat mellow dramatically) rocking slowly backwards and forth in the corner of the shower after being exposed to it. So to ease my pain, and perhaps yours, I have compiled an explanation of why I feel so intolerant toward this pattern.</p>
 
@@ -848,7 +848,7 @@ exposed by the HttpClinet, which will allow us to pass the <em>server</em> code 
   <entry>
     <title type="html"><![CDATA[A Recipe To Make Girls]]></title>
     <link href="http://amy.palamounta.in/2012/10/22/2012528a-recipe-to-make-boys-and-girls-html/"/>
-    <updated>2012-10-22T00:00:00+13:00</updated>
+    <updated>2012-10-22T00:00:00+02:00</updated>
     <id>http://amy.palamounta.in/2012/10/22/2012528a-recipe-to-make-boys-and-girls-html</id>
     <content type="html"><![CDATA[<p>If I were to ask you, genetically speaking what is the difference between a boy and a girl? You are likely to say  “A girl carries two X chromosomes, while a boy carries one X and one Y”.</p>
 
@@ -898,7 +898,7 @@ exposed by the HttpClinet, which will allow us to pass the <em>server</em> code 
   <entry>
     <title type="html"><![CDATA[Reflecting on Codemania]]></title>
     <link href="http://amy.palamounta.in/2012/04/02/reflecting-on-codemania/"/>
-    <updated>2012-04-02T00:00:00+12:00</updated>
+    <updated>2012-04-02T00:00:00+02:00</updated>
     <id>http://amy.palamounta.in/2012/04/02/reflecting-on-codemania</id>
     <content type="html"><![CDATA[<h1></h1>
 
@@ -929,7 +929,7 @@ exposed by the HttpClinet, which will allow us to pass the <em>server</em> code 
   <entry>
     <title type="html"><![CDATA[The Amy Grenade]]></title>
     <link href="http://amy.palamounta.in/2011/11/22/the-amy-grenade/"/>
-    <updated>2011-11-22T00:00:00+13:00</updated>
+    <updated>2011-11-22T00:00:00+01:00</updated>
     <id>http://amy.palamounta.in/2011/11/22/the-amy-grenade</id>
     <content type="html"><![CDATA[<p>Its been almost 4 weeks since I had my cast off and my pins removed, and life has immeasurably improved.</p>
 
@@ -961,7 +961,7 @@ exposed by the HttpClinet, which will allow us to pass the <em>server</em> code 
   <entry>
     <title type="html"><![CDATA[Wrist Reconstruction]]></title>
     <link href="http://amy.palamounta.in/2011/09/07/wrist-reconstruction/"/>
-    <updated>2011-09-07T00:00:00+12:00</updated>
+    <updated>2011-09-07T00:00:00+02:00</updated>
     <id>http://amy.palamounta.in/2011/09/07/wrist-reconstruction</id>
     <content type="html"><![CDATA[<p>Two weeks ago I went into hospital to finally get the reconstruction of my right wrist I have been waiting for. No nerves this time – I knew what to expect, was well researched and it was going to get rid of my pain. I closed my eyes in theater and opened them a second later in recovery. What I didn’t expect was the pain. I guess being cut, sawed, screwed and pined will do that to you. The surgeon had warned me how painful it was but I really was not prepared. It took a fair whack of Morphine to bring it down to a bearable level and Tramadol (synthetic opiate) to bring it down to a dull ache.</p>
 
@@ -984,7 +984,7 @@ exposed by the HttpClinet, which will allow us to pass the <em>server</em> code 
   <entry>
     <title type="html"><![CDATA[A visit to the surgeon.]]></title>
     <link href="http://amy.palamounta.in/2011/06/02/a-visit-to-the-surgeon/"/>
-    <updated>2011-06-02T00:00:00+12:00</updated>
+    <updated>2011-06-02T00:00:00+02:00</updated>
     <id>http://amy.palamounta.in/2011/06/02/a-visit-to-the-surgeon</id>
     <content type="html"><![CDATA[<p>I have seen the surgeon for my follow up appointment. The bandage is off and the stitches are out. I have two small cuts from where the probe went in. Pain at this point is back to where it was previously, and any additional pain must just be scarring tissue. So doing quite well.</p>
 
@@ -1035,7 +1035,7 @@ exposed by the HttpClinet, which will allow us to pass the <em>server</em> code 
   <entry>
     <title type="html"><![CDATA[Right wrist &#8211; Scapolunate troubles.]]></title>
     <link href="http://amy.palamounta.in/2011/05/26/right-wrist-scapolunate-troubles/"/>
-    <updated>2011-05-26T00:00:00+12:00</updated>
+    <updated>2011-05-26T00:00:00+02:00</updated>
     <id>http://amy.palamounta.in/2011/05/26/right-wrist-scapolunate-troubles</id>
     <content type="html"><![CDATA[<p>Its been ten months since I broke my Scaphoid, but I am only at the starting line on the race to recovery.
 A group of us decided to hit the mountain for a weekend in July 2010. It was my first time snow boarding, and I was having a great time. Really starting to get the nack of it. I was boarding down at reasonable speed, turned a corner straight onto a wide steep area of ice. Picking up speed too quickly I panicd and dug my heals in. I smashed the end of my Scaphoid on the way down (see the pretty bright spot on the right? that’s apparently the break)</p>
@@ -1060,7 +1060,7 @@ A group of us decided to hit the mountain for a weekend in July 2010. It was my 
   <entry>
     <title type="html"><![CDATA[Code Contracts &#8211; Part 3 : Runtime Checker &#038; Basic Contracts]]></title>
     <link href="http://amy.palamounta.in/2011/01/07/201117code-contracts-part-3-runtime-checker-basic-contracts-html/"/>
-    <updated>2011-01-07T00:00:00+13:00</updated>
+    <updated>2011-01-07T00:00:00+01:00</updated>
     <id>http://amy.palamounta.in/2011/01/07/201117code-contracts-part-3-runtime-checker-basic-contracts-html</id>
     <content type="html"><![CDATA[<p><img class="center" src="http://amy.palamounta.in/images/posts/code-contracts/runtime.png"></p>
 
@@ -1079,7 +1079,7 @@ A group of us decided to hit the mountain for a weekend in July 2010. It was my 
   <entry>
     <title type="html"><![CDATA[Code Contracts &#8211; Part 2 : The static checker]]></title>
     <link href="http://amy.palamounta.in/2011/01/04/code-contracts-part-2-the-static-checker/"/>
-    <updated>2011-01-04T00:00:00+13:00</updated>
+    <updated>2011-01-04T00:00:00+01:00</updated>
     <id>http://amy.palamounta.in/2011/01/04/code-contracts-part-2-the-static-checker</id>
     <content type="html"><![CDATA[<p>This post will cover the options available when enabling static checking of your project, and a very basic overview of how static checking is achieved.</p>
 
@@ -1194,7 +1194,7 @@ Enabling this option causes the checker to attempt to prove the Contract.Assume(
   <entry>
     <title type="html"><![CDATA[Code Contracts &#8211; Part 1]]></title>
     <link href="http://amy.palamounta.in/2011/01/03/code-contracts-part-1/"/>
-    <updated>2011-01-03T00:00:00+13:00</updated>
+    <updated>2011-01-03T00:00:00+01:00</updated>
     <id>http://amy.palamounta.in/2011/01/03/code-contracts-part-1</id>
     <content type="html"><![CDATA[<h1></h1>
 
@@ -1238,7 +1238,7 @@ Enabling this option causes the checker to attempt to prove the Contract.Assume(
   <entry>
     <title type="html"><![CDATA[Chromatin and Histones]]></title>
     <link href="http://amy.palamounta.in/2010/11/30/20081022chromatin-and-histones-html/"/>
-    <updated>2010-11-30T00:00:00+13:00</updated>
+    <updated>2010-11-30T00:00:00+01:00</updated>
     <id>http://amy.palamounta.in/2010/11/30/20081022chromatin-and-histones-html</id>
     <content type="html"><![CDATA[<p>The basic building block of chromatin is the nucleosome, which contains 147 base pairs (bp) of DNA wrapped in a left-handed superhelix 1.7 times around a core histone octamer (two copies each of histones H2A, H2B, H3, and H4). Each core histone contains two separate functional domains: a signature “histone-fold” motif sufficient for both histone-histone and histone-DNA contacts within the nucleosome, and NH2-terminal and COOH-terminal “tail” domains that contain sites for posttranslational modifications (such as acetylation, methylation, phosphorylation, and ubiquitination). Although these histone tails are mostly unresolved in the crystal structure of the nucleosome, they appear to emanate radially from the nucleosome, conveniently positioned to associate with “linker” DNA residing between nucleosomes or with adjacent nucleosomes.</p>
 
@@ -1282,7 +1282,7 @@ What is the structure of the chromatin fiber in vivo? Do 10-nm, bead-on-a-string
   <entry>
     <title type="html"><![CDATA[Fun in the lab]]></title>
     <link href="http://amy.palamounta.in/2008/12/07/2008127fun-in-the-lab-html/"/>
-    <updated>2008-12-07T00:00:00+13:00</updated>
+    <updated>2008-12-07T00:00:00+01:00</updated>
     <id>http://amy.palamounta.in/2008/12/07/2008127fun-in-the-lab-html</id>
     <content type="html"><![CDATA[<p>At the moment I have a technicians job, working in a lab. I have two weeks left, and must Finnish the tasks that I have been charged.</p>
 
